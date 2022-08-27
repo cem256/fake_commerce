@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/app_bloc_observer.dart';
-import 'blocs/auth/auth_bloc.dart';
+import 'blocs/blocs.dart';
 import 'config/router/app_router.gr.dart';
 import 'repositories/repositories.dart';
 
@@ -40,6 +40,11 @@ class FakeCommerce extends StatelessWidget {
             create: (context) => AuthBloc(
               authRepository: context.read<AuthRepository>(),
               userRepository: context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider<RegisterBloc>(
+            create: (context) => RegisterBloc(
+              authRepository: context.read<AuthRepository>(),
             ),
           ),
         ],

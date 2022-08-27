@@ -11,33 +11,15 @@ class AuthRepository extends BaseAuthRepository {
   Stream<auth.User?> get user => firebaseAuth.userChanges();
 
   @override
-  Future<auth.User?> signUpWithEmailAndPassword({required String email, required String password}) async {
-    try {
-      final credential = await firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+  Future<auth.User?> createUserWithEmailAndPassword({required String email, required String password}) async {
+    final credential = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 
-      final user = credential.user;
-      return user;
-    } on auth.FirebaseAuthException {
-      rethrow;
-    }
+    return credential.user;
   }
 
   @override
-  Future<void> logInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      await firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on auth.FirebaseAuthException {
-      rethrow;
-    }
+  Future<void> signInWithEmailAndPassword({required String email, required String password}) async {
+    await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
   }
 
   @override
