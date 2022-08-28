@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import '../../constants/enums/form_status.dart';
 import '../../repositories/auth/auth_repository.dart';

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 import '../../constants/enums/form_status.dart';
 import '../../repositories/auth/auth_repository.dart';
@@ -37,8 +36,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Future<void> _onRegisterSubmitted(RegisterSubmitted event, Emitter<RegisterState> emit) async {
     emit(state.copyWith(status: FormStatus.submitting));
     try {
-      var user = await authRepository.createUserWithEmailAndPassword(email: state.email, password: state.password);
-      emit(state.copyWith(status: FormStatus.success, user: user));
+      await authRepository.createUserWithEmailAndPassword(email: state.email, password: state.password);
+      emit(state.copyWith(status: FormStatus.success));
     } catch (_) {
       emit(state.copyWith(status: FormStatus.failure));
       emit(state.copyWith(status: FormStatus.initial));

@@ -7,7 +7,6 @@ class RegisterState extends Equatable {
   final String password;
   final bool? isValidPassword;
   final bool isPasswordObscured;
-  final auth.User? user;
 
   const RegisterState({
     this.status = FormStatus.initial,
@@ -16,7 +15,6 @@ class RegisterState extends Equatable {
     this.password = "",
     this.isValidPassword,
     this.isPasswordObscured = true,
-    this.user,
   });
 
   @override
@@ -27,7 +25,6 @@ class RegisterState extends Equatable {
         password,
         isValidPassword,
         isPasswordObscured,
-        user,
       ];
 
   RegisterState copyWith({
@@ -37,7 +34,6 @@ class RegisterState extends Equatable {
     String? password,
     bool? isValidPassword,
     bool? isPasswordObscured,
-    auth.User? user,
   }) {
     return RegisterState(
       status: status ?? this.status,
@@ -46,7 +42,6 @@ class RegisterState extends Equatable {
       password: password ?? this.password,
       isValidPassword: isValidPassword ?? this.isValidPassword,
       isPasswordObscured: isPasswordObscured ?? this.isPasswordObscured,
-      user: user ?? this.user,
     );
   }
 }

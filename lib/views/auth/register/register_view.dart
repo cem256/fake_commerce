@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/blocs.dart';
-import '../../../config/router/app_router.gr.dart';
 import '../../../constants/enums/form_status.dart';
 import '../../../constants/extensions/context_extensions.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
@@ -12,6 +10,10 @@ import '../../../widgets/input/password_input_field.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);
+
+  static Route<void> route() {
+    return MaterialPageRoute<void>(builder: (_) => const RegisterView());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +89,7 @@ class RegisterView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Have an account?"),
-                    TextButton(
-                      child: const Text("Login"),
-                      onPressed: () => context.router.replace(const LoginRoute()),
-                    ),
+                    TextButton(child: const Text("Login"), onPressed: () {}),
                   ],
                 ),
               ],

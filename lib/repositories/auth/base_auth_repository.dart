@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart' as auth;
+import '../../models/user/user_model.dart';
 
 abstract class BaseAuthRepository {
-  Stream<auth.User?> get user;
+  Stream<UserModel> get user;
 
-  Future<auth.User?> createUserWithEmailAndPassword({
+  Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,
   });

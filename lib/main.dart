@@ -1,33 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/app_bloc_observer.dart';
 import 'blocs/blocs.dart';
-import 'config/router/app_router.gr.dart';
+import 'config/router/routes.dart';
 import 'repositories/repositories.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = AppBlocObserver();
 
   await Firebase.initializeApp();
-
-  Bloc.observer = AppBlocObserver();
-  runApp(FakeCommerce());
+  runApp(const FakeCommerce());
 }
 
 class FakeCommerce extends StatelessWidget {
-  FakeCommerce({super.key});
-
-  final _appRouter = AppRouter();
+  const FakeCommerce({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<AuthRepository>(
-          create: (context) => AuthRepository(firebaseAuth: FirebaseAuth.instance),
+          create: (context) => AuthRepository(
+            firebaseAuth: FirebaseAuth.instance,
+          ),
         ),
       ],
       child: MultiBlocProvider(
@@ -48,19 +48,29 @@ class FakeCommerce extends StatelessWidget {
             ),
           ),
         ],
-        child: MaterialApp.router(
-          title: "Fake Commerce",
-          debugShowCheckedModeBanner: false,
+        child: const AppWidget(),
+      ),
+    );
+  }
+}
 
-          //theme
-          themeMode: ThemeMode.system,
-          theme: ThemeData.light(),
-          darkTheme: ThemeData.dark(),
+class AppWidget extends StatelessWidget {
+  const AppWidget({Key? key}) : super(key: key);
 
-          // routing
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Fake Commerce",
+      debugShowCheckedModeBanner: false,
+
+      //theme
+      themeMode: ThemeMode.system,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+
+      home: FlowBuilder<AuthStatus>(
+        state: context.select((AuthBloc bloc) => bloc.state.status),
+        onGeneratePages: onGenerateAppViewPages,
       ),
     );
   }

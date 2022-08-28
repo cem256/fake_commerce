@@ -11,12 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #routing
-  auto_route: ^4.2.1
-
   #state management
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
+
+  #navigation flow
+  flow_builder: ^0.0.9
 
   #core
   equatable: ^2.0.5
@@ -29,6 +29,8 @@ dependencies:
   #ui
   carousel_slider: ^4.1.1
 
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -37,7 +39,7 @@ dev_dependencies:
 
   #code geneneration
   build_runner: ^2.2.0
-  auto_route_generator: ^4.2.1
+
 
 
 flutter:
