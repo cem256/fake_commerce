@@ -15,7 +15,7 @@ class SplashView extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.status == AuthStatus.unauthenticated) {
-          context.router.replace(const RegisterRoute());
+          context.router.replace(const LoginRoute());
         } else if (state.status == AuthStatus.authenticated) {
           context.router.replace(const HomeRoute());
         }

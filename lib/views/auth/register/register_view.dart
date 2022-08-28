@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/blocs.dart';
 import '../../../config/router/app_router.gr.dart';
+import '../../../constants/enums/form_status.dart';
 import '../../../constants/extensions/context_extensions.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/input/email_input_field.dart';
@@ -20,13 +21,13 @@ class RegisterView extends StatelessWidget {
       ),
       body: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
-          if (state.status == RegisterStatus.failure) {
+          if (state.status == FormStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("Something went wrong"),
               ),
             );
-          } else if (state.status == RegisterStatus.success) {
+          } else if (state.status == FormStatus.success) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text("Account successfully created"),
@@ -45,7 +46,7 @@ class RegisterView extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.next,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<RegisterBloc>().add(EmailChanged(email)),
+                      onChanged: (email) => context.read<RegisterBloc>().add(RegisterEmailChanged(email)),
                     );
                   },
                 ),
@@ -58,8 +59,8 @@ class RegisterView extends StatelessWidget {
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
-                      onPressed: () => context.read<RegisterBloc>().add(PasswordVisibilityChanged()),
-                      onChanged: (password) => context.read<RegisterBloc>().add(PasswordChanged(password)),
+                      onPressed: () => context.read<RegisterBloc>().add(RegisterPasswordVisibilityChanged()),
+                      onChanged: (password) => context.read<RegisterBloc>().add(RegisterPasswordChanged(password)),
                     );
                   },
                 ),

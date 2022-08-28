@@ -1,6 +1,7 @@
-part of 'register_bloc.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+part of 'login_bloc.dart';
 
-class RegisterState extends Equatable {
+class LoginState extends Equatable {
   final FormStatus status;
   final String email;
   final bool? isValidEmail;
@@ -9,15 +10,14 @@ class RegisterState extends Equatable {
   final bool isPasswordObscured;
   final auth.User? user;
 
-  const RegisterState({
-    this.status = FormStatus.initial,
-    this.email = "",
-    this.isValidEmail,
-    this.password = "",
-    this.isValidPassword,
-    this.isPasswordObscured = true,
-    this.user,
-  });
+  const LoginState(
+      {this.status = FormStatus.initial,
+      this.email = "",
+      this.isValidEmail,
+      this.password = "",
+      this.isValidPassword,
+      this.isPasswordObscured = true,
+      this.user});
 
   @override
   List<Object?> get props => [
@@ -30,7 +30,7 @@ class RegisterState extends Equatable {
         user,
       ];
 
-  RegisterState copyWith({
+  LoginState copyWith({
     FormStatus? status,
     String? email,
     bool? isValidEmail,
@@ -39,7 +39,7 @@ class RegisterState extends Equatable {
     bool? isPasswordObscured,
     auth.User? user,
   }) {
-    return RegisterState(
+    return LoginState(
       status: status ?? this.status,
       email: email ?? this.email,
       isValidEmail: isValidEmail ?? this.isValidEmail,

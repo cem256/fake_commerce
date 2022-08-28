@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -30,16 +29,17 @@ class FakeCommerce extends StatelessWidget {
         RepositoryProvider<AuthRepository>(
           create: (context) => AuthRepository(firebaseAuth: FirebaseAuth.instance),
         ),
-        RepositoryProvider<UserRepository>(
-          create: (context) => UserRepository(firebaseFirestore: FirebaseFirestore.instance),
-        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(
               authRepository: context.read<AuthRepository>(),
-              userRepository: context.read<UserRepository>(),
+            ),
+          ),
+          BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(
+              authRepository: context.read<AuthRepository>(),
             ),
           ),
           BlocProvider<RegisterBloc>(

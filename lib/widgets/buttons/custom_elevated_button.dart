@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../blocs/blocs.dart';
+import '../../constants/enums/form_status.dart';
 import '../../constants/extensions/context_extensions.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -14,14 +14,14 @@ class CustomElevatedButton extends StatelessWidget {
 
   final String buttonText;
   final void Function()? onPressed;
-  final RegisterStatus status;
+  final FormStatus status;
   final bool? isValid;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: isValid ?? true ? onPressed : null,
-      child: status == RegisterStatus.submitting
+      child: status == FormStatus.submitting
           ? SizedBox(
               height: context.mediumValue,
               width: context.mediumValue,
