@@ -127,6 +127,7 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   }
 }
 
+// https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/sendPasswordResetEmail.html
 class PasswordResetFailure implements Exception {
   const PasswordResetFailure([this.message = 'An unknown exception occurred.']);
 

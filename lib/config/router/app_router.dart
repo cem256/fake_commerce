@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import '../../views/wishlist/wishlist_view.dart';
 
 import '../../views/auth/forgot_password/forgot_password_view.dart';
 import '../../views/auth/login/login_view.dart';
@@ -19,6 +20,7 @@ import '../../views/shopping_cart/shopping_cart_view.dart';
       children: [
         MaterialRoute(initial: true, page: HomeView),
         MaterialRoute(page: ShoppingCartView),
+        MaterialRoute(page: WishListView),
       ],
     ),
   ],

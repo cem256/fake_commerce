@@ -9,10 +9,7 @@ class NavbarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [
-        HomeRoute(),
-        ShoppingCartRoute(),
-      ],
+      routes: const [HomeRoute(), ShoppingCartRoute(), WishListRoute()],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
@@ -25,6 +22,10 @@ class NavbarView extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
               label: "Cart",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: "Wishlist",
             )
           ],
         );

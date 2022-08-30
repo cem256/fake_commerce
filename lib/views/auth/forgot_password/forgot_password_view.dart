@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/blocs.dart';
+import '../../../config/router/app_router.gr.dart';
 import '../../../constants/enums/form_status.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
@@ -13,9 +15,6 @@ class ForgotPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Forgot Password"),
-      ),
       body: BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
         listener: (context, state) {
           if (state.status == FormStatus.failure) {
@@ -34,42 +33,68 @@ class ForgotPasswordView extends StatelessWidget {
         },
         child: Padding(
           padding: context.paddingAllDefault,
-          child: SingleChildScrollView(
-            reverse: true,
-            child: Column(
-              children: [
-                BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                  builder: (context, state) {
-                    return EmailInputField(
-                      textInputAction: TextInputAction.done,
-                      isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<ForgotPasswordBloc>().add(ForgotPasswordEmailChanged(email)),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: context.mediumValue,
-                ),
-                SizedBox(
-                  height: context.mediumValue,
-                ),
-                BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                  builder: (context, state) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: CustomElevatedButton(
-                        buttonText: "Send reset",
-                        isValid: ((state.isValidEmail ?? false)),
-                        status: state.status,
-                        onPressed: () => context.read<ForgotPasswordBloc>().add(const ForgotPasswordSubmitted()),
+          child: Container(
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Forgot Password",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  SizedBox(
+                    height: context.mediumValue,
+                  ),
+                  const Text(
+                    "Please provide your email and we will send you a link to reset your password",
+                  ),
+                  SizedBox(
+                    height: context.mediumValue,
+                  ),
+                  BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                    builder: (context, state) {
+                      return EmailInputField(
+                        textInputAction: TextInputAction.done,
+                        isValidEmail: state.isValidEmail,
+                        onChanged: (email) => context.read<ForgotPasswordBloc>().add(ForgotPasswordEmailChanged(email)),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: context.mediumValue,
+                  ),
+                  BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: CustomElevatedButton(
+                          buttonText: "Reset",
+                          isValid: ((state.isValidEmail ?? false)),
+                          status: state.status,
+                          onPressed: () => context.read<ForgotPasswordBloc>().add(const ForgotPasswordSubmitted()),
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: context.highValue,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Already have an account?"),
+                      TextButton(
+                        child: const Text("Login"),
+                        onPressed: () => context.router.replace(
+                          const LoginRoute(),
+                        ),
                       ),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: context.highValue,
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -55,8 +56,8 @@ class FakeCommerce extends StatelessWidget {
 
           //theme
           themeMode: ThemeMode.system,
-          theme: ThemeData.light(),
-          darkTheme: ThemeData.dark(),
+          theme: FlexColorScheme.light(primary: Colors.orange).toTheme,
+          darkTheme: FlexColorScheme.dark(primary: Colors.orange).toTheme,
 
           // routing
           routerDelegate: _appRouter.delegate(),

@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../core/utils/input_validator/input_validator.dart';
 
 import '../../constants/enums/form_status.dart';
+import '../../core/utils/input_validator/input_validator.dart';
 import '../../repositories/auth/auth_repository.dart';
 
 part 'register_event.dart';

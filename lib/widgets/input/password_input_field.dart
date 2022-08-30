@@ -24,7 +24,7 @@ class PasswordInputField extends StatelessWidget {
         border: const OutlineInputBorder(),
         prefixIcon: const Icon(Icons.password),
         labelText: "Password",
-        errorText: (isValid ?? true) ? null : "Password must be at least 6 characters long",
+        errorText: (isValid ?? true) ? null : "Weak password",
         suffixIcon: IconButton(
           icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
           onPressed: onPressed,
