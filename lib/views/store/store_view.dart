@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../../repositories/auth/auth_repository.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+class StoreView extends StatelessWidget {
+  const StoreView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home View"),
+        title: const Text("Store View"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => AuthRepository(

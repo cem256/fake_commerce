@@ -17,9 +17,9 @@ import 'package:flutter/material.dart' as _i9;
 import '../../views/auth/forgot_password/forgot_password_view.dart' as _i3;
 import '../../views/auth/login/login_view.dart' as _i1;
 import '../../views/auth/register/register_view.dart' as _i2;
-import '../../views/home/home_view.dart' as _i5;
 import '../../views/navbar/navbar_view.dart' as _i4;
 import '../../views/shopping_cart/shopping_cart_view.dart' as _i6;
+import '../../views/store/store_view.dart' as _i5;
 import '../../views/wishlist/wishlist_view.dart' as _i7;
 
 class AppRouter extends _i8.RootStackRouter {
@@ -44,9 +44,9 @@ class AppRouter extends _i8.RootStackRouter {
       return _i8.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.NavbarView());
     },
-    HomeRoute.name: (routeData) {
+    StoreRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.HomeView());
+          routeData: routeData, child: const _i5.StoreView());
     },
     ShoppingCartRoute.name: (routeData) {
       return _i8.MaterialPageX<dynamic>(
@@ -65,7 +65,7 @@ class AppRouter extends _i8.RootStackRouter {
         _i8.RouteConfig(ForgotPasswordRoute.name,
             path: '/forgot-password-view'),
         _i8.RouteConfig(NavbarRoute.name, path: '/', children: [
-          _i8.RouteConfig(HomeRoute.name, path: '', parent: NavbarRoute.name),
+          _i8.RouteConfig(StoreRoute.name, path: '', parent: NavbarRoute.name),
           _i8.RouteConfig(ShoppingCartRoute.name,
               path: 'shopping-cart-view', parent: NavbarRoute.name),
           _i8.RouteConfig(WishListRoute.name,
@@ -109,11 +109,11 @@ class NavbarRoute extends _i8.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.HomeView]
-class HomeRoute extends _i8.PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: '');
+/// [_i5.StoreView]
+class StoreRoute extends _i8.PageRouteInfo<void> {
+  const StoreRoute() : super(StoreRoute.name, path: '');
 
-  static const String name = 'HomeRoute';
+  static const String name = 'StoreRoute';
 }
 
 /// generated route for

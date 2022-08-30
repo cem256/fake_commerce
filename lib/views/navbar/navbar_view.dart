@@ -9,15 +9,15 @@ class NavbarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: const [HomeRoute(), ShoppingCartRoute(), WishListRoute()],
+      routes: const [StoreRoute(), ShoppingCartRoute(), WishListRoute()],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
           currentIndex: tabsRouter.activeIndex,
           onTap: tabsRouter.setActiveIndex,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
+              icon: Icon(Icons.store),
+              label: "Store",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
