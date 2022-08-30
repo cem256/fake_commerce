@@ -40,6 +40,17 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    try {
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      throw PasswordResetFailure.fromCode(e.code);
+    } catch (_) {
+      throw const PasswordResetFailure();
+    }
+  }
+
+  @override
   Future<void> signOut() async {
     try {
       await firebaseAuth.signOut();
@@ -112,6 +123,23 @@ class LogInWithEmailAndPasswordFailure implements Exception {
         );
       default:
         return const LogInWithEmailAndPasswordFailure();
+    }
+  }
+}
+
+class PasswordResetFailure implements Exception {
+  const PasswordResetFailure([this.message = 'An unknown exception occurred.']);
+
+  final String message;
+
+  factory PasswordResetFailure.fromCode(String code) {
+    switch (code) {
+      case 'invalid-email':
+        return const PasswordResetFailure(
+          'Email is not valid or badly formatted.',
+        );
+      default:
+        return const PasswordResetFailure();
     }
   }
 }

@@ -8,6 +8,7 @@ class LoginState extends Equatable {
   final String password;
   final bool? isValidPassword;
   final bool isPasswordObscured;
+  final String? errorMessage;
 
   const LoginState({
     this.status = FormStatus.initial,
@@ -16,6 +17,7 @@ class LoginState extends Equatable {
     this.password = "",
     this.isValidPassword,
     this.isPasswordObscured = true,
+    this.errorMessage,
   });
 
   @override
@@ -26,6 +28,7 @@ class LoginState extends Equatable {
         password,
         isValidPassword,
         isPasswordObscured,
+        errorMessage,
       ];
 
   LoginState copyWith({
@@ -35,6 +38,7 @@ class LoginState extends Equatable {
     String? password,
     bool? isValidPassword,
     bool? isPasswordObscured,
+    String? errorMessage,
   }) {
     return LoginState(
       status: status ?? this.status,
@@ -43,6 +47,7 @@ class LoginState extends Equatable {
       password: password ?? this.password,
       isValidPassword: isValidPassword ?? this.isValidPassword,
       isPasswordObscured: isPasswordObscured ?? this.isPasswordObscured,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }

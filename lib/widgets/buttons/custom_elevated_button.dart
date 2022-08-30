@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/enums/form_status.dart';
-import '../../constants/extensions/context_extensions.dart';
+import '../../core/extensions/context_extensions.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({

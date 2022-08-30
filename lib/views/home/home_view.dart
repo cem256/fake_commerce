@@ -6,8 +6,6 @@ import '../../repositories/auth/auth_repository.dart';
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
-  static Page<void> route() => const MaterialPage(child: HomeView());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

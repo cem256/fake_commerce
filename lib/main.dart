@@ -1,12 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'blocs/app_bloc_observer.dart';
 import 'blocs/blocs.dart';
-import 'config/router/routes.dart';
+import 'config/router/app_router.gr.dart';
+import 'core/utils/observers/app_bloc_observer.dart';
 import 'repositories/repositories.dart';
 
 Future<void> main() async {
@@ -14,11 +13,13 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver();
 
   await Firebase.initializeApp();
-  runApp(const FakeCommerce());
+  runApp(FakeCommerce());
 }
 
 class FakeCommerce extends StatelessWidget {
-  const FakeCommerce({super.key});
+  FakeCommerce({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +33,6 @@ class FakeCommerce extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(
-              authRepository: context.read<AuthRepository>(),
-            ),
-          ),
           BlocProvider<LoginBloc>(
             create: (context) => LoginBloc(
               authRepository: context.read<AuthRepository>(),
@@ -47,30 +43,25 @@ class FakeCommerce extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
+          BlocProvider<ForgotPasswordBloc>(
+            create: (context) => ForgotPasswordBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
         ],
-        child: const AppWidget(),
-      ),
-    );
-  }
-}
+        child: MaterialApp.router(
+          title: "Fake Commerce",
+          debugShowCheckedModeBanner: false,
 
-class AppWidget extends StatelessWidget {
-  const AppWidget({Key? key}) : super(key: key);
+          //theme
+          themeMode: ThemeMode.system,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Fake Commerce",
-      debugShowCheckedModeBanner: false,
-
-      //theme
-      themeMode: ThemeMode.system,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-
-      home: FlowBuilder<AuthStatus>(
-        state: context.select((AuthBloc bloc) => bloc.state.status),
-        onGeneratePages: onGenerateAppViewPages,
+          // routing
+          routerDelegate: _appRouter.delegate(),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+        ),
       ),
     );
   }

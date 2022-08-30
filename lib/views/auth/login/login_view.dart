@@ -1,18 +1,17 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../blocs/login/login_bloc.dart';
+import '../../../config/router/app_router.gr.dart';
 import '../../../constants/enums/form_status.dart';
-import '../../../constants/extensions/context_extensions.dart';
+import '../../../core/extensions/context_extensions.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/input/email_input_field.dart';
 import '../../../widgets/input/password_input_field.dart';
-import '../register/register_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({Key? key}) : super(key: key);
-
-  static Page<void> route() => const MaterialPage(child: LoginView());
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +23,12 @@ class LoginView extends StatelessWidget {
         listener: (context, state) {
           if (state.status == FormStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Something went wrong"),
+              SnackBar(
+                content: Text(state.errorMessage.toString()),
               ),
             );
           } else if (state.status == FormStatus.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Successful login"),
-              ),
-            );
+            context.router.replace(const NavbarRoute());
           }
         },
         child: Padding(
@@ -84,13 +79,19 @@ class LoginView extends StatelessWidget {
                 SizedBox(
                   height: context.highValue,
                 ),
+                TextButton(
+                  onPressed: () => context.router.push(const ForgotPasswordRoute()),
+                  child: const Text("Forgot Password?"),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Don't have an account?"),
                     TextButton(
                       child: const Text("Register"),
-                      onPressed: () => Navigator.of(context).push<void>(RegisterView.route()),
+                      onPressed: () => context.router.replace(
+                        const RegisterRoute(),
+                      ),
                     ),
                   ],
                 ),
