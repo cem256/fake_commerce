@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -31,6 +32,16 @@ class FakeCommerce extends StatelessWidget {
             firebaseAuth: FirebaseAuth.instance,
           ),
         ),
+        RepositoryProvider<CategoryRepository>(
+          create: (context) => CategoryRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
+        RepositoryProvider<ProductRepository>(
+          create: (context) => ProductRepository(
+            firebaseFirestore: FirebaseFirestore.instance,
+          ),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -49,6 +60,16 @@ class FakeCommerce extends StatelessWidget {
               authRepository: context.read<AuthRepository>(),
             ),
           ),
+          BlocProvider<CategoryBloc>(
+            create: (context) => CategoryBloc(
+              categoryRepository: context.read<CategoryRepository>(),
+            )..add(CategoriesFetched()),
+          ),
+          BlocProvider<ProductBloc>(
+            create: (context) => ProductBloc(
+              productRepository: context.read<ProductRepository>(),
+            ),
+          ),
         ],
         child: MaterialApp.router(
           title: "Fake Commerce",
@@ -56,8 +77,11 @@ class FakeCommerce extends StatelessWidget {
 
           //theme
           themeMode: ThemeMode.system,
-          theme: FlexColorScheme.light(primary: Colors.orange).toTheme,
-          darkTheme: FlexColorScheme.dark(primary: Colors.orange).toTheme,
+          theme: FlexColorScheme.light(primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
+              .toTheme,
+          darkTheme:
+              FlexColorScheme.dark(primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
+                  .toTheme,
 
           // routing
           routerDelegate: _appRouter.delegate(),

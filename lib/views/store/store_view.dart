@@ -1,7 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import '../../core/extensions/context_extensions.dart';
+import '../../widgets/carousel/category_carousel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../repositories/auth/auth_repository.dart';
+import '../../blocs/category/category_bloc.dart';
+import '../../constants/enums/page_status.dart';
 
 class StoreView extends StatelessWidget {
   const StoreView({Key? key}) : super(key: key);
@@ -10,12 +14,44 @@ class StoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Store View"),
+        title: const Text("Fake Commerce"),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => AuthRepository(
-          firebaseAuth: FirebaseAuth.instance,
-        ).signOut(),
+      body: Padding(
+        padding: context.paddingAllDefault,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            BlocBuilder<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                if (state.status == PageStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state.status == PageStatus.success) {
+                  return CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 2,
+                      viewportFraction: 1,
+                      enlargeCenterPage: true,
+                    ),
+                    items: state.categories.map((category) => CategoryCarousel(category: category)).toList(),
+                  );
+                } else {
+                  return const Center(child: Text("Some Error"));
+                }
+              },
+            ),
+            SizedBox(
+              height: context.mediumValue,
+            ),
+            Text(
+              "All Products",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            SizedBox(
+              height: context.mediumValue,
+            ),
+          ],
+        ),
       ),
     );
   }
