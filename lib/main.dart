@@ -66,10 +66,9 @@ class FakeCommerce extends StatelessWidget {
             )..add(CategoriesFetched()),
           ),
           BlocProvider<ProductBloc>(
-            create: (context) => ProductBloc(
-              productRepository: context.read<ProductRepository>(),
-            ),
-          ),
+              create: (context) => ProductBloc(
+                    productRepository: context.read<ProductRepository>(),
+                  )..add(ProductsFetched())),
         ],
         child: MaterialApp.router(
           title: "Fake Commerce",
