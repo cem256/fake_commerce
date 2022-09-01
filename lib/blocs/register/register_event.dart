@@ -28,3 +28,5 @@ class RegisterPasswordChanged extends RegisterEvent {
 class RegisterPasswordVisibilityChanged extends RegisterEvent {}
 
 class RegisterSubmitted extends RegisterEvent {}
+
+class RegisterWithGooglePressed extends RegisterEvent {}

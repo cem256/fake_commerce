@@ -7,6 +7,7 @@ import '../../../config/router/app_router.gr.dart';
 import '../../../constants/enums/form_status.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
+import '../../../widgets/buttons/google_button.dart';
 import '../../../widgets/input/email_input_field.dart';
 import '../../../widgets/input/password_input_field.dart';
 
@@ -87,6 +88,17 @@ class LoginView extends StatelessWidget {
                           isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
                           status: state.status,
                           onPressed: () => context.read<LoginBloc>().add(const LoginSubmitted()),
+                        ),
+                      );
+                    },
+                  ),
+                  BlocBuilder<LoginBloc, LoginState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: GoogleButton(
+                          label: "Login With Google",
+                          onPressed: () => context.read<LoginBloc>().add(LoginWithGooglePressed()),
                         ),
                       );
                     },

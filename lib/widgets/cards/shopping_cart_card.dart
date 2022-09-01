@@ -1,9 +1,9 @@
-import '../../core/extensions/context_extensions.dart';
-import '../../models/shopping_cart/shopping_cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/shopping_cart/shopping_cart_bloc.dart';
+import '../../core/extensions/context_extensions.dart';
+import '../../models/shopping_cart/shopping_cart_model.dart';
 
 class ShoppingCartCard extends StatelessWidget {
   const ShoppingCartCard({super.key, required this.cartItem});

@@ -45,5 +45,16 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+			<dict>
+					<key>CFBundleTypeRole</key>
+					<string>Editor</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+							<string>com.googleusercontent.apps.984840829241-3r6pu9p17llp6vps6l1sci4eclslgo06</string>
+					</array>
+			</dict>
+	</array>
 </dict>
 </plist>

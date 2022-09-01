@@ -25,10 +25,12 @@ dependencies:
   firebase_core: ^1.21.1
   firebase_auth: ^3.7.0
   cloud_firestore: ^3.4.6
+  google_sign_in: ^5.4.1
 
   #ui
   flex_color_scheme: ^5.1.0
   carousel_slider: ^4.1.1
+  font_awesome_flutter: ^10.1.0
 
 
 

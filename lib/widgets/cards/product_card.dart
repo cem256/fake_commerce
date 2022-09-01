@@ -1,12 +1,10 @@
-import '../../models/shopping_cart/shopping_cart_model.dart';
-
-import '../../blocs/blocs.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/blocs.dart';
 import '../../core/extensions/context_extensions.dart';
-import 'package:flutter/material.dart';
-
 import '../../models/product/product_model.dart';
+import '../../models/shopping_cart/shopping_cart_model.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
@@ -35,7 +33,7 @@ class ProductCard extends StatelessWidget {
             right: 0,
             child: Container(
               height: context.dynamicHeight(0.08),
-              color: Theme.of(context).cardColor,
+              color: Theme.of(context).secondaryHeaderColor,
               child: Padding(
                 padding: context.paddingAllLow,
                 child: Row(

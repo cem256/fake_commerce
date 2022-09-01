@@ -16,6 +16,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginPasswordVisibilityChanged>(_onPasswordVisibilityChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
+    on<LoginWithGooglePressed>(_onLoginWithGoogleSubmitted);
   }
 
   void _onEmailChanged(LoginEmailChanged event, Emitter<LoginState> emit) {
@@ -41,6 +42,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(status: FormStatus.success));
       emit(state.copyWith(status: FormStatus.initial));
     } on LogInWithEmailAndPasswordFailure catch (e) {
+      emit(state.copyWith(errorMessage: e.message, status: FormStatus.failure));
+      emit(state.copyWith(status: FormStatus.initial));
+    }
+  }
+
+  Future<void> _onLoginWithGoogleSubmitted(LoginWithGooglePressed event, Emitter<LoginState> emit) async {
+    emit(state.copyWith(status: FormStatus.submitting));
+
+    try {
+      await authRepository.logInWithGoogle();
+      emit(state.copyWith(status: FormStatus.success));
+      emit(state.copyWith(status: FormStatus.initial));
+    } on LogInWithGoogleFailure catch (e) {
       emit(state.copyWith(errorMessage: e.message, status: FormStatus.failure));
       emit(state.copyWith(status: FormStatus.initial));
     }

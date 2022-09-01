@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import '../../../widgets/buttons/google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -87,6 +88,17 @@ class RegisterView extends StatelessWidget {
                           isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
                           status: state.status,
                           onPressed: () => context.read<RegisterBloc>().add(RegisterSubmitted()),
+                        ),
+                      );
+                    },
+                  ),
+                  BlocBuilder<RegisterBloc, RegisterState>(
+                    builder: (context, state) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: GoogleButton(
+                          label: "Register with Google",
+                          onPressed: () => context.read<RegisterBloc>().add(RegisterWithGooglePressed()),
                         ),
                       );
                     },

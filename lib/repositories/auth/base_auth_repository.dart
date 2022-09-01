@@ -3,6 +3,8 @@ import '../../models/user/user_model.dart';
 abstract class BaseAuthRepository {
   Stream<UserModel> get user;
 
+  Future<void> logInWithGoogle();
+
   Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,

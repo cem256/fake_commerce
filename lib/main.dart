@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import 'blocs/blocs.dart';
 import 'config/router/app_router.gr.dart';
@@ -30,6 +31,7 @@ class FakeCommerce extends StatelessWidget {
         RepositoryProvider<AuthRepository>(
           create: (context) => AuthRepository(
             firebaseAuth: FirebaseAuth.instance,
+            googleSignIn: GoogleSignIn.standard(),
           ),
         ),
         RepositoryProvider<CategoryRepository>(

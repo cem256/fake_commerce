@@ -16,6 +16,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<RegisterPasswordChanged>(_onPasswordChanged);
     on<RegisterPasswordVisibilityChanged>(_onPasswordVisibilityChanged);
     on<RegisterSubmitted>(_onRegisterSubmitted);
+    on<RegisterWithGooglePressed>(_onRegisterWithGoogleSubmitted);
   }
 
   void _onEmailChanged(RegisterEmailChanged event, Emitter<RegisterState> emit) {
@@ -41,6 +42,19 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       emit(state.copyWith(status: FormStatus.success));
       emit(state.copyWith(status: FormStatus.initial));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
+      emit(state.copyWith(errorMessage: e.message, status: FormStatus.failure));
+      emit(state.copyWith(status: FormStatus.initial));
+    }
+  }
+
+  Future<void> _onRegisterWithGoogleSubmitted(RegisterWithGooglePressed event, Emitter<RegisterState> emit) async {
+    emit(state.copyWith(status: FormStatus.submitting));
+
+    try {
+      await authRepository.logInWithGoogle();
+      emit(state.copyWith(status: FormStatus.success));
+      emit(state.copyWith(status: FormStatus.initial));
+    } on LogInWithGoogleFailure catch (e) {
       emit(state.copyWith(errorMessage: e.message, status: FormStatus.failure));
       emit(state.copyWith(status: FormStatus.initial));
     }

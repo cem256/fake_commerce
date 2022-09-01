@@ -32,3 +32,5 @@ class LoginPasswordVisibilityChanged extends LoginEvent {
 class LoginSubmitted extends LoginEvent {
   const LoginSubmitted();
 }
+
+class LoginWithGooglePressed extends LoginEvent {}
