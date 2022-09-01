@@ -1,9 +1,8 @@
-import '../../core/extensions/context_extensions.dart';
-import '../cards/product_card.dart';
-
 import 'package:flutter/material.dart';
 
+import '../../core/extensions/context_extensions.dart';
 import '../../models/product/product_model.dart';
+import '../cards/product_card.dart';
 
 class ProductGrid extends StatelessWidget {
   const ProductGrid({super.key, required this.products});

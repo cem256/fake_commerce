@@ -12,8 +12,8 @@ class CategoryCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => context.router.push(CategoryDetailRoute(category: category)),
+    return InkWell(
+      onTap: () => context.router.push(CategoryDetailRoute(category: category)),
       child: ClipRRect(
         borderRadius: context.defaultBorderRadius,
         child: Stack(

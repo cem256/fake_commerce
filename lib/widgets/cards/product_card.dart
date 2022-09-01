@@ -1,3 +1,8 @@
+import '../../models/shopping_cart/shopping_cart_model.dart';
+
+import '../../blocs/blocs.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../core/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 
@@ -58,12 +63,25 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                        child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.add_circle,
+                      child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                        builder: (context, state) {
+                          return IconButton(
+                            onPressed: () => context.read<ShoppingCartBloc>()
+                              ..add(
+                                ProductAddedToCart(
+                                  ShoppingCartModel(product, 1),
+                                ),
+                              ),
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: state.cartItems.map((e) => e.product.name).contains(product.name)
+                                  ? Theme.of(context).primaryColor
+                                  : null,
+                            ),
+                          );
+                        },
                       ),
-                    )),
+                    ),
                   ],
                 ),
               ),
