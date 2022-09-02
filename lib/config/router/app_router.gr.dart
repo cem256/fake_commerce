@@ -20,9 +20,9 @@ import '../../views/auth/login/login_view.dart' as _i1;
 import '../../views/auth/register/register_view.dart' as _i2;
 import '../../views/category_detail/category_detail_view.dart' as _i5;
 import '../../views/navbar/navbar_view.dart' as _i4;
+import '../../views/settings/settings_view.dart' as _i8;
 import '../../views/shopping_cart/shopping_cart_view.dart' as _i7;
 import '../../views/store/store_view.dart' as _i6;
-import '../../views/wishlist/wishlist_view.dart' as _i8;
 
 class AppRouter extends _i9.RootStackRouter {
   AppRouter([_i10.GlobalKey<_i10.NavigatorState>? navigatorKey])
@@ -61,9 +61,9 @@ class AppRouter extends _i9.RootStackRouter {
       return _i9.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i7.ShoppingCartView());
     },
-    WishListRoute.name: (routeData) {
+    SettingsRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.WishListView());
+          routeData: routeData, child: const _i8.SettingsView());
     }
   };
 
@@ -77,8 +77,8 @@ class AppRouter extends _i9.RootStackRouter {
           _i9.RouteConfig(StoreRoute.name, path: '', parent: NavbarRoute.name),
           _i9.RouteConfig(ShoppingCartRoute.name,
               path: 'shopping-cart-view', parent: NavbarRoute.name),
-          _i9.RouteConfig(WishListRoute.name,
-              path: 'wish-list-view', parent: NavbarRoute.name)
+          _i9.RouteConfig(SettingsRoute.name,
+              path: 'settings-view', parent: NavbarRoute.name)
         ]),
         _i9.RouteConfig(CategoryDetailRoute.name, path: '/category-detail-view')
       ];
@@ -160,9 +160,9 @@ class ShoppingCartRoute extends _i9.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.WishListView]
-class WishListRoute extends _i9.PageRouteInfo<void> {
-  const WishListRoute() : super(WishListRoute.name, path: 'wish-list-view');
+/// [_i8.SettingsView]
+class SettingsRoute extends _i9.PageRouteInfo<void> {
+  const SettingsRoute() : super(SettingsRoute.name, path: 'settings-view');
 
-  static const String name = 'WishListRoute';
+  static const String name = 'SettingsRoute';
 }

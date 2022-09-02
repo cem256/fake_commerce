@@ -14,6 +14,7 @@ dependencies:
   #state management
   bloc: ^8.1.0
   flutter_bloc: ^8.1.1
+  hydrated_bloc: ^8.1.0
 
   #navigation
   auto_route: ^5.0.1
@@ -31,6 +32,9 @@ dependencies:
   flex_color_scheme: ^5.1.0
   carousel_slider: ^4.1.1
   font_awesome_flutter: ^10.1.0
+
+  #utility
+  path_provider: ^2.0.11
 
 
 

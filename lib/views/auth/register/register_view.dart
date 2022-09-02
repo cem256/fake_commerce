@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import '../../../widgets/buttons/google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +7,7 @@ import '../../../config/router/app_router.gr.dart';
 import '../../../constants/enums/form_status.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
+import '../../../widgets/buttons/google_button.dart';
 import '../../../widgets/input/email_input_field.dart';
 import '../../../widgets/input/password_input_field.dart';
 

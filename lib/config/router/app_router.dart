@@ -5,9 +5,9 @@ import '../../views/auth/login/login_view.dart';
 import '../../views/auth/register/register_view.dart';
 import '../../views/category_detail/category_detail_view.dart';
 import '../../views/navbar/navbar_view.dart';
+import '../../views/settings/settings_view.dart';
 import '../../views/shopping_cart/shopping_cart_view.dart';
 import '../../views/store/store_view.dart';
-import '../../views/wishlist/wishlist_view.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: "View,Route",
@@ -21,7 +21,7 @@ import '../../views/wishlist/wishlist_view.dart';
       children: [
         MaterialRoute(initial: true, page: StoreView),
         MaterialRoute(page: ShoppingCartView),
-        MaterialRoute(page: WishListView),
+        MaterialRoute(page: SettingsView),
       ],
     ),
     MaterialRoute(page: CategoryDetailView),

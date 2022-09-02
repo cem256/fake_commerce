@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'blocs/blocs.dart';
 import 'config/router/app_router.gr.dart';
@@ -16,7 +19,17 @@ Future<void> main() async {
   Bloc.observer = AppBlocObserver();
 
   await Firebase.initializeApp();
-  runApp(FakeCommerce());
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  final storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
+  HydratedBlocOverrides.runZoned(
+    () => runApp(FakeCommerce()),
+    storage: storage,
+    blocObserver: AppBlocObserver(),
+  );
 }
 
 class FakeCommerce extends StatelessWidget {
@@ -75,22 +88,30 @@ class FakeCommerce extends StatelessWidget {
           BlocProvider<ShoppingCartBloc>(
             create: (context) => ShoppingCartBloc(),
           ),
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc(),
+          ),
         ],
-        child: MaterialApp.router(
-          title: "Fake Commerce",
-          debugShowCheckedModeBanner: false,
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              title: "Fake Commerce",
+              debugShowCheckedModeBanner: false,
 
-          //theme
-          themeMode: ThemeMode.system,
-          theme: FlexColorScheme.light(primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
-              .toTheme,
-          darkTheme:
-              FlexColorScheme.dark(primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
+              //theme
+              themeMode: state.theme,
+              theme: FlexColorScheme.light(
+                      primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
                   .toTheme,
+              darkTheme:
+                  FlexColorScheme.dark(primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
+                      .toTheme,
 
-          // routing
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
+              // routing
+              routerDelegate: _appRouter.delegate(),
+              routeInformationParser: _appRouter.defaultRouteParser(),
+            );
+          },
         ),
       ),
     );
