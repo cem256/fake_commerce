@@ -5,11 +5,13 @@ class PasswordInputField extends StatelessWidget {
     Key? key,
     required this.obscureText,
     this.isValid,
+    required this.labelText,
     this.onPressed,
     this.onChanged,
     required this.textInputAction,
   }) : super(key: key);
   final TextInputAction textInputAction;
+  final String labelText;
   final bool obscureText;
   final bool? isValid;
   final void Function()? onPressed;
@@ -23,7 +25,7 @@ class PasswordInputField extends StatelessWidget {
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         prefixIcon: const Icon(Icons.password),
-        labelText: "Password",
+        labelText: labelText,
         errorText: (isValid ?? true) ? null : "Weak password",
         suffixIcon: IconButton(
           icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),

@@ -91,6 +91,11 @@ class FakeCommerce extends StatelessWidget {
           BlocProvider<ThemeBloc>(
             create: (context) => ThemeBloc(),
           ),
+          BlocProvider<SettingsBloc>(
+            create: (context) => SettingsBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {

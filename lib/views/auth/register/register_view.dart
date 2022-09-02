@@ -68,6 +68,7 @@ class RegisterView extends StatelessWidget {
                   BlocBuilder<RegisterBloc, RegisterState>(
                     builder: (context, state) {
                       return PasswordInputField(
+                        labelText: "Password",
                         obscureText: state.isPasswordObscured,
                         textInputAction: TextInputAction.next,
                         isValid: state.isValidPassword,

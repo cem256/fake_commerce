@@ -15,9 +15,15 @@ abstract class BaseAuthRepository {
     required String password,
   });
 
+  Future<void> updatePassword({
+    required String newPassword,
+  });
+
   Future<void> sendPasswordResetEmail({
     required String email,
   });
+
+  Future<void> deleteAccount();
 
   Future<void> signOut();
 }

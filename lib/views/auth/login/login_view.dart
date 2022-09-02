@@ -64,6 +64,7 @@ class LoginView extends StatelessWidget {
                   BlocBuilder<LoginBloc, LoginState>(
                     builder: (context, state) {
                       return PasswordInputField(
+                        labelText: "Password",
                         obscureText: state.isPasswordObscured,
                         textInputAction: TextInputAction.next,
                         isValid: state.isValidPassword,

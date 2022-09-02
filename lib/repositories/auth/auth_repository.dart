@@ -73,6 +73,26 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<void> updatePassword({required String newPassword}) async {
+    try {
+      await firebaseAuth.currentUser?.updatePassword(newPassword);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      throw UpdatePasswordFailure.fromCode(e.code);
+    } catch (_) {
+      throw const UpdatePasswordFailure();
+    }
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    try {
+      await firebaseAuth.currentUser?.delete();
+    } catch (_) {
+      throw AccountDeletionFailure();
+    }
+  }
+
+  @override
   Future<void> signOut() async {
     try {
       await Future.wait([
@@ -198,6 +218,28 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   }
 }
 
+class UpdatePasswordFailure implements Exception {
+  const UpdatePasswordFailure([this.message = 'An unknown exception occurred.']);
+
+  final String message;
+
+  factory UpdatePasswordFailure.fromCode(String code) {
+    switch (code) {
+      case 'weak-password':
+        return const UpdatePasswordFailure(
+          'Please enter a stronger password.',
+        );
+      case 'requires-recent-login':
+        return const UpdatePasswordFailure(
+          'Please login again to perform this action.',
+        );
+
+      default:
+        return const UpdatePasswordFailure();
+    }
+  }
+}
+
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/sendPasswordResetEmail.html
 class PasswordResetFailure implements Exception {
   const PasswordResetFailure([this.message = 'An unknown exception occurred.']);
@@ -212,6 +254,23 @@ class PasswordResetFailure implements Exception {
         );
       default:
         return const PasswordResetFailure();
+    }
+  }
+}
+
+class AccountDeletionFailure implements Exception {
+  AccountDeletionFailure([this.message = 'An unknown exception occurred.']);
+
+  final String message;
+
+  factory AccountDeletionFailure.fromCode(String code) {
+    switch (code) {
+      case 'requires-recent-login':
+        return AccountDeletionFailure(
+          'Please login again to perform this action.',
+        );
+      default:
+        return AccountDeletionFailure();
     }
   }
 }

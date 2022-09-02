@@ -4,6 +4,7 @@ import '../../views/auth/forgot_password/forgot_password_view.dart';
 import '../../views/auth/login/login_view.dart';
 import '../../views/auth/register/register_view.dart';
 import '../../views/category_detail/category_detail_view.dart';
+import '../../views/change_password/change_password_view.dart';
 import '../../views/navbar/navbar_view.dart';
 import '../../views/settings/settings_view.dart';
 import '../../views/shopping_cart/shopping_cart_view.dart';
@@ -25,6 +26,7 @@ import '../../views/store/store_view.dart';
       ],
     ),
     MaterialRoute(page: CategoryDetailView),
+    MaterialRoute(page: ChangePasswordView),
   ],
 )
 class $AppRouter {}
