@@ -9,5 +9,5 @@ class ShoppingCartModel extends Equatable {
   ShoppingCartModel(this.product, this.count);
 
   @override
-  List<Object?> get props => [product, count];
+  List<Object?> get props => [product];
 }

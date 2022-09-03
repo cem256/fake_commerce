@@ -15,7 +15,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   }
 
   void _onProductAddedToCart(ProductAddedToCart event, Emitter<ShoppingCartState> emit) {
-    if (state.cartItems.contains(event.product)) {
+    if (state.cartItems.map((e) => e.product.name).contains(event.product.product.name)) {
       List<ShoppingCartModel> cartItems = List.of(state.cartItems)..remove(event.product);
       emit(state.copyWith(cartItems: cartItems, subtotal: _calculateSubtotal(cartItems)));
     } else {
