@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../core/enums/form_status.dart';
-import '../../core/utils/input_validator/input_validator.dart';
-import '../../data/repositories/auth/auth_repository.dart';
+import '../../../core/enums/form_status.dart';
+import '../../../core/utils/input_validator/input_validator.dart';
+import '../../../data/repositories/auth/auth_repository.dart';
 
 part 'forgot_password_event.dart';
 part 'forgot_password_state.dart';
