@@ -37,7 +37,7 @@ class ShoppingCartCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(cartItem.product.name, maxLines: 1),
+              Text(cartItem.product.name, maxLines: 2),
               Text(
                 "\$${cartItem.product.price} x ${cartItem.count}",
               ),

@@ -43,6 +43,15 @@ class RegisterView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: Icon(
+                      Icons.store,
+                      size: context.veryHighValue,
+                    ),
+                  ),
+                  SizedBox(
+                    height: context.highValue,
+                  ),
                   Text(
                     "Register",
                     style: Theme.of(context).textTheme.headline6,

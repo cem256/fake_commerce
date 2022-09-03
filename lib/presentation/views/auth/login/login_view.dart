@@ -39,6 +39,15 @@ class LoginView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Center(
+                    child: Icon(
+                      Icons.store,
+                      size: context.veryHighValue,
+                    ),
+                  ),
+                  SizedBox(
+                    height: context.highValue,
+                  ),
                   Text(
                     "Login",
                     style: Theme.of(context).textTheme.headline6,

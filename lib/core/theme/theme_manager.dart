@@ -8,13 +8,13 @@ class ThemeManager {
   ThemeManager._init();
 
   ThemeData get lightTheme => FlexColorScheme.light(
-        primary: Colors.orange,
+        primary: Colors.orangeAccent,
         appBarBackground: Colors.transparent,
         appBarElevation: 0,
       ).toTheme;
 
   ThemeData get darkTheme => FlexColorScheme.dark(
-        primary: Colors.orange,
+        primary: Colors.orangeAccent,
         appBarBackground: Colors.transparent,
         appBarElevation: 0,
       ).toTheme;

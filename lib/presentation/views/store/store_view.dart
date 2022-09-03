@@ -15,7 +15,7 @@ class StoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Fake Commerce"),
+        title: const Text("FakeCommerce"),
       ),
       body: Padding(
         padding: context.paddingAllDefault,
