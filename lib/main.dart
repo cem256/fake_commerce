@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +8,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'blocs/blocs.dart';
-import 'config/router/app_router.gr.dart';
+import 'core/constants/string_constants.dart';
+import 'core/theme/theme_manager.dart';
 import 'core/utils/observers/app_bloc_observer.dart';
-import 'repositories/repositories.dart';
+import 'data/repositories/repositories.dart';
+import 'logic/blocs.dart';
+import 'presentation/router/app_router.gr.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -88,29 +89,25 @@ class FakeCommerce extends StatelessWidget {
           BlocProvider<ShoppingCartBloc>(
             create: (context) => ShoppingCartBloc(),
           ),
-          BlocProvider<ThemeBloc>(
-            create: (context) => ThemeBloc(),
-          ),
           BlocProvider<SettingsBloc>(
             create: (context) => SettingsBloc(
               authRepository: context.read<AuthRepository>(),
             ),
           ),
+          BlocProvider<ThemeBloc>(
+            create: (context) => ThemeBloc(),
+          ),
         ],
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             return MaterialApp.router(
-              title: "Fake Commerce",
+              title: StringConstants.title,
               debugShowCheckedModeBanner: false,
 
               //theme
               themeMode: state.theme,
-              theme: FlexColorScheme.light(
-                      primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
-                  .toTheme,
-              darkTheme:
-                  FlexColorScheme.dark(primary: Colors.orange, appBarBackground: Colors.transparent, appBarElevation: 0)
-                      .toTheme,
+              theme: ThemeManager.instance.lightTheme,
+              darkTheme: ThemeManager.instance.darkTheme,
 
               // routing
               routerDelegate: _appRouter.delegate(),
