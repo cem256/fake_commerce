@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'app/auth/bloc/auth_bloc.dart';
 import 'core/constants/string_constants.dart';
 import 'core/theme/theme_manager.dart';
 import 'core/utils/observers/app_bloc_observer.dart';
@@ -61,8 +62,8 @@ class FakeCommerce extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<LoginBloc>(
-            create: (context) => LoginBloc(
+          BlocProvider<AuthBloc>(
+            create: (context) => AuthBloc(
               authRepository: context.read<AuthRepository>(),
             ),
           ),

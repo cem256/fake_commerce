@@ -13,7 +13,7 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Stream<UserModel> get user {
-    return firebaseAuth.authStateChanges().map(
+    return firebaseAuth.userChanges().map(
       (firebaseUser) {
         return firebaseUser == null ? UserModel.empty : firebaseUser.toUser;
       },

@@ -15,59 +15,27 @@ class SettingsView extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Settings"),
       ),
-      body: BlocListener<SettingsBloc, SettingsState>(
-        listener: (context, state) {
-          if (state.isDeletionSuccessful == false) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.deletionError!),
-              ),
-            );
-          } else if (state.isDeletionSuccessful == true) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Your account deleted successfuly"),
-              ),
-            );
-            context.router.replace(const LoginRoute());
-          }
-          if (state.isLogoutSuccessful == false) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.logoutError ?? "Logout Error"),
-              ),
-            );
-          } else if (state.isLogoutSuccessful == true) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Logout successful"),
-              ),
-            );
-            context.router.replace(const LoginRoute());
-          }
-        },
-        child: Padding(
-          padding: context.paddingAllDefault,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Display",
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
-              ),
-              const _ThemeTile(),
-              SizedBox(
-                height: context.mediumValue,
-              ),
-              Text(
-                "Account",
-                style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
-              ),
-              const _ChangePasswordTile(),
-              const _DeleleteAccounTile(),
-              const _LogoutTile(),
-            ],
-          ),
+      body: Padding(
+        padding: context.paddingAllDefault,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Display",
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const _ThemeTile(),
+            SizedBox(
+              height: context.mediumValue,
+            ),
+            Text(
+              "Account",
+              style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
+            ),
+            const _ChangePasswordTile(),
+            const _DeleleteAccounTile(),
+            const _LogoutTile(),
+          ],
         ),
       ),
     );
