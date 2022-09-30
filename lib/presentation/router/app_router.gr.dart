@@ -115,45 +115,47 @@ class AppRouter extends _i15.RootStackRouter {
 
   @override
   List<_i15.RouteConfig> get routes => [
-        _i15.RouteConfig(UnauthenticatedRouter.name, path: '/', children: [
-          _i15.RouteConfig(LoginWrapper.name,
-              path: '',
-              parent: UnauthenticatedRouter.name,
-              children: [
-                _i15.RouteConfig(LoginRoute.name,
-                    path: '', parent: LoginWrapper.name),
-                _i15.RouteConfig('*#redirect',
-                    path: '*',
-                    parent: LoginWrapper.name,
-                    redirectTo: '',
-                    fullMatch: true)
-              ]),
-          _i15.RouteConfig(RegisterWrapper.name,
-              path: '',
-              parent: UnauthenticatedRouter.name,
-              children: [
-                _i15.RouteConfig(RegisterRoute.name,
-                    path: 'register-view', parent: RegisterWrapper.name),
-                _i15.RouteConfig('*#redirect',
-                    path: '*',
-                    parent: RegisterWrapper.name,
-                    redirectTo: '',
-                    fullMatch: true)
-              ]),
-          _i15.RouteConfig(ForgotPasswordWrapper.name,
-              path: '',
-              parent: UnauthenticatedRouter.name,
-              children: [
-                _i15.RouteConfig(ForgotPasswordRoute.name,
-                    path: 'forgot-password-view',
-                    parent: ForgotPasswordWrapper.name),
-                _i15.RouteConfig('*#redirect',
-                    path: '*',
-                    parent: ForgotPasswordWrapper.name,
-                    redirectTo: '',
-                    fullMatch: true)
-              ])
-        ]),
+        _i15.RouteConfig(UnauthenticatedRouter.name,
+            path: '/empty-router-page',
+            children: [
+              _i15.RouteConfig(LoginWrapper.name,
+                  path: '',
+                  parent: UnauthenticatedRouter.name,
+                  children: [
+                    _i15.RouteConfig(LoginRoute.name,
+                        path: '', parent: LoginWrapper.name),
+                    _i15.RouteConfig('*#redirect',
+                        path: '*',
+                        parent: LoginWrapper.name,
+                        redirectTo: '',
+                        fullMatch: true)
+                  ]),
+              _i15.RouteConfig(RegisterWrapper.name,
+                  path: '',
+                  parent: UnauthenticatedRouter.name,
+                  children: [
+                    _i15.RouteConfig(RegisterRoute.name,
+                        path: 'register-view', parent: RegisterWrapper.name),
+                    _i15.RouteConfig('*#redirect',
+                        path: '*',
+                        parent: RegisterWrapper.name,
+                        redirectTo: '',
+                        fullMatch: true)
+                  ]),
+              _i15.RouteConfig(ForgotPasswordWrapper.name,
+                  path: '',
+                  parent: UnauthenticatedRouter.name,
+                  children: [
+                    _i15.RouteConfig(ForgotPasswordRoute.name,
+                        path: 'forgot-password-view',
+                        parent: ForgotPasswordWrapper.name),
+                    _i15.RouteConfig('*#redirect',
+                        path: '*',
+                        parent: ForgotPasswordWrapper.name,
+                        redirectTo: '',
+                        fullMatch: true)
+                  ])
+            ]),
         _i15.RouteConfig(AuthenticatedRouter.name,
             path: '/navbar-wrapper',
             children: [
@@ -217,7 +219,8 @@ class AppRouter extends _i15.RootStackRouter {
 /// [_i1.EmptyRouterPage]
 class UnauthenticatedRouter extends _i15.PageRouteInfo<void> {
   const UnauthenticatedRouter({List<_i15.PageRouteInfo>? children})
-      : super(UnauthenticatedRouter.name, path: '/', initialChildren: children);
+      : super(UnauthenticatedRouter.name,
+            path: '/empty-router-page', initialChildren: children);
 
   static const String name = 'UnauthenticatedRouter';
 }

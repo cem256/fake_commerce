@@ -135,6 +135,10 @@ class PasswordResetFailure implements Exception {
 
   factory PasswordResetFailure.fromCode(String code) {
     switch (code) {
+      case 'user-not-found':
+        return const PasswordResetFailure(
+          'Enter a valid email address.',
+        );
       case 'invalid-email':
         return const PasswordResetFailure(
           'Email is not valid or badly formatted.',

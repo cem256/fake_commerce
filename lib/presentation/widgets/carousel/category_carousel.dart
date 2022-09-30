@@ -12,10 +12,10 @@ class CategoryCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.router.push(CategoryDetailRoute(category: category)),
-      child: ClipRRect(
-        borderRadius: context.defaultBorderRadius,
+    return ClipRRect(
+      borderRadius: context.defaultBorderRadius,
+      child: InkWell(
+        onTap: () => context.router.push(CategoryDetailRoute(category: category)),
         child: Stack(
           children: [
             Container(
@@ -37,8 +37,8 @@ class CategoryCarousel extends StatelessWidget {
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      Color.fromARGB(255, 0, 0, 0),
-                      Color.fromARGB(0, 0, 0, 0),
+                      Colors.black,
+                      Colors.transparent,
                     ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,

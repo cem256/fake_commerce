@@ -26,7 +26,6 @@ import 'wrappers/register_wrapper.dart';
 class $AppRouter {}
 
 const unauthenticatedRouter = AutoRoute(
-  initial: true,
   name: "UnauthenticatedRouter",
   page: EmptyRouterPage,
   children: [
