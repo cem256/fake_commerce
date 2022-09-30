@@ -14,87 +14,94 @@ class ForgotPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
-        listener: (context, state) {
-          if (state.status == FormStatus.failure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage.toString()),
-              ),
-            );
-          } else if (state.status == FormStatus.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Password reset link sent to the email provided. (Check your spam.)"),
-              ),
-            );
-          }
-        },
-        child: Padding(
-          padding: context.paddingAllDefault,
-          child: Container(
-            alignment: Alignment.center,
-            child: SingleChildScrollView(
-              reverse: true,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Forgot Password",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  SizedBox(
-                    height: context.mediumValue,
-                  ),
-                  const Text(
-                    "Please provide your email and we will send you a link to reset your password",
-                  ),
-                  SizedBox(
-                    height: context.mediumValue,
-                  ),
-                  BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                    builder: (context, state) {
-                      return EmailInputField(
-                        textInputAction: TextInputAction.done,
-                        isValidEmail: state.isValidEmail,
-                        onChanged: (email) => context.read<ForgotPasswordBloc>().add(ForgotPasswordEmailChanged(email)),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: context.mediumValue,
-                  ),
-                  BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                    builder: (context, state) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: CustomElevatedButton(
-                          buttonText: "Reset",
-                          isValid: ((state.isValidEmail ?? false)),
-                          status: state.status,
-                          onPressed: () => context.read<ForgotPasswordBloc>().add(const ForgotPasswordSubmitted()),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: context.highValue,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Already have an account?"),
-                      TextButton(
-                        child: const Text("Login"),
-                        onPressed: () => context.router.replace(
-                          const LoginRoute(),
-                        ),
+    return const Scaffold(
+      body: _ForgotPasswordViewBody(),
+    );
+  }
+}
+
+class _ForgotPasswordViewBody extends StatelessWidget {
+  const _ForgotPasswordViewBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
+      listener: (context, state) {
+        if (state.status == FormStatus.failure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage.toString()),
+            ),
+          );
+        } else if (state.status == FormStatus.success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Password reset link sent to the email provided. (Check your spam.)"),
+            ),
+          );
+        }
+      },
+      child: Padding(
+        padding: context.paddingAllDefault,
+        child: Container(
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Forgot Password",
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                SizedBox(
+                  height: context.mediumValue,
+                ),
+                const Text(
+                  "Please provide your email and we will send you a link to reset your password",
+                ),
+                SizedBox(
+                  height: context.mediumValue,
+                ),
+                BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                  builder: (context, state) {
+                    return EmailInputField(
+                      textInputAction: TextInputAction.done,
+                      isValidEmail: state.isValidEmail,
+                      onChanged: (email) => context.read<ForgotPasswordBloc>().add(ForgotPasswordEmailChanged(email)),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: context.mediumValue,
+                ),
+                BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                  builder: (context, state) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: CustomElevatedButton(
+                        buttonText: "Reset",
+                        isValid: ((state.isValidEmail ?? false)),
+                        status: state.status,
+                        onPressed: () => context.read<ForgotPasswordBloc>().add(const ForgotPasswordSubmitted()),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: context.highValue,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Already have an account?"),
+                    TextButton(
+                      child: const Text("Login"),
+                      onPressed: () => context.router.replace(const LoginWrapper(children: [LoginRoute()])),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

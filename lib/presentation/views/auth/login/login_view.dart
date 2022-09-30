@@ -1,12 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../../../../data/repositories/auth/auth_repository.dart';
 import '../../../../logic/blocs.dart';
 import '../../../router/app_router.gr.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
@@ -19,16 +16,8 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => LoginBloc(
-          authRepository: AuthRepository(
-            firebaseAuth: FirebaseAuth.instance,
-            googleSignIn: GoogleSignIn.standard(),
-          ),
-        ),
-        child: const _LoginViewBody(),
-      ),
+    return const Scaffold(
+      body: _LoginViewBody(),
     );
   }
 }
@@ -104,7 +93,8 @@ class _LoginViewBody extends StatelessWidget {
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () => context.router.replace(const ForgotPasswordRoute()),
+                    onPressed: () =>
+                        context.router.replace(const ForgotPasswordWrapper(children: [ForgotPasswordRoute()])),
                     child: const Text("Forgot Password?"),
                   ),
                 ),
@@ -142,7 +132,7 @@ class _LoginViewBody extends StatelessWidget {
                     TextButton(
                       child: const Text("Register"),
                       onPressed: () => context.router.replace(
-                        const RegisterRoute(),
+                        const RegisterWrapper(children: [RegisterRoute()]),
                       ),
                     ),
                   ],

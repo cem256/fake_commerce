@@ -49,3 +49,6 @@ app.*.map.json
 # Google API key and other resources
 GoogleService-Info.plist
 google-services.json
+
+*.g.dart 
+*.freezed.dart

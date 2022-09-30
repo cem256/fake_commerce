@@ -1,18 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app/auth/bloc/auth_bloc.dart';
+import 'app/theme/theme_bloc.dart';
 import 'core/constants/string_constants.dart';
 import 'core/theme/theme_manager.dart';
 import 'core/utils/observers/app_bloc_observer.dart';
-import 'data/repositories/repositories.dart';
+import 'locator.dart';
 import 'logic/blocs.dart';
 import 'presentation/router/app_router.gr.dart';
 
@@ -26,6 +25,8 @@ Future<void> main() async {
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+
+  initServices();
 
   HydratedBlocOverrides.runZoned(
     () => runApp(FakeCommerce()),
@@ -41,81 +42,45 @@ class FakeCommerce extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiRepositoryProvider(
+    return MultiBlocProvider(
       providers: [
-        RepositoryProvider<AuthRepository>(
-          create: (context) => AuthRepository(
-            firebaseAuth: FirebaseAuth.instance,
-            googleSignIn: GoogleSignIn.standard(),
-          ),
+        BlocProvider<AuthBloc>(
+          create: (context) => getIt<AuthBloc>(),
         ),
-        RepositoryProvider<CategoryRepository>(
-          create: (context) => CategoryRepository(
-            firebaseFirestore: FirebaseFirestore.instance,
-          ),
+        BlocProvider<ThemeBloc>(
+          create: (context) => getIt<ThemeBloc>(),
         ),
-        RepositoryProvider<ProductRepository>(
-          create: (context) => ProductRepository(
-            firebaseFirestore: FirebaseFirestore.instance,
-          ),
+        BlocProvider<SettingsBloc>(
+          create: (context) => getIt<SettingsBloc>(),
         ),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider<AuthBloc>(
-            create: (context) => AuthBloc(
-              authRepository: context.read<AuthRepository>(),
-            ),
-          ),
-          BlocProvider<RegisterBloc>(
-            create: (context) => RegisterBloc(
-              authRepository: context.read<AuthRepository>(),
-            ),
-          ),
-          BlocProvider<ForgotPasswordBloc>(
-            create: (context) => ForgotPasswordBloc(
-              authRepository: context.read<AuthRepository>(),
-            ),
-          ),
-          BlocProvider<CategoryBloc>(
-            create: (context) => CategoryBloc(
-              categoryRepository: context.read<CategoryRepository>(),
-            )..add(CategoriesFetched()),
-          ),
-          BlocProvider<ProductBloc>(
-            create: (context) => ProductBloc(
-              productRepository: context.read<ProductRepository>(),
-            )..add(ProductsFetched()),
-          ),
-          BlocProvider<ShoppingCartBloc>(
-            create: (context) => ShoppingCartBloc(),
-          ),
-          BlocProvider<SettingsBloc>(
-            create: (context) => SettingsBloc(
-              authRepository: context.read<AuthRepository>(),
-            ),
-          ),
-          BlocProvider<ThemeBloc>(
-            create: (context) => ThemeBloc(),
-          ),
-        ],
-        child: BlocBuilder<ThemeBloc, ThemeState>(
-          builder: (context, state) {
-            return MaterialApp.router(
-              title: StringConstants.title,
-              debugShowCheckedModeBanner: false,
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, themeState) {
+          return BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, authState) {
+              final routes = <PageRouteInfo<dynamic>>[];
 
-              //theme
-              themeMode: state.theme,
-              theme: ThemeManager.instance.lightTheme,
-              darkTheme: ThemeManager.instance.darkTheme,
+              authState.whenOrNull(
+                authenticated: (_) => routes.add(const AuthenticatedRouter()),
+                unauthenticated: () => routes.add(const UnauthenticatedRouter()),
+              );
 
-              // routing
-              routerDelegate: _appRouter.delegate(),
-              routeInformationParser: _appRouter.defaultRouteParser(),
-            );
-          },
-        ),
+              return MaterialApp.router(
+                title: StringConstants.title,
+                debugShowCheckedModeBanner: false,
+
+                //theme
+                themeMode: themeState.theme,
+                theme: ThemeManager.instance.lightTheme,
+                darkTheme: ThemeManager.instance.darkTheme,
+
+                // routing
+                routerDelegate: AutoRouterDelegate.declarative(_appRouter, routes: (_) => routes),
+                routeInformationParser: _appRouter.defaultRouteParser(),
+              );
+            },
+          );
+        },
       ),
     );
   }

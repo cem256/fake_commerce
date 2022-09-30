@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../core/enums/form_status.dart';
+import '../../core/exceptions/auth_exceptions.dart';
 import '../../core/utils/input_validator/input_validator.dart';
 import '../../data/repositories/auth/auth_repository.dart';
 

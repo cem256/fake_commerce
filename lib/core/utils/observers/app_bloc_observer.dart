@@ -19,4 +19,16 @@ class AppBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     debugPrint("${bloc.runtimeType} $transition");
   }
+
+  @override
+  void onCreate(BlocBase bloc) {
+    super.onCreate(bloc);
+    debugPrint("Created ${bloc.runtimeType}");
+  }
+
+  @override
+  void onClose(BlocBase bloc) {
+    super.onClose(bloc);
+    debugPrint("Closed ${bloc.runtimeType}");
+  }
 }

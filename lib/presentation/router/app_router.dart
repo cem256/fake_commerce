@@ -10,32 +10,14 @@ import '../views/navbar/navbar_view.dart';
 import '../views/settings/settings_view.dart';
 import '../views/shopping_cart/shopping_cart_view.dart';
 import '../views/store/store_view.dart';
-import 'wrapper/authenticated_wrapper.dart';
-import 'wrapper/unauthenticated_wrapper.dart';
-
-// @MaterialAutoRouter(
-//   replaceInRouteName: "View,Route",
-//   routes: <AutoRoute>[
-//     MaterialRoute(initial: true, page: LoginView),
-//     MaterialRoute(page: RegisterView),
-//     MaterialRoute(page: ForgotPasswordView),
-//     MaterialRoute(
-//       page: NavbarView,
-//       initial: true,
-//       children: [
-//         MaterialRoute(initial: true, page: StoreView),
-//         MaterialRoute(page: ShoppingCartView),
-//         MaterialRoute(page: SettingsView),
-//       ],
-//     ),
-//     MaterialRoute(page: CategoryDetailView),
-//     MaterialRoute(page: ChangePasswordView),
-//   ],
-// )
-// class $AppRouter {}
+import 'wrappers/forgot_password_wrapper.dart';
+import 'wrappers/login_wrapper.dart';
+import 'wrappers/navbar_wrapper.dart';
+import 'wrappers/register_wrapper.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'View,Route',
+  preferRelativeImports: true,
   routes: [
     unauthenticatedRouter,
     authenticatedRouter,
@@ -46,36 +28,49 @@ class $AppRouter {}
 const unauthenticatedRouter = AutoRoute(
   initial: true,
   name: "UnauthenticatedRouter",
-  page: UnauthenticatedWrapper,
+  page: EmptyRouterPage,
   children: [
     AutoRoute(
       initial: true,
-      page: LoginView,
+      page: LoginWrapper,
+      children: [
+        AutoRoute(initial: true, page: LoginView),
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
     ),
     AutoRoute(
-      page: RegisterView,
+      initial: true,
+      page: RegisterWrapper,
+      children: [
+        AutoRoute(page: RegisterView),
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
     ),
     AutoRoute(
-      page: ForgotPasswordView,
+      initial: true,
+      page: ForgotPasswordWrapper,
+      children: [
+        AutoRoute(page: ForgotPasswordView),
+        RedirectRoute(path: '*', redirectTo: ''),
+      ],
     ),
-    RedirectRoute(path: '*', redirectTo: ''),
   ],
 );
 
 const authenticatedRouter = AutoRoute(
   name: "AuthenticatedRouter",
-  page: AuthenticatedWrapper,
+  page: NavbarWrapper,
   children: [
     AutoRoute(
       page: NavbarView,
       initial: true,
       children: [
         AutoRoute(
+          initial: true,
           page: EmptyRouterPage,
           name: "StoreRouter",
           children: [
             AutoRoute(initial: true, page: StoreView),
-            AutoRoute(page: CategoryDetailView),
             RedirectRoute(path: '*', redirectTo: ''),
           ],
         ),
@@ -92,11 +87,13 @@ const authenticatedRouter = AutoRoute(
           page: EmptyRouterPage,
           children: [
             AutoRoute(initial: true, page: SettingsView),
-            AutoRoute(page: ChangePasswordView),
             RedirectRoute(path: '*', redirectTo: ''),
           ],
         ),
       ],
     ),
+    AutoRoute(page: CategoryDetailView),
+    AutoRoute(page: ChangePasswordView),
+    RedirectRoute(path: '*', redirectTo: ''),
   ],
 );
