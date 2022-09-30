@@ -19,7 +19,9 @@ class NavbarWrapper implements AutoRouteWrapper {
         BlocProvider(
           create: (context) => getIt<CategoryBloc>()..add(CategoriesFetched()),
         ),
-        BlocProvider(create: (context) => getIt<ShoppingCartBloc>()),
+        BlocProvider(
+          create: (context) => getIt<ShoppingCartBloc>(),
+        ),
         BlocProvider<SettingsBloc>(
           create: (context) => getIt<SettingsBloc>(),
         ),

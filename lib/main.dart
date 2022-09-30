@@ -12,8 +12,7 @@ import 'core/constants/string_constants.dart';
 import 'core/theme/theme_manager.dart';
 import 'core/utils/observers/app_bloc_observer.dart';
 import 'locator.dart';
-import 'logic/blocs.dart';
-import 'presentation/router/app_router.gr.dart';
+import 'core/router/app_router.gr.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,9 +48,6 @@ class FakeCommerce extends StatelessWidget {
         ),
         BlocProvider<ThemeBloc>(
           create: (context) => getIt<ThemeBloc>(),
-        ),
-        BlocProvider<SettingsBloc>(
-          create: (context) => getIt<SettingsBloc>(),
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

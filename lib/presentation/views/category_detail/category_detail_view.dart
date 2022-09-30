@@ -17,7 +17,7 @@ class CategoryDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.name.toUpperCase()),
+        title: Text(category.name),
       ),
       body: Padding(
         padding: context.paddingAllDefault,

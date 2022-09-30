@@ -52,8 +52,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(state.copyWith(status: FormStatus.submitting));
     try {
       await authRepository.updatePassword(newPassword: state.password);
+      await authRepository.signOut();
       emit(state.copyWith(status: FormStatus.success));
-      emit(state.copyWith(status: FormStatus.initial));
     } on UpdatePasswordFailure catch (e) {
       emit(state.copyWith(changePasswordErrorMessage: e.message, status: FormStatus.failure));
       emit(state.copyWith(status: FormStatus.initial));

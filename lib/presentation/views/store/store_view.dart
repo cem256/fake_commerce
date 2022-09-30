@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import '../../../core/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,7 @@ class StoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("FakeCommerce"),
+        title: const Text(StringConstants.title),
       ),
       body: const _StoreViewBody(),
     );
