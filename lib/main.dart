@@ -12,7 +12,7 @@ import 'core/constants/string_constants.dart';
 import 'core/theme/theme_manager.dart';
 import 'core/utils/observers/app_bloc_observer.dart';
 import 'locator.dart';
-import 'presentation/router/app_router.gr.dart';
+import 'core/router/app_router.gr.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

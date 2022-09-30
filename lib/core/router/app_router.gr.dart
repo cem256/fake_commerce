@@ -16,15 +16,18 @@ import 'package:auto_route/empty_router_widgets.dart' as _i1;
 import 'package:flutter/material.dart' as _i16;
 
 import '../../data/models/category/category_model.dart' as _i17;
-import '../views/auth/forgot_password/forgot_password_view.dart' as _i8;
-import '../views/auth/login/login_view.dart' as _i6;
-import '../views/auth/register/register_view.dart' as _i7;
-import '../views/category_detail/category_detail_view.dart' as _i10;
-import '../views/change_password/change_password_view.dart' as _i11;
-import '../views/navbar/navbar_view.dart' as _i9;
-import '../views/settings/settings_view.dart' as _i14;
-import '../views/shopping_cart/shopping_cart_view.dart' as _i13;
-import '../views/store/store_view.dart' as _i12;
+import '../../presentation/views/auth/forgot_password/forgot_password_view.dart'
+    as _i8;
+import '../../presentation/views/auth/login/login_view.dart' as _i6;
+import '../../presentation/views/auth/register/register_view.dart' as _i7;
+import '../../presentation/views/category_detail/category_detail_view.dart'
+    as _i10;
+import '../../presentation/views/change_password/change_password_view.dart'
+    as _i11;
+import '../../presentation/views/navbar/navbar_view.dart' as _i9;
+import '../../presentation/views/settings/settings_view.dart' as _i14;
+import '../../presentation/views/shopping_cart/shopping_cart_view.dart' as _i13;
+import '../../presentation/views/store/store_view.dart' as _i12;
 import 'wrappers/forgot_password_wrapper.dart' as _i5;
 import 'wrappers/login_wrapper.dart' as _i3;
 import 'wrappers/navbar_wrapper.dart' as _i2;

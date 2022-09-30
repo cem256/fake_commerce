@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/extensions/context_extensions.dart';
+import '../../../core/router/app_router.gr.dart';
 import '../../../data/models/category/category_model.dart';
-import '../../router/app_router.gr.dart';
 
 class CategoryCarousel extends StatelessWidget {
   const CategoryCarousel({super.key, required this.category});

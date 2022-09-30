@@ -105,6 +105,7 @@ class LogInWithEmailAndPasswordFailure implements Exception {
   }
 }
 
+// https://pub.dev/documentation/firebase_auth/latest/firebase_auth/User/updatePassword.html
 class UpdatePasswordFailure implements Exception {
   const UpdatePasswordFailure([this.message = 'An unknown exception occurred.']);
 
@@ -149,6 +150,7 @@ class PasswordResetFailure implements Exception {
   }
 }
 
+// https://pub.dev/documentation/firebase_auth/latest/firebase_auth/User/delete.html
 class AccountDeletionFailure implements Exception {
   AccountDeletionFailure([this.message = 'An unknown exception occurred.']);
 

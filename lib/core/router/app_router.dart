@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 
-import '../views/auth/forgot_password/forgot_password_view.dart';
-import '../views/auth/login/login_view.dart';
-import '../views/auth/register/register_view.dart';
-import '../views/category_detail/category_detail_view.dart';
-import '../views/change_password/change_password_view.dart';
-import '../views/navbar/navbar_view.dart';
-import '../views/settings/settings_view.dart';
-import '../views/shopping_cart/shopping_cart_view.dart';
-import '../views/store/store_view.dart';
+import '../../presentation/views/auth/forgot_password/forgot_password_view.dart';
+import '../../presentation/views/auth/login/login_view.dart';
+import '../../presentation/views/auth/register/register_view.dart';
+import '../../presentation/views/category_detail/category_detail_view.dart';
+import '../../presentation/views/change_password/change_password_view.dart';
+import '../../presentation/views/navbar/navbar_view.dart';
+import '../../presentation/views/settings/settings_view.dart';
+import '../../presentation/views/shopping_cart/shopping_cart_view.dart';
+import '../../presentation/views/store/store_view.dart';
 import 'wrappers/forgot_password_wrapper.dart';
 import 'wrappers/login_wrapper.dart';
 import 'wrappers/navbar_wrapper.dart';

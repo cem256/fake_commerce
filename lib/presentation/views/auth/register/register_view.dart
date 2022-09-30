@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
+import '../../../../core/router/app_router.gr.dart';
 import '../../../../logic/blocs.dart';
-import '../../../router/app_router.gr.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/buttons/google_button.dart';
 import '../../../widgets/input/email_input_field.dart';

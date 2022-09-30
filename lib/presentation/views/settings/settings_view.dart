@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/theme/theme_bloc.dart';
 import '../../../core/extensions/context_extensions.dart';
+import '../../../core/router/app_router.gr.dart';
 import '../../../logic/blocs.dart';
-import '../../router/app_router.gr.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);
