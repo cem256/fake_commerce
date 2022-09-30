@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../core/enums/form_status.dart';
+import '../../core/exceptions/auth_exceptions.dart';
 import '../../core/utils/input_validator/input_validator.dart';
 import '../../data/repositories/auth/auth_repository.dart';
 
@@ -54,7 +55,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(state.copyWith(status: FormStatus.success));
       emit(state.copyWith(status: FormStatus.initial));
     } on UpdatePasswordFailure catch (e) {
-      emit(state.copyWith(changePasswordErrorMessage: e.toString(), status: FormStatus.failure));
+      emit(state.copyWith(changePasswordErrorMessage: e.message, status: FormStatus.failure));
       emit(state.copyWith(status: FormStatus.initial));
     }
   }
