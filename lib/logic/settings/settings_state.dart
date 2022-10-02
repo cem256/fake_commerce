@@ -1,55 +1,38 @@
 part of 'settings_bloc.dart';
 
-class SettingsState extends Equatable {
-  final String? deletionError;
-  final bool? isDeletionSuccessful;
-  final String? logoutError;
-  final bool? isLogoutSuccessful;
+abstract class SettingsState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
-  final FormStatus status;
-  final String password;
-  final bool? isValidPassword;
-  final bool isPasswordObscured;
-  final String? changePasswordErrorMessage;
+class InitialState extends SettingsState {
+  @override
+  List<Object?> get props => [];
+}
 
-  const SettingsState({
-    this.deletionError,
-    this.isDeletionSuccessful,
-    this.logoutError,
-    this.isLogoutSuccessful,
-    this.status = FormStatus.initial,
-    this.password = "",
-    this.isValidPassword,
-    this.isPasswordObscured = true,
-    this.changePasswordErrorMessage,
-  });
+class DeleteAccountSuccessState extends SettingsState {
+  @override
+  List<Object?> get props => [];
+}
+
+class DeleteAccountFailureState extends SettingsState {
+  DeleteAccountFailureState({required this.errorMessage});
+
+  final String errorMessage;
+  @override
+  List<Object?> get props => [errorMessage];
+}
+
+class LogoutSuccessState extends SettingsState {
+  @override
+  List<Object?> get props => [];
+}
+
+class LogoutFailureState extends SettingsState {
+  LogoutFailureState({required this.errorMessage});
+
+  final String errorMessage;
 
   @override
-  List<Object?> get props => [
-        deletionError,
-        isDeletionSuccessful,
-        logoutError,
-        isLogoutSuccessful,
-        status,
-        password,
-        isValidPassword,
-        isPasswordObscured,
-        changePasswordErrorMessage,
-      ];
-
-  SettingsState copyWith({
-    FormStatus? status,
-    String? password,
-    bool? isValidPassword,
-    bool? isPasswordObscured,
-    String? changePasswordErrorMessage,
-  }) {
-    return SettingsState(
-      status: status ?? this.status,
-      password: password ?? this.password,
-      isValidPassword: isValidPassword ?? this.isValidPassword,
-      isPasswordObscured: isPasswordObscured ?? this.isPasswordObscured,
-      changePasswordErrorMessage: changePasswordErrorMessage ?? this.changePasswordErrorMessage,
-    );
-  }
+  List<Object?> get props => [errorMessage];
 }

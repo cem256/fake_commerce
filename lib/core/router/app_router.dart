@@ -10,10 +10,7 @@ import '../../presentation/views/navbar/navbar_view.dart';
 import '../../presentation/views/settings/settings_view.dart';
 import '../../presentation/views/shopping_cart/shopping_cart_view.dart';
 import '../../presentation/views/store/store_view.dart';
-import 'wrappers/forgot_password_wrapper.dart';
-import 'wrappers/login_wrapper.dart';
 import 'wrappers/navbar_wrapper.dart';
-import 'wrappers/register_wrapper.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'View,Route',
@@ -29,30 +26,10 @@ const unauthenticatedRouter = AutoRoute(
   name: "UnauthenticatedRouter",
   page: EmptyRouterPage,
   children: [
-    AutoRoute(
-      initial: true,
-      page: LoginWrapper,
-      children: [
-        AutoRoute(initial: true, page: LoginView),
-        RedirectRoute(path: '*', redirectTo: ''),
-      ],
-    ),
-    AutoRoute(
-      initial: true,
-      page: RegisterWrapper,
-      children: [
-        AutoRoute(page: RegisterView),
-        RedirectRoute(path: '*', redirectTo: ''),
-      ],
-    ),
-    AutoRoute(
-      initial: true,
-      page: ForgotPasswordWrapper,
-      children: [
-        AutoRoute(page: ForgotPasswordView),
-        RedirectRoute(path: '*', redirectTo: ''),
-      ],
-    ),
+    AutoRoute(initial: true, page: LoginView),
+    AutoRoute(page: RegisterView),
+    AutoRoute(page: ForgotPasswordView),
+    RedirectRoute(path: '*', redirectTo: ''),
   ],
 );
 
@@ -91,8 +68,8 @@ const authenticatedRouter = AutoRoute(
         ),
       ],
     ),
-    AutoRoute(page: CategoryDetailView),
     AutoRoute(page: ChangePasswordView),
+    AutoRoute(page: CategoryDetailView),
     RedirectRoute(path: '*', redirectTo: ''),
   ],
 );

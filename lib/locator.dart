@@ -9,6 +9,7 @@ import 'data/repositories/auth/auth_repository.dart';
 import 'data/repositories/category/category_repository.dart';
 import 'data/repositories/product/product_repository.dart';
 import 'logic/blocs.dart';
+import 'logic/change_password/change_password_bloc.dart';
 
 // Global service locator
 final GetIt getIt = GetIt.instance;
@@ -75,6 +76,11 @@ void initServices() {
   );
   getIt.registerFactory(
     () => SettingsBloc(
+      authRepository: getIt(),
+    ),
+  );
+  getIt.registerFactory(
+    () => ChangePasswordBloc(
       authRepository: getIt(),
     ),
   );
