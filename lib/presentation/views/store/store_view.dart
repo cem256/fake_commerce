@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import '../../../core/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../core/constants/string_constants.dart';
 import '../../../core/enums/page_status.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../logic/blocs.dart';

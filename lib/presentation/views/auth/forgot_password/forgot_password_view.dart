@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
-import '../../../../logic/blocs.dart';
 import '../../../../core/router/app_router.gr.dart';
+import '../../../../locator.dart';
+import '../../../../logic/blocs.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/input/email_input_field.dart';
 
@@ -14,8 +15,11 @@ class ForgotPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _ForgotPasswordViewBody(),
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => getIt<ForgotPasswordBloc>(),
+        child: const _ForgotPasswordViewBody(),
+      ),
     );
   }
 }
@@ -97,7 +101,7 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                     const Text("Already have an account?"),
                     TextButton(
                       child: const Text("Login"),
-                      onPressed: () => context.router.replace(const LoginWrapper(children: [LoginRoute()])),
+                      onPressed: () => context.router.replace(const LoginRoute()),
                     ),
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/router/app_router.gr.dart';
+import '../../../../locator.dart';
 import '../../../../logic/blocs.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/buttons/google_button.dart';
@@ -16,8 +17,11 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _LoginViewBody(),
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => getIt<LoginBloc>(),
+        child: const _LoginViewBody(),
+      ),
     );
   }
 }
@@ -93,8 +97,7 @@ class _LoginViewBody extends StatelessWidget {
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () =>
-                        context.router.replace(const ForgotPasswordWrapper(children: [ForgotPasswordRoute()])),
+                    onPressed: () => context.router.replace(const ForgotPasswordRoute()),
                     child: const Text("Forgot Password?"),
                   ),
                 ),
@@ -131,9 +134,7 @@ class _LoginViewBody extends StatelessWidget {
                     const Text("Don't have an account?"),
                     TextButton(
                       child: const Text("Register"),
-                      onPressed: () => context.router.replace(
-                        const RegisterWrapper(children: [RegisterRoute()]),
-                      ),
+                      onPressed: () => context.router.replace(const RegisterRoute()),
                     ),
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/router/app_router.gr.dart';
+import '../../../../locator.dart';
 import '../../../../logic/blocs.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/buttons/google_button.dart';
@@ -16,8 +17,11 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _RegisterViewBody(),
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => getIt<RegisterBloc>(),
+        child: const _RegisterViewBody(),
+      ),
     );
   }
 }
@@ -126,7 +130,7 @@ class _RegisterViewBody extends StatelessWidget {
                     TextButton(
                       child: const Text("Login"),
                       onPressed: () => context.router.replace(
-                        const LoginWrapper(children: [LoginRoute()]),
+                        const LoginRoute(),
                       ),
                     ),
                   ],
