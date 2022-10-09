@@ -1,19 +1,8 @@
 part of 'change_password_bloc.dart';
 
-abstract class ChangePasswordEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
+@freezed
+class ChangePasswordEvent with _$ChangePasswordEvent {
+  const factory ChangePasswordEvent.passwordModified(password) = PasswordModified;
+  const factory ChangePasswordEvent.changePasswordVisibilityChanged() = ChangePasswordVisibilityChanged;
+  const factory ChangePasswordEvent.changePasswordSubmitted() = ChangePasswordSubmitted;
 }
-
-class PasswordModified extends ChangePasswordEvent {
-  PasswordModified({required this.password});
-
-  final String password;
-
-  @override
-  List<Object> get props => [password];
-}
-
-class ChangePasswordVisibilityChanged extends ChangePasswordEvent {}
-
-class ChangePasswordSubmitted extends ChangePasswordEvent {}

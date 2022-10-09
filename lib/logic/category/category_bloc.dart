@@ -1,12 +1,11 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../core/enums/page_status.dart';
-import '../../data/models/category/category_model.dart';
-import '../../data/repositories/category/category_repository.dart';
+import '../../../core/enums/page_status.dart';
+import '../../../data/models/category/category_model.dart';
+import '../../../data/repositories/category/category_repository.dart';
 
+part 'category_bloc.freezed.dart';
 part 'category_event.dart';
 part 'category_state.dart';
 

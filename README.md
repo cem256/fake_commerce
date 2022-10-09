@@ -38,6 +38,11 @@ Example Flutter e-commerce app.
 2. Update `./android/app/build.gradle`
    - Replace `"com.example.fake_commerce_firebase""` with the `package_name` from `google-services.json`
 
+### Run build runner command
+```sh
+sh scripts/build_runner.sh
+```
+
 ### Run the project
 
 ## Preview

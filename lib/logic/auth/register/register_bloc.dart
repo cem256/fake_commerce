@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/enums/form_status.dart';
-import '../../../core/exceptions/auth_exceptions.dart';
-import '../../../core/utils/input_validator/input_validator.dart';
-import '../../../data/repositories/auth/auth_repository.dart';
+import '../../../../core/enums/form_status.dart';
+import '../../../../core/exceptions/auth_exceptions.dart';
+import '../../../../core/utils/input_validator/input_validator.dart';
+import '../../../../data/repositories/auth/auth_repository.dart';
 
+part 'register_bloc.freezed.dart';
 part 'register_event.dart';
 part 'register_state.dart';
 

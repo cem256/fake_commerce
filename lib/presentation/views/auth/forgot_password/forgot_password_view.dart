@@ -72,7 +72,9 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.done,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<ForgotPasswordBloc>().add(ForgotPasswordEmailChanged(email)),
+                      onChanged: (email) => context.read<ForgotPasswordBloc>().add(
+                            ForgotPasswordEmailChanged(email),
+                          ),
                     );
                   },
                 ),

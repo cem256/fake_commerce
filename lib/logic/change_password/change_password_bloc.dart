@@ -1,22 +1,23 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../core/exceptions/auth_exceptions.dart';
+import '../../../core/utils/input_validator/input_validator.dart';
+import '../../../data/repositories/auth/auth_repository.dart';
 import '../../core/enums/form_status.dart';
-import '../../core/exceptions/auth_exceptions.dart';
-import '../../core/utils/input_validator/input_validator.dart';
-import '../../data/repositories/auth/auth_repository.dart';
 
+part 'change_password_bloc.freezed.dart';
 part 'change_password_event.dart';
 part 'change_password_state.dart';
 
 class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> {
   final AuthRepository authRepository;
+
   ChangePasswordBloc({required this.authRepository}) : super(const ChangePasswordState()) {
     on<PasswordModified>(_onPasswordChanged);
     on<ChangePasswordVisibilityChanged>(_onChangePasswordVisibilityChanged);
     on<ChangePasswordSubmitted>(_onChangePasswordSubmitted);
   }
-
   void _onPasswordChanged(PasswordModified event, Emitter<ChangePasswordState> emit) {
     InputValidator.checkPasswordValidity(event.password)
         ? emit(state.copyWith(password: event.password, isValidPassword: true))

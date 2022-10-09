@@ -1,15 +1,15 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../data/models/shopping_cart/shopping_cart_model.dart';
+import '../../../data/models/shopping_cart/shopping_cart_model.dart';
 
+part 'shopping_cart_bloc.freezed.dart';
 part 'shopping_cart_event.dart';
 part 'shopping_cart_state.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   ShoppingCartBloc() : super(const ShoppingCartState()) {
     on<ProductAddedToCart>(_onProductAddedToCart);
-
     on<ProductCountIncreased>(_onProductCountIncreased);
     on<ProductCountDecreased>(_onProductCountDecreased);
   }

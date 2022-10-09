@@ -1,18 +1,9 @@
 part of 'shopping_cart_bloc.dart';
 
-class ShoppingCartState {
-  const ShoppingCartState({this.cartItems = const [], this.subtotal = 0});
-
-  final List<ShoppingCartModel> cartItems;
-  final double subtotal;
-
-  ShoppingCartState copyWith({
-    List<ShoppingCartModel>? cartItems,
-    double? subtotal,
-  }) {
-    return ShoppingCartState(
-      cartItems: cartItems ?? this.cartItems,
-      subtotal: subtotal ?? this.subtotal,
-    );
-  }
+@freezed
+class ShoppingCartState with _$ShoppingCartState {
+  const factory ShoppingCartState({
+    @Default([]) List<ShoppingCartModel> cartItems,
+    @Default(0) double subtotal,
+  }) = _ShoppingCartState;
 }

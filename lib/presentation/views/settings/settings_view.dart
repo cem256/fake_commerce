@@ -221,7 +221,7 @@ class _DeleteAccountDialog extends StatelessWidget {
                   child: const Text("CANCEL"),
                 ),
                 TextButton(
-                  onPressed: () => context.read<SettingsBloc>().add(AccountDeletionRequested()),
+                  onPressed: () => context.read<SettingsBloc>().add(const AccountDeletionRequested()),
                   child: const Text("OK"),
                 )
               ],
@@ -283,7 +283,7 @@ class _LogoutDialog extends StatelessWidget {
                   child: const Text("CANCEL"),
                 ),
                 TextButton(
-                  onPressed: () => context.read<SettingsBloc>().add(LogoutRequested()),
+                  onPressed: () => context.read<SettingsBloc>().add(const LogoutRequested()),
                   child: const Text("OK"),
                 )
               ],

@@ -75,7 +75,9 @@ class _LoginViewBody extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.next,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<LoginBloc>().add(LoginEmailChanged(email)),
+                      onChanged: (email) => context.read<LoginBloc>().add(
+                            LoginEmailChanged(email),
+                          ),
                     );
                   },
                 ),
@@ -90,7 +92,9 @@ class _LoginViewBody extends StatelessWidget {
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
                       onPressed: () => context.read<LoginBloc>().add(const LoginPasswordVisibilityChanged()),
-                      onChanged: (password) => context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+                      onChanged: (password) => context.read<LoginBloc>().add(
+                            LoginPasswordChanged(password),
+                          ),
                     );
                   },
                 ),
@@ -120,7 +124,7 @@ class _LoginViewBody extends StatelessWidget {
                       width: double.infinity,
                       child: GoogleButton(
                         label: "Login With Google",
-                        onPressed: () => context.read<LoginBloc>().add(LoginWithGooglePressed()),
+                        onPressed: () => context.read<LoginBloc>().add(const LoginWithGooglePressed()),
                       ),
                     );
                   },

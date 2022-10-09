@@ -1,10 +1,7 @@
 part of 'settings_bloc.dart';
 
-abstract class SettingsEvent extends Equatable {
-  @override
-  List<Object> get props => [];
+@freezed
+class SettingsEvent with _$SettingsEvent {
+  const factory SettingsEvent.accountDeletionRequested() = AccountDeletionRequested;
+  const factory SettingsEvent.logoutRequested() = LogoutRequested;
 }
-
-class AccountDeletionRequested extends SettingsEvent {}
-
-class LogoutRequested extends SettingsEvent {}

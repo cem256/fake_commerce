@@ -14,10 +14,10 @@ class NavbarWrapper implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<ProductBloc>()..add(ProductsFetched()),
+          create: (context) => getIt<ProductBloc>()..add(const ProductsFetched()),
         ),
         BlocProvider(
-          create: (context) => getIt<CategoryBloc>()..add(CategoriesFetched()),
+          create: (context) => getIt<CategoryBloc>()..add(const CategoriesFetched()),
         ),
         BlocProvider(
           create: (context) => getIt<ShoppingCartBloc>(),
