@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/signInWithCredential.html
 class LogInWithGoogleFailure implements Exception {
   const LogInWithGoogleFailure([this.message = 'An unknown exception occurred.']);
@@ -166,6 +167,17 @@ class AccountDeletionFailure implements Exception {
         return AccountDeletionFailure();
     }
   }
+}
+
+class AddUserDetailsFailure implements Exception {
+  AddUserDetailsFailure([this.message = 'An error occured while creating user.']);
+  final String message;
+}
+
+class DeleteUserDetailsFailure implements Exception {
+  DeleteUserDetailsFailure([this.message = 'An error occured while deleting user.']);
+
+  final String message;
 }
 
 class LogOutFailure implements Exception {}

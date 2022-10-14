@@ -8,6 +8,7 @@ import 'app/theme/theme_bloc.dart';
 import 'data/repositories/auth/auth_repository.dart';
 import 'data/repositories/category/category_repository.dart';
 import 'data/repositories/product/product_repository.dart';
+import 'data/repositories/user/user_repository.dart';
 import 'logic/blocs.dart';
 import 'logic/change_password/change_password_bloc.dart';
 
@@ -25,6 +26,13 @@ void initServices() {
     () => AuthRepository(
       firebaseAuth: getIt(),
       googleSignIn: getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton(
+    () => UserRepository(
+      firebaseFirestore: getIt(),
+      firebaseAuth: getIt(),
     ),
   );
 
@@ -52,11 +60,13 @@ void initServices() {
   getIt.registerFactory(
     () => RegisterBloc(
       authRepository: getIt(),
+      userRepository: getIt(),
     ),
   );
   getIt.registerFactory(
     () => LoginBloc(
       authRepository: getIt(),
+      userRepository: getIt(),
     ),
   );
   getIt.registerFactory(
@@ -77,6 +87,7 @@ void initServices() {
   getIt.registerFactory(
     () => SettingsBloc(
       authRepository: getIt(),
+      userRepository: getIt(),
     ),
   );
   getIt.registerFactory(

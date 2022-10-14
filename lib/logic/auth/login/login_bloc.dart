@@ -5,15 +5,17 @@ import '../../../../core/enums/form_status.dart';
 import '../../../../core/exceptions/auth_exceptions.dart';
 import '../../../../core/utils/input_validator/input_validator.dart';
 import '../../../../data/repositories/auth/auth_repository.dart';
+import '../../../data/repositories/user/user_repository.dart';
 
+part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
-part 'login_bloc.freezed.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
+  final UserRepository userRepository;
 
-  LoginBloc({required this.authRepository}) : super(const LoginState()) {
+  LoginBloc({required this.authRepository, required this.userRepository}) : super(const LoginState()) {
     on<LoginEmailChanged>(_onLoginEmailChanged);
     on<LoginPasswordChanged>(_onLoginPasswordChanged);
     on<LoginPasswordVisibilityChanged>(_onLoginPasswordVisibilityChanged);
@@ -53,10 +55,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: FormStatus.submitting));
 
     try {
+      // login with google then create user in firestore database
       await authRepository.logInWithGoogle();
+      await userRepository.addUserDetails();
       emit(state.copyWith(status: FormStatus.success));
       emit(state.copyWith(status: FormStatus.initial));
     } on LogInWithGoogleFailure catch (e) {
+      emit(state.copyWith(errorMessage: e.message, status: FormStatus.failure));
+      emit(state.copyWith(status: FormStatus.initial));
+    } on AddUserDetailsFailure catch (e) {
       emit(state.copyWith(errorMessage: e.message, status: FormStatus.failure));
       emit(state.copyWith(status: FormStatus.initial));
     }
