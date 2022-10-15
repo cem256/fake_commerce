@@ -2,25 +2,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/exceptions/auth_exceptions.dart';
+import '../../../core/extensions/firebase_user_extensions.dart';
 import '../../models/user/user_model.dart';
 import 'base_user_repository.dart';
 
 class UserRepository implements BaseUserRepository {
-  UserRepository({required this.firebaseFirestore, required this.firebaseAuth});
+  UserRepository({required this.firebaseAuth, required this.firebaseFirestore});
 
-  final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth firebaseAuth;
+  final FirebaseFirestore firebaseFirestore;
 
-  UserModel get _currentUser => firebaseAuth.currentUser._toUser;
+  @override
+  UserModel get currentUser => firebaseAuth.currentUser.toUserModel;
 
   @override
   Future<void> addUserDetails() async {
     try {
-      await firebaseFirestore.collection('users').doc(_currentUser.uid).set({
-        'uid': _currentUser.uid,
-        'email': _currentUser.email,
-        'name': _currentUser.displayName,
-        'photo': _currentUser.photoURL,
+      await firebaseFirestore.collection('users').doc(currentUser.uid).set({
+        'uid': currentUser.uid,
+        'email': currentUser.email,
+        'name': currentUser.displayName,
+        'photo': currentUser.photoURL,
       });
     } catch (_) {
       throw AddUserDetailsFailure();
@@ -30,17 +32,9 @@ class UserRepository implements BaseUserRepository {
   @override
   Future<void> deleteUserDetails() async {
     try {
-      await firebaseFirestore.collection('users').doc(_currentUser.uid).delete();
+      await firebaseFirestore.collection('users').doc(currentUser.uid).delete();
     } catch (_) {
       throw DeleteUserDetailsFailure();
     }
-  }
-}
-
-extension on User? {
-  UserModel get _toUser {
-    return this == null
-        ? UserModel.empty
-        : UserModel(uid: this!.uid, email: this!.email, displayName: this!.displayName, photoURL: this!.photoURL);
   }
 }

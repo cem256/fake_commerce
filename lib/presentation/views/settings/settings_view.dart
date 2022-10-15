@@ -6,7 +6,7 @@ import '../../../app/theme/theme_bloc.dart';
 import '../../../core/exceptions/auth_exceptions.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../core/router/app_router.gr.dart';
-import '../../../logic/blocs.dart';
+import '../../../logic/settings/settings_bloc.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key}) : super(key: key);

@@ -6,7 +6,7 @@ import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/router/app_router.gr.dart';
 import '../../../../locator.dart';
-import '../../../../logic/blocs.dart';
+import '../../../../logic/auth/login/login_bloc.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/buttons/google_button.dart';
 import '../../../widgets/input/email_input_field.dart';

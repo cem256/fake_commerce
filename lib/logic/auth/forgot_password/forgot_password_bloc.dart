@@ -3,15 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/exceptions/auth_exceptions.dart';
 import '../../../../core/utils/input_validator/input_validator.dart';
-import '../../../../data/repositories/auth/auth_repository.dart';
 import '../../../core/enums/form_status.dart';
+import '../../../data/repositories/auth/base_auth_repository.dart';
 
 part 'forgot_password_bloc.freezed.dart';
 part 'forgot_password_event.dart';
 part 'forgot_password_state.dart';
 
 class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
-  final AuthRepository authRepository;
+  final BaseAuthRepository authRepository;
   ForgotPasswordBloc({required this.authRepository}) : super(const ForgotPasswordState()) {
     on<ForgotPasswordEmailChanged>(_onForgotPasswordEmailChanged);
     on<ForgotPasswordSubmitted>(_onForgotPasswordSubmitted);

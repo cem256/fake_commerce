@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/string_constants.dart';
 import '../../../core/enums/page_status.dart';
 import '../../../core/extensions/context_extensions.dart';
-import '../../../logic/blocs.dart';
+import '../../../logic/category/category_bloc.dart';
+import '../../../logic/product/product_bloc.dart';
 import '../../widgets/carousel/category_carousel.dart';
 import '../../widgets/grid/product_grid.dart';
 

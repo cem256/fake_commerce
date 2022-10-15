@@ -1,7 +1,7 @@
 import '../../models/user/user_model.dart';
 
 abstract class BaseAuthRepository {
-  Stream<UserModel> get user;
+  Stream<UserModel> get userStream;
 
   Future<void> logInWithGoogle();
 

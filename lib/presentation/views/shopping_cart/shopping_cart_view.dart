@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/shopping_cart/shopping_cart_model.dart';
-import '../../../logic/blocs.dart';
+import '../../../logic/shopping_cart/shopping_cart_bloc.dart';
 import '../../widgets/cards/shopping_cart_card.dart';
 
 class ShoppingCartView extends StatelessWidget {

@@ -3,14 +3,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/enums/page_status.dart';
 import '../../../data/models/category/category_model.dart';
-import '../../../data/repositories/category/category_repository.dart';
+import '../../data/repositories/category/base_category_repository.dart';
 
 part 'category_bloc.freezed.dart';
 part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final CategoryRepository categoryRepository;
+  final BaseCategoryRepository categoryRepository;
 
   CategoryBloc({required this.categoryRepository}) : super(const CategoryState()) {
     on<CategoriesFetched>(_onCategoriesFetched);

@@ -4,16 +4,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../../core/enums/form_status.dart';
 import '../../../../core/exceptions/auth_exceptions.dart';
 import '../../../../core/utils/input_validator/input_validator.dart';
-import '../../../../data/repositories/auth/auth_repository.dart';
-import '../../../data/repositories/user/user_repository.dart';
+import '../../../data/repositories/auth/base_auth_repository.dart';
+import '../../../data/repositories/user/base_user_repository.dart';
 
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepository authRepository;
-  final UserRepository userRepository;
+  final BaseAuthRepository authRepository;
+  final BaseUserRepository userRepository;
 
   LoginBloc({required this.authRepository, required this.userRepository}) : super(const LoginState()) {
     on<LoginEmailChanged>(_onLoginEmailChanged);

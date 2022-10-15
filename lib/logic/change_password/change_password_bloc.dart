@@ -3,15 +3,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../core/exceptions/auth_exceptions.dart';
 import '../../../core/utils/input_validator/input_validator.dart';
-import '../../../data/repositories/auth/auth_repository.dart';
 import '../../core/enums/form_status.dart';
+import '../../data/repositories/auth/base_auth_repository.dart';
 
 part 'change_password_bloc.freezed.dart';
 part 'change_password_event.dart';
 part 'change_password_state.dart';
 
 class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> {
-  final AuthRepository authRepository;
+  final BaseAuthRepository authRepository;
 
   ChangePasswordBloc({required this.authRepository}) : super(const ChangePasswordState()) {
     on<PasswordModified>(_onPasswordChanged);

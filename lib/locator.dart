@@ -3,14 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'app/auth/bloc/auth_bloc.dart';
-import 'app/theme/theme_bloc.dart';
-import 'data/repositories/auth/auth_repository.dart';
-import 'data/repositories/category/category_repository.dart';
-import 'data/repositories/product/product_repository.dart';
-import 'data/repositories/user/user_repository.dart';
+import 'data/repositories/repositories.dart';
 import 'logic/blocs.dart';
-import 'logic/change_password/change_password_bloc.dart';
 
 // Global service locator
 final GetIt getIt = GetIt.instance;
@@ -22,27 +16,27 @@ void initServices() {
   getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
 
   //Repositories
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseAuthRepository>(
     () => AuthRepository(
       firebaseAuth: getIt(),
       googleSignIn: getIt(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseUserRepository>(
     () => UserRepository(
-      firebaseFirestore: getIt(),
       firebaseAuth: getIt(),
+      firebaseFirestore: getIt(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseCategoryRepository>(
     () => CategoryRepository(
       firebaseFirestore: getIt(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseProductRepository>(
     () => ProductRepository(
       firebaseFirestore: getIt(),
     ),

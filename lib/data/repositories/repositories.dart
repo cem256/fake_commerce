@@ -1,8 +1,12 @@
 export 'auth/auth_repository.dart';
 export 'auth/base_auth_repository.dart';
 export 'category/base_category_repository.dart';
+export 'category/base_category_repository.dart';
+export 'category/category_repository.dart';
 export 'category/category_repository.dart';
 export 'product/base_product_repository.dart';
 export 'product/product_repository.dart';
 export 'user/base_user_repository.dart';
 export 'user/user_repository.dart';
+export 'user_cart/base_user_cart_repository.dart';
+export 'user_cart/user_cart_repository.dart';
