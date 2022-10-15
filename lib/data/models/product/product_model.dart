@@ -1,38 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class ProductModel extends Equatable {
-  final String name;
-  final String category;
-  final String description;
-  final double price;
-  final String imageUrl;
+part 'product_model.freezed.dart';
+part 'product_model.g.dart';
 
-  const ProductModel({
-    required this.name,
-    required this.category,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
-  });
+@freezed
+class ProductModel with _$ProductModel {
+  @JsonSerializable()
+  const factory ProductModel({
+    required String name,
+    required String category,
+    required String description,
+    required double price,
+    required String imageUrl,
+  }) = _ProductModel;
 
-  static ProductModel fromSnapshot(DocumentSnapshot snap) {
-    ProductModel product = ProductModel(
-      name: snap['name'],
-      category: snap['category'],
-      description: snap['description'],
-      price: snap['price'],
-      imageUrl: snap['imageUrl'],
-    );
-    return product;
-  }
-
-  @override
-  List<Object?> get props => [
-        name,
-        category,
-        description,
-        price,
-        imageUrl,
-      ];
+  factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 }

@@ -17,7 +17,7 @@ dependencies:
   hydrated_bloc: ^8.1.0
 
   #navigation
-  auto_route: ^5.0.1
+  auto_route: ^5.0.2
 
   #core
   equatable: ^2.0.5
@@ -30,6 +30,7 @@ dependencies:
 
   #data class generation
   freezed_annotation: ^2.1.0
+  json_annotation: ^4.7.0
 
   #dependency injection
   get_it: ^7.2.0
@@ -52,8 +53,9 @@ dev_dependencies:
 
   #code geneneration
   freezed: ^2.1.0+1
+  json_serializable: ^6.5.1
   build_runner: ^2.2.0
-  auto_route_generator: 5.0.1
+  auto_route_generator: 5.0.2
 
 
 

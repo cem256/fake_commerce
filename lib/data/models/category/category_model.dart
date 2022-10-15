@@ -1,20 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class CategoryModel extends Equatable {
-  final String name;
-  final String imageUrl;
+part 'category_model.freezed.dart';
+part 'category_model.g.dart';
 
-  const CategoryModel({required this.name, required this.imageUrl});
+@freezed
+class CategoryModel with _$CategoryModel {
+  @JsonSerializable()
+  const factory CategoryModel({
+    required String name,
+    required String imageUrl,
+  }) = _CategoryModel;
 
-  @override
-  List<Object?> get props => [name, imageUrl];
-
-  static CategoryModel fromSnapshot(DocumentSnapshot snap) {
-    CategoryModel category = CategoryModel(
-      name: snap['name'],
-      imageUrl: snap['imageUrl'],
-    );
-    return category;
-  }
+  factory CategoryModel.fromJson(Map<String, dynamic> json) => _$CategoryModelFromJson(json);
 }

@@ -1,12 +1,19 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class UserModel extends Equatable {
-  const UserModel({required this.uid, this.email, this.displayName, this.photoURL});
+part 'user_model.freezed.dart';
+part 'user_model.g.dart';
 
-  final String uid;
-  final String? email;
-  final String? displayName;
-  final String? photoURL;
+@freezed
+class UserModel with _$UserModel {
+  @JsonSerializable(explicitToJson: true)
+  const UserModel._();
+
+  const factory UserModel({
+    required String uid,
+    String? email,
+    String? displayName,
+    String? photoURL,
+  }) = _UserModel;
 
   static const empty = UserModel(uid: '');
 
@@ -14,6 +21,5 @@ class UserModel extends Equatable {
 
   bool get isNotEmpty => this != UserModel.empty;
 
-  @override
-  List<Object?> get props => [uid, email, displayName, photoURL];
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

@@ -8,5 +8,5 @@ export 'product/base_product_repository.dart';
 export 'product/product_repository.dart';
 export 'user/base_user_repository.dart';
 export 'user/user_repository.dart';
-export 'user_cart/base_user_cart_repository.dart';
-export 'user_cart/user_cart_repository.dart';
+export 'shopping_cart/base_shopping_cart_repository.dart';
+export 'shopping_cart/shopping_cart_repository.dart';

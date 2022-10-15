@@ -18,11 +18,11 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
   Future<void> _onProductsFetched(ProductsFetched event, Emitter<ProductState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));
-
-    await emit.forEach<List<ProductModel>>(
-      productRepository.fetchProducts(),
-      onData: (products) => state.copyWith(products: products, status: PageStatus.success),
-      onError: (_, __) => state.copyWith(status: PageStatus.failure),
-    );
+    try {
+      final products = await productRepository.fetchProducts();
+      emit(state.copyWith(products: products, status: PageStatus.success));
+    } catch (_) {
+      emit(state.copyWith(status: PageStatus.failure));
+    }
   }
 }
