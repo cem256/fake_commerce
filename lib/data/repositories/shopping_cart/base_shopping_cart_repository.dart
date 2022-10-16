@@ -4,7 +4,6 @@ import '../../models/user/user_model.dart';
 
 abstract class BaseShoppingCartRepostiory {
   UserModel get currentUser;
-  void createUserCart();
 
   Stream<List<ShoppingCartItemModel>> getUserCart();
   Future<void> addItemToCart(List<ShoppingCartItemModel> cartItems, ProductModel product);

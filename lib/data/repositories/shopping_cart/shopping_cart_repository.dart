@@ -17,11 +17,6 @@ class ShoppingCartRepository implements BaseShoppingCartRepostiory {
   UserModel get currentUser => firebaseAuth.currentUser.toUserModel;
 
   @override
-  void createUserCart() {
-    firebaseFirestore.collection('userCart').doc(currentUser.uid).collection('cartItems');
-  }
-
-  @override
   Stream<List<ShoppingCartItemModel>> getUserCart() {
     return firebaseFirestore
         .collection('userCart')

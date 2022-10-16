@@ -88,7 +88,6 @@ void initServices() {
   getIt.registerFactory(
     () => SettingsBloc(
       authRepository: getIt(),
-      userRepository: getIt(),
     ),
   );
   getIt.registerFactory(

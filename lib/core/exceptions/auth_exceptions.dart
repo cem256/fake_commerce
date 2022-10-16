@@ -173,10 +173,4 @@ class AddUserDetailsFailure implements Exception {
   final String message;
 }
 
-class DeleteUserDetailsFailure implements Exception {
-  DeleteUserDetailsFailure([this.message = 'An error occured while deleting user.']);
-
-  final String message;
-}
-
 class LogOutFailure implements Exception {}

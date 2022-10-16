@@ -28,13 +28,4 @@ class UserRepository implements BaseUserRepository {
       throw AddUserDetailsFailure();
     }
   }
-
-  @override
-  Future<void> deleteUserDetails() async {
-    try {
-      await firebaseFirestore.collection('users').doc(currentUser.uid).delete();
-    } catch (_) {
-      throw DeleteUserDetailsFailure();
-    }
-  }
 }
