@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/extensions/firebase_user_extensions.dart';
 import '../../models/product/product_model.dart';
+import '../../models/shopping_cart/shopping_cart_item_model.dart';
 import '../../models/user/user_model.dart';
 import 'base_shopping_cart_repository.dart';
 
@@ -17,21 +18,81 @@ class ShoppingCartRepository implements BaseShoppingCartRepostiory {
 
   @override
   void createUserCart() {
-    firebaseFirestore.collection('userCart').doc(currentUser.uid).collection('items');
+    firebaseFirestore.collection('userCart').doc(currentUser.uid).collection('cartItems');
   }
 
   @override
-  Future<void> addItemToCart(ProductModel product) async {
+  Stream<List<ShoppingCartItemModel>> getUserCart() {
+    return firebaseFirestore
+        .collection('userCart')
+        .doc(currentUser.uid)
+        .collection('cartItems')
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => ShoppingCartItemModel.fromJson(doc.data())).toList();
+    });
+  }
+
+  @override
+  Future<void> addItemToCart(List<ShoppingCartItemModel> cartItems, ProductModel product) async {
+    if (_isItemAlreadyAdded(cartItems, product)) {
+      await firebaseFirestore
+          .collection('userCart')
+          .doc(currentUser.uid)
+          .collection('cartItems')
+          .doc(product.name)
+          .delete();
+    } else {
+      await firebaseFirestore
+          .collection('userCart')
+          .doc(currentUser.uid)
+          .collection('cartItems')
+          .doc(product.name)
+          .set(ShoppingCartItemModel(product: product).toJson());
+    }
+  }
+
+  @override
+  Future<void> decreaseQuantity(ShoppingCartItemModel cartItem) async {
+    if (cartItem.quantity == 1) {
+      await firebaseFirestore
+          .collection('userCart')
+          .doc(currentUser.uid)
+          .collection('cartItems')
+          .doc(cartItem.product.name)
+          .delete();
+    } else {
+      await firebaseFirestore
+          .collection('userCart')
+          .doc(currentUser.uid)
+          .collection('cartItems')
+          .doc(cartItem.product.name)
+          .update(cartItem.copyWith(quantity: cartItem.quantity - 1).toJson());
+    }
+  }
+
+  @override
+  Future<void> increaseQuantity(ShoppingCartItemModel cartItem) async {
     await firebaseFirestore
         .collection('userCart')
         .doc(currentUser.uid)
-        .collection('items')
-        .doc(product.name)
-        .set(product.toJson());
+        .collection('cartItems')
+        .doc(cartItem.product.name)
+        .update(cartItem.copyWith(quantity: cartItem.quantity + 1).toJson());
   }
 
   @override
-  Future<void> removeItemFromCart(ProductModel product) async {
-    firebaseFirestore.collection('userCart').doc(currentUser.uid).collection('items').doc(product.name).delete();
+  double calculateSubtotal(List<ShoppingCartItemModel> userCart) {
+    double subTotal = 0;
+
+    for (var element in userCart) {
+      subTotal += element.product.price * element.quantity;
+    }
+
+    return subTotal;
+  }
+
+  bool _isItemAlreadyAdded(List<ShoppingCartItemModel> cartItems, ProductModel product) {
+    return cartItems.map((e) => e.product.name).contains(product.name);
   }
 }

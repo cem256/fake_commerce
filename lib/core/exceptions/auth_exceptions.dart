@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/signInWithCredential.html
 class LogInWithGoogleFailure implements Exception {
   const LogInWithGoogleFailure([this.message = 'An unknown exception occurred.']);

@@ -42,6 +42,13 @@ void initServices() {
     ),
   );
 
+  getIt.registerLazySingleton<BaseShoppingCartRepostiory>(
+    () => ShoppingCartRepository(
+      firebaseAuth: getIt(),
+      firebaseFirestore: getIt(),
+    ),
+  );
+
   //Blocs
   getIt.registerFactory(
     () => AuthBloc(
@@ -90,6 +97,6 @@ void initServices() {
     ),
   );
   getIt.registerFactory(
-    () => ShoppingCartBloc(),
+    () => ShoppingCartBloc(shoppingCartRepostiory: getIt()),
   );
 }
