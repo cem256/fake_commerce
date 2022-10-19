@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/string_constants.dart';
 import '../../../core/enums/page_status.dart';
 import '../../../core/extensions/context_extensions.dart';
+import '../../../core/router/app_router.gr.dart';
 import '../../../logic/category/category_bloc.dart';
 import '../../../logic/product/product_bloc.dart';
 import '../../widgets/carousel/category_carousel.dart';
@@ -18,6 +20,12 @@ class StoreView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(StringConstants.title),
+        actions: [
+          IconButton(
+            onPressed: () => context.router.push(const SearchRoute()),
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: const _StoreViewBody(),
     );

@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'data/repositories/repositories.dart';
 import 'logic/blocs.dart';
+import 'logic/search/bloc/search_bloc.dart';
 
 // Global service locator
 final GetIt getIt = GetIt.instance;
@@ -97,5 +98,8 @@ void initServices() {
   );
   getIt.registerFactory(
     () => ShoppingCartBloc(shoppingCartRepostiory: getIt()),
+  );
+  getIt.registerFactory(
+    () => SearchBloc(),
   );
 }
