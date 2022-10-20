@@ -14,21 +14,21 @@ class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> 
   final BaseAuthRepository authRepository;
 
   ChangePasswordBloc({required this.authRepository}) : super(const ChangePasswordState()) {
-    on<PasswordModified>(_onPasswordChanged);
-    on<ChangePasswordVisibilityChanged>(_onChangePasswordVisibilityChanged);
-    on<ChangePasswordSubmitted>(_onChangePasswordSubmitted);
+    on<_PasswordModified>(_onPasswordChanged);
+    on<_PasswordVisibilityChanged>(_onPasswordVisibilityChanged);
+    on<_ChangePasswordSubmitted>(_onChangePasswordSubmitted);
   }
-  void _onPasswordChanged(PasswordModified event, Emitter<ChangePasswordState> emit) {
+  void _onPasswordChanged(_PasswordModified event, Emitter<ChangePasswordState> emit) {
     InputValidator.checkPasswordValidity(event.password)
         ? emit(state.copyWith(password: event.password, isValidPassword: true))
         : emit(state.copyWith(password: event.password, isValidPassword: false));
   }
 
-  void _onChangePasswordVisibilityChanged(ChangePasswordVisibilityChanged event, Emitter<ChangePasswordState> emit) {
+  void _onPasswordVisibilityChanged(_PasswordVisibilityChanged event, Emitter<ChangePasswordState> emit) {
     emit(state.copyWith(isPasswordObscured: !state.isPasswordObscured));
   }
 
-  Future<void> _onChangePasswordSubmitted(ChangePasswordSubmitted event, Emitter<ChangePasswordState> emit) async {
+  Future<void> _onChangePasswordSubmitted(_ChangePasswordSubmitted event, Emitter<ChangePasswordState> emit) async {
     try {
       await authRepository.updatePassword(newPassword: state.password);
       await authRepository.signOut();

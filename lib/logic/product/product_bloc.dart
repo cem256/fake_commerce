@@ -13,10 +13,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final BaseProductRepository productRepository;
 
   ProductBloc({required this.productRepository}) : super(const ProductState()) {
-    on<ProductsFetched>(_onProductsFetched);
+    on<_ProductsFetched>(_onProductsFetched);
   }
 
-  Future<void> _onProductsFetched(ProductsFetched event, Emitter<ProductState> emit) async {
+  Future<void> _onProductsFetched(_ProductsFetched event, Emitter<ProductState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));
     try {
       final products = await productRepository.fetchProducts();

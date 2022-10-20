@@ -63,8 +63,12 @@ class _ChangePasswordBody extends StatelessWidget {
                   obscureText: state.isPasswordObscured,
                   textInputAction: TextInputAction.done,
                   isValid: state.isValidPassword,
-                  onChanged: (password) => context.read<ChangePasswordBloc>().add(PasswordModified(password)),
-                  onPressed: () => context.read<ChangePasswordBloc>().add(const ChangePasswordVisibilityChanged()),
+                  onChanged: (password) => context.read<ChangePasswordBloc>().add(
+                        ChangePasswordEvent.passwordModified(password),
+                      ),
+                  onPressed: () => context.read<ChangePasswordBloc>().add(
+                        const ChangePasswordEvent.passwordVisibilityChanged(),
+                      ),
                 );
               },
             ),
@@ -77,7 +81,9 @@ class _ChangePasswordBody extends StatelessWidget {
                   width: double.infinity,
                   child: CustomElevatedButton(
                     buttonText: "Change Password",
-                    onPressed: () => context.read<ChangePasswordBloc>().add(const ChangePasswordSubmitted()),
+                    onPressed: () => context.read<ChangePasswordBloc>().add(
+                          const ChangePasswordEvent.changePasswordSubmitted(),
+                        ),
                     status: state.status,
                     isValid: state.isValidPassword ?? false,
                   ),

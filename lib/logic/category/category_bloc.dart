@@ -13,10 +13,10 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   final BaseCategoryRepository categoryRepository;
 
   CategoryBloc({required this.categoryRepository}) : super(const CategoryState()) {
-    on<CategoriesFetched>(_onCategoriesFetched);
+    on<_CategoriesFetched>(_onCategoriesFetched);
   }
 
-  Future<void> _onCategoriesFetched(CategoriesFetched event, Emitter<CategoryState> emit) async {
+  Future<void> _onCategoriesFetched(_CategoriesFetched event, Emitter<CategoryState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));
 
     try {

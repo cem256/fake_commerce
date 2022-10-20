@@ -6,10 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'core/services/search_service.dart';
 import 'core/theme/theme_manager.dart';
 import 'data/repositories/repositories.dart';
-import 'data/repositories/search/base_search_repository.dart';
-import 'data/repositories/search/search_repository.dart';
+
 import 'logic/blocs.dart';
-import 'logic/search/bloc/search_bloc.dart';
 
 // Global service locator
 final GetIt getIt = GetIt.instance;

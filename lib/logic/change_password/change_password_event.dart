@@ -2,7 +2,7 @@ part of 'change_password_bloc.dart';
 
 @freezed
 class ChangePasswordEvent with _$ChangePasswordEvent {
-  const factory ChangePasswordEvent.passwordModified(String password) = PasswordModified;
-  const factory ChangePasswordEvent.changePasswordVisibilityChanged() = ChangePasswordVisibilityChanged;
-  const factory ChangePasswordEvent.changePasswordSubmitted() = ChangePasswordSubmitted;
+  const factory ChangePasswordEvent.passwordModified(String password) = _PasswordModified;
+  const factory ChangePasswordEvent.passwordVisibilityChanged() = _PasswordVisibilityChanged;
+  const factory ChangePasswordEvent.changePasswordSubmitted() = _ChangePasswordSubmitted;
 }

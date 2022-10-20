@@ -73,7 +73,7 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                       textInputAction: TextInputAction.done,
                       isValidEmail: state.isValidEmail,
                       onChanged: (email) => context.read<ForgotPasswordBloc>().add(
-                            ForgotPasswordEmailChanged(email),
+                            ForgotPasswordEvent.emailChanged(email),
                           ),
                     );
                   },
@@ -89,7 +89,8 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                         buttonText: "Reset",
                         isValid: ((state.isValidEmail ?? false)),
                         status: state.status,
-                        onPressed: () => context.read<ForgotPasswordBloc>().add(const ForgotPasswordSubmitted()),
+                        onPressed: () =>
+                            context.read<ForgotPasswordBloc>().add(const ForgotPasswordEvent.passwordSubmitted()),
                       ),
                     );
                   },

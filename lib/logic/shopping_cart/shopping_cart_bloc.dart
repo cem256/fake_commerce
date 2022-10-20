@@ -16,13 +16,13 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   final BaseShoppingCartRepostiory shoppingCartRepostiory;
 
   ShoppingCartBloc({required this.shoppingCartRepostiory}) : super(const ShoppingCartState()) {
-    on<LoadShoppingCart>(_onShoppingCartLoaded);
-    on<AddProductToCart>(_onProductAddedToCart);
-    on<IncreaseProductQuantity>(_onProductCountIncreased);
-    on<DecreaseProductQuantity>(_onProductCountDecreased);
+    on<_LoadShoppingCart>(_onShoppingCartLoaded);
+    on<_AddProductToCart>(_onProductAddedToCart);
+    on<_IncreaseProductQuantity>(_onProductCountIncreased);
+    on<_DecreaseProductQuantity>(_onProductCountDecreased);
   }
 
-  Future<void> _onShoppingCartLoaded(LoadShoppingCart event, Emitter<ShoppingCartState> emit) async {
+  Future<void> _onShoppingCartLoaded(_LoadShoppingCart event, Emitter<ShoppingCartState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));
 
     await emit.forEach<List<ShoppingCartItemModel>>(
@@ -35,7 +35,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     );
   }
 
-  Future<void> _onProductAddedToCart(AddProductToCart event, Emitter<ShoppingCartState> emit) async {
+  Future<void> _onProductAddedToCart(_AddProductToCart event, Emitter<ShoppingCartState> emit) async {
     // It is not needed to emit new state since we are listening the stream on _onShoppingCartLoaded method
     try {
       await shoppingCartRepostiory.addItemToCart(state.cartItems, event.product);
@@ -44,7 +44,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     }
   }
 
-  Future<void> _onProductCountIncreased(IncreaseProductQuantity event, Emitter<ShoppingCartState> emit) async {
+  Future<void> _onProductCountIncreased(_IncreaseProductQuantity event, Emitter<ShoppingCartState> emit) async {
     // It is not needed to emit new state since we are listening the stream on _onShoppingCartLoaded method
     try {
       await shoppingCartRepostiory.increaseQuantity(event.cartItem);
@@ -53,7 +53,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     }
   }
 
-  Future<void> _onProductCountDecreased(DecreaseProductQuantity event, Emitter<ShoppingCartState> emit) async {
+  Future<void> _onProductCountDecreased(_DecreaseProductQuantity event, Emitter<ShoppingCartState> emit) async {
     // It is not needed to emit new state since we are listening the stream on _onShoppingCartLoaded method
     try {
       await shoppingCartRepostiory.decreaseQuantity(event.cartItem);

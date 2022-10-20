@@ -63,7 +63,8 @@ class ProductCard extends StatelessWidget {
                       child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
                         builder: (context, state) {
                           return IconButton(
-                            onPressed: () => context.read<ShoppingCartBloc>()..add(AddProductToCart(product)),
+                            onPressed: () =>
+                                context.read<ShoppingCartBloc>()..add(ShoppingCartEvent.addProductToCart(product)),
                             icon: Icon(
                               Icons.shopping_cart,
                               color: state.cartItems.map((e) => e.product.name).contains(product.name)

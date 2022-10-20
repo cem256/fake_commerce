@@ -16,30 +16,30 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final BaseUserRepository userRepository;
 
   LoginBloc({required this.authRepository, required this.userRepository}) : super(const LoginState()) {
-    on<LoginEmailChanged>(_onLoginEmailChanged);
-    on<LoginPasswordChanged>(_onLoginPasswordChanged);
-    on<LoginPasswordVisibilityChanged>(_onLoginPasswordVisibilityChanged);
-    on<LoginSubmitted>(_onLoginSubmitted);
-    on<LoginWithGooglePressed>(_onLoginWithGooglePressed);
+    on<_EmailChanged>(_onEmailChanged);
+    on<_PasswordChanged>(_onPasswordChanged);
+    on<_PasswordVisibilityChanged>(_onPasswordVisibilityChanged);
+    on<_LoginSubmitted>(_onLoginSubmitted);
+    on<_LoginWithGooglePressed>(_onLoginWithGooglePressed);
   }
 
-  void _onLoginEmailChanged(LoginEmailChanged event, Emitter<LoginState> emit) {
+  void _onEmailChanged(_EmailChanged event, Emitter<LoginState> emit) {
     InputValidator.checkEmailValidity(event.email)
         ? emit(state.copyWith(email: event.email, isValidEmail: true))
         : emit(state.copyWith(email: event.email, isValidEmail: false));
   }
 
-  void _onLoginPasswordChanged(LoginPasswordChanged event, Emitter<LoginState> emit) {
+  void _onPasswordChanged(_PasswordChanged event, Emitter<LoginState> emit) {
     InputValidator.checkPasswordValidity(event.password)
         ? emit(state.copyWith(password: event.password, isValidPassword: true))
         : emit(state.copyWith(password: event.password, isValidPassword: false));
   }
 
-  void _onLoginPasswordVisibilityChanged(LoginPasswordVisibilityChanged event, Emitter<LoginState> emit) {
+  void _onPasswordVisibilityChanged(_PasswordVisibilityChanged event, Emitter<LoginState> emit) {
     emit(state.copyWith(isPasswordObscured: !state.isPasswordObscured));
   }
 
-  Future<void> _onLoginSubmitted(LoginSubmitted event, Emitter<LoginState> emit) async {
+  Future<void> _onLoginSubmitted(_LoginSubmitted event, Emitter<LoginState> emit) async {
     emit(state.copyWith(status: FormStatus.submitting));
     try {
       await authRepository.signInWithEmailAndPassword(email: state.email, password: state.password);
@@ -51,7 +51,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-  Future<void> _onLoginWithGooglePressed(LoginWithGooglePressed event, Emitter<LoginState> emit) async {
+  Future<void> _onLoginWithGooglePressed(_LoginWithGooglePressed event, Emitter<LoginState> emit) async {
     emit(state.copyWith(status: FormStatus.submitting));
 
     try {

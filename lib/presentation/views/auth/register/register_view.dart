@@ -75,7 +75,7 @@ class _RegisterViewBody extends StatelessWidget {
                       textInputAction: TextInputAction.next,
                       isValidEmail: state.isValidEmail,
                       onChanged: (email) => context.read<RegisterBloc>().add(
-                            RegisterEmailChanged(email),
+                            RegisterEvent.emailChanged(email),
                           ),
                     );
                   },
@@ -90,9 +90,11 @@ class _RegisterViewBody extends StatelessWidget {
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
-                      onPressed: () => context.read<RegisterBloc>().add(const RegisterPasswordVisibilityChanged()),
+                      onPressed: () => context.read<RegisterBloc>().add(
+                            const RegisterEvent.passwordVisibilityChanged(),
+                          ),
                       onChanged: (password) => context.read<RegisterBloc>().add(
-                            RegisterPasswordChanged(password),
+                            RegisterEvent.passwordChanged(password),
                           ),
                     );
                   },
@@ -108,7 +110,9 @@ class _RegisterViewBody extends StatelessWidget {
                         buttonText: "Register",
                         isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
                         status: state.status,
-                        onPressed: () => context.read<RegisterBloc>().add(const RegisterSubmitted()),
+                        onPressed: () => context.read<RegisterBloc>().add(
+                              const RegisterEvent.registerSubmitted(),
+                            ),
                       ),
                     );
                   },
@@ -119,7 +123,9 @@ class _RegisterViewBody extends StatelessWidget {
                       width: double.infinity,
                       child: GoogleButton(
                         label: "Register with Google",
-                        onPressed: () => context.read<RegisterBloc>().add(const RegisterWithGooglePressed()),
+                        onPressed: () => context.read<RegisterBloc>().add(
+                              const RegisterEvent.registerWithGooglePressed(),
+                            ),
                       ),
                     );
                   },

@@ -8,3 +8,4 @@ export 'change_password/change_password_bloc.dart';
 export 'product/product_bloc.dart';
 export 'settings/settings_bloc.dart';
 export 'shopping_cart/shopping_cart_bloc.dart';
+export 'search/bloc/search_bloc.dart';

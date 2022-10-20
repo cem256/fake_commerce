@@ -6,6 +6,8 @@ export 'category/category_repository.dart';
 export 'category/category_repository.dart';
 export 'product/base_product_repository.dart';
 export 'product/product_repository.dart';
+export 'search/base_search_repository.dart';
+export 'search/search_repository.dart';
 export 'shopping_cart/base_shopping_cart_repository.dart';
 export 'shopping_cart/shopping_cart_repository.dart';
 export 'user/base_user_repository.dart';

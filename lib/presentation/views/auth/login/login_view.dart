@@ -75,9 +75,7 @@ class _LoginViewBody extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.next,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<LoginBloc>().add(
-                            LoginEmailChanged(email),
-                          ),
+                      onChanged: (email) => context.read<LoginBloc>().add(LoginEvent.emailChanged(email)),
                     );
                   },
                 ),
@@ -91,10 +89,8 @@ class _LoginViewBody extends StatelessWidget {
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
-                      onPressed: () => context.read<LoginBloc>().add(const LoginPasswordVisibilityChanged()),
-                      onChanged: (password) => context.read<LoginBloc>().add(
-                            LoginPasswordChanged(password),
-                          ),
+                      onPressed: () => context.read<LoginBloc>().add(const LoginEvent.passwordVisibilityChanged()),
+                      onChanged: (password) => context.read<LoginBloc>().add(LoginEvent.passwordChanged(password)),
                     );
                   },
                 ),
@@ -113,7 +109,7 @@ class _LoginViewBody extends StatelessWidget {
                         buttonText: "Login",
                         isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
                         status: state.status,
-                        onPressed: () => context.read<LoginBloc>().add(const LoginSubmitted()),
+                        onPressed: () => context.read<LoginBloc>().add(const LoginEvent.loginSubmitted()),
                       ),
                     );
                   },
@@ -124,7 +120,7 @@ class _LoginViewBody extends StatelessWidget {
                       width: double.infinity,
                       child: GoogleButton(
                         label: "Login With Google",
-                        onPressed: () => context.read<LoginBloc>().add(const LoginWithGooglePressed()),
+                        onPressed: () => context.read<LoginBloc>().add(const LoginEvent.loginWithGooglePressed()),
                       ),
                     );
                   },

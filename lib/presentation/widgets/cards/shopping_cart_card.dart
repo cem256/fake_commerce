@@ -47,12 +47,16 @@ class ShoppingCartCard extends StatelessWidget {
         Row(
           children: [
             IconButton(
-              onPressed: () => context.read<ShoppingCartBloc>().add(DecreaseProductQuantity(cartItem)),
+              onPressed: () => context.read<ShoppingCartBloc>().add(
+                    ShoppingCartEvent.decreaseProductQuantity(cartItem),
+                  ),
               icon: const Icon(Icons.remove_circle),
             ),
             Text(cartItem.quantity.toString()),
             IconButton(
-              onPressed: () => context.read<ShoppingCartBloc>().add(IncreaseProductQuantity(cartItem)),
+              onPressed: () => context.read<ShoppingCartBloc>().add(
+                    ShoppingCartEvent.increaseProductQuantity(cartItem),
+                  ),
               icon: const Icon(Icons.add_circle),
             ),
           ],

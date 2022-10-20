@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../app/theme/theme_bloc.dart';
-import '../../../core/exceptions/auth_exceptions.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../core/router/app_router.gr.dart';
 import '../../../logic/settings/settings_bloc.dart';
@@ -29,25 +28,25 @@ class _SettingsViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SettingsBloc, SettingsState>(
       listener: (context, state) {
-        if (state is DeleteAccountFailureState) {
-          ScaffoldMessenger.of(context).showSnackBar(
+        state.mapOrNull(
+          deleteAccountFailureState: (state) => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(state.errorMessage.toString()),
+              content: Text(
+                state.errorMessage.toString(),
+              ),
             ),
-          );
-        } else if (state is DeleteAccountSuccessState) {
-          ScaffoldMessenger.of(context).showSnackBar(
+          ),
+          deleteAccountSuccessState: (value) => ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Your account deleted permanently"),
             ),
-          );
-        } else if (state is LogOutFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
+          ),
+          logoutFailureState: (value) => ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("We cannot process your request right now."),
             ),
-          );
-        }
+          ),
+        );
       },
       child: Padding(
         padding: context.paddingAllDefault,
