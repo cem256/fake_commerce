@@ -101,7 +101,7 @@ class _LoginViewBody extends StatelessWidget {
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () => context.router.replace(const ForgotPasswordRoute()),
+                    onPressed: () => context.router.push(const ForgotPasswordRoute()),
                     child: const Text("Forgot Password?"),
                   ),
                 ),
@@ -138,7 +138,7 @@ class _LoginViewBody extends StatelessWidget {
                     const Text("Don't have an account?"),
                     TextButton(
                       child: const Text("Register"),
-                      onPressed: () => context.router.replace(const RegisterRoute()),
+                      onPressed: () => context.router.push(const RegisterRoute()),
                     ),
                   ],
                 ),

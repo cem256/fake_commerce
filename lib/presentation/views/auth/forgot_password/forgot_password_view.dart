@@ -103,7 +103,7 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                     const Text("Already have an account?"),
                     TextButton(
                       child: const Text("Login"),
-                      onPressed: () => context.router.replace(const LoginRoute()),
+                      onPressed: () => context.router.pop(const LoginRoute()),
                     ),
                   ],
                 ),

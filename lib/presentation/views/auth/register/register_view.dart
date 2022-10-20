@@ -133,7 +133,7 @@ class _RegisterViewBody extends StatelessWidget {
                     const Text("Already have an account?"),
                     TextButton(
                       child: const Text("Login"),
-                      onPressed: () => context.router.replace(
+                      onPressed: () => context.router.pop(
                         const LoginRoute(),
                       ),
                     ),
