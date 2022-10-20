@@ -50,5 +50,9 @@ app.*.map.json
 GoogleService-Info.plist
 google-services.json
 
+# generated files
 *.g.dart 
 *.freezed.dart
+
+# environment variables
+/env

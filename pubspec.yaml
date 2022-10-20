@@ -45,6 +45,8 @@ dependencies:
 
   #utility
   path_provider: ^2.0.11
+  flutter_dotenv: ^5.0.2
+  bloc_event_transformers: ^1.0.1
 
 
 dev_dependencies:
@@ -66,10 +68,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/
-  #   - images/a_dot_ham.jpeg
-
+  assets:
+    - env/
 
   # fonts:
   #   - family: Schyler

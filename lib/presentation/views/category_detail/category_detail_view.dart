@@ -37,7 +37,10 @@ class CategoryDetailView extends StatelessWidget {
                     products: products,
                   ));
                 } else {
-                  return const Text("Something went wrong");
+                  return Text(
+                    "Something went wrong",
+                    style: Theme.of(context).textTheme.headline6,
+                  );
                 }
               },
             ),

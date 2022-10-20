@@ -2,5 +2,5 @@ part of 'search_bloc.dart';
 
 @freezed
 class SearchEvent with _$SearchEvent {
-  const factory SearchEvent.searchTermChanged() = SearchTermChanged;
+  const factory SearchEvent.searchTermChanged(String searchTerm) = SearchTermChanged;
 }

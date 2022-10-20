@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -11,6 +12,7 @@ import 'app/theme/theme_bloc.dart';
 import 'core/constants/string_constants.dart';
 import 'core/router/app_router.gr.dart';
 import 'core/theme/theme_manager.dart';
+import 'core/utils/environment/environment.dart';
 import 'core/utils/observers/app_bloc_observer.dart';
 import 'locator.dart';
 
@@ -20,7 +22,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
+  await dotenv.load(fileName: Environment.fileName);
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
@@ -67,8 +69,8 @@ class FakeCommerce extends StatelessWidget {
 
                 //theme
                 themeMode: themeState.theme,
-                theme: ThemeManager.instance.lightTheme,
-                darkTheme: ThemeManager.instance.darkTheme,
+                theme: getIt<ThemeManager>().lightTheme,
+                darkTheme: getIt<ThemeManager>().darkTheme,
 
                 // routing
                 routerDelegate: AutoRouterDelegate.declarative(_appRouter, routes: (_) => routes),

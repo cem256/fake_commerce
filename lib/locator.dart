@@ -3,7 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'core/services/search_service.dart';
+import 'core/theme/theme_manager.dart';
 import 'data/repositories/repositories.dart';
+import 'data/repositories/search/base_search_repository.dart';
+import 'data/repositories/search/search_repository.dart';
 import 'logic/blocs.dart';
 import 'logic/search/bloc/search_bloc.dart';
 
@@ -15,6 +19,9 @@ void initServices() {
   getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
+
+  getIt.registerLazySingleton(() => SearchService());
+  getIt.registerLazySingleton(() => ThemeManager());
 
   //Repositories
   getIt.registerLazySingleton<BaseAuthRepository>(
@@ -47,6 +54,12 @@ void initServices() {
     () => ShoppingCartRepository(
       firebaseAuth: getIt(),
       firebaseFirestore: getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BaseSearchRepository>(
+    () => SearchRepository(
+      searchService: getIt(),
     ),
   );
 
@@ -100,6 +113,8 @@ void initServices() {
     () => ShoppingCartBloc(shoppingCartRepostiory: getIt()),
   );
   getIt.registerFactory(
-    () => SearchBloc(),
+    () => SearchBloc(
+      searchRepository: getIt(),
+    ),
   );
 }
