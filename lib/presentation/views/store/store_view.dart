@@ -42,24 +42,27 @@ class _StoreViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BlocBuilder<CategoryBloc, CategoryState>(
-            builder: (context, state) {
-              if (state.status == PageStatus.loading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state.status == PageStatus.success) {
-                return CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 2,
-                    viewportFraction: 1,
-                    enlargeCenterPage: true,
-                  ),
-                  items: state.categories.map((category) => CategoryCarousel(category: category)).toList(),
-                );
-              } else {
-                return const Center(child: Text("Some Error"));
-              }
-            },
+          Expanded(
+            flex: 4,
+            child: BlocBuilder<CategoryBloc, CategoryState>(
+              builder: (context, state) {
+                if (state.status == PageStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state.status == PageStatus.success) {
+                  return CarouselSlider(
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 2,
+                      viewportFraction: 1,
+                      enlargeCenterPage: true,
+                    ),
+                    items: state.categories.map((category) => CategoryCarousel(category: category)).toList(),
+                  );
+                } else {
+                  return const Center(child: Text("Some Error"));
+                }
+              },
+            ),
           ),
           SizedBox(
             height: context.mediumValue,
@@ -72,6 +75,7 @@ class _StoreViewBody extends StatelessWidget {
             height: context.mediumValue,
           ),
           Expanded(
+            flex: 6,
             child: BlocBuilder<ProductBloc, ProductState>(
               builder: (context, state) {
                 if (state.status == PageStatus.loading) {
