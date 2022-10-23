@@ -1,36 +1,10 @@
 part of 'login_bloc.dart';
 
-abstract class LoginEvent extends Equatable {
-  const LoginEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class LoginEvent with _$LoginEvent {
+  const factory LoginEvent.emailChanged(String email) = _EmailChanged;
+  const factory LoginEvent.passwordChanged(String password) = _PasswordChanged;
+  const factory LoginEvent.passwordVisibilityChanged() = _PasswordVisibilityChanged;
+  const factory LoginEvent.loginSubmitted() = _LoginSubmitted;
+  const factory LoginEvent.loginWithGooglePressed() = _LoginWithGooglePressed;
 }
-
-class LoginEmailChanged extends LoginEvent {
-  const LoginEmailChanged(this.email);
-
-  final String email;
-
-  @override
-  List<Object> get props => [email];
-}
-
-class LoginPasswordChanged extends LoginEvent {
-  const LoginPasswordChanged(this.password);
-
-  final String password;
-
-  @override
-  List<Object> get props => [password];
-}
-
-class LoginPasswordVisibilityChanged extends LoginEvent {
-  const LoginPasswordVisibilityChanged();
-}
-
-class LoginSubmitted extends LoginEvent {
-  const LoginSubmitted();
-}
-
-class LoginWithGooglePressed extends LoginEvent {}

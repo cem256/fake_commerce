@@ -6,7 +6,7 @@ import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/router/app_router.gr.dart';
 import '../../../../locator.dart';
-import '../../../../logic/blocs.dart';
+import '../../../../logic/auth/login/login_bloc.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/buttons/google_button.dart';
 import '../../../widgets/input/email_input_field.dart';
@@ -75,7 +75,7 @@ class _LoginViewBody extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.next,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<LoginBloc>().add(LoginEmailChanged(email)),
+                      onChanged: (email) => context.read<LoginBloc>().add(LoginEvent.emailChanged(email)),
                     );
                   },
                 ),
@@ -89,15 +89,15 @@ class _LoginViewBody extends StatelessWidget {
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
-                      onPressed: () => context.read<LoginBloc>().add(const LoginPasswordVisibilityChanged()),
-                      onChanged: (password) => context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+                      onPressed: () => context.read<LoginBloc>().add(const LoginEvent.passwordVisibilityChanged()),
+                      onChanged: (password) => context.read<LoginBloc>().add(LoginEvent.passwordChanged(password)),
                     );
                   },
                 ),
                 Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () => context.router.replace(const ForgotPasswordRoute()),
+                    onPressed: () => context.router.push(const ForgotPasswordRoute()),
                     child: const Text("Forgot Password?"),
                   ),
                 ),
@@ -109,7 +109,7 @@ class _LoginViewBody extends StatelessWidget {
                         buttonText: "Login",
                         isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
                         status: state.status,
-                        onPressed: () => context.read<LoginBloc>().add(const LoginSubmitted()),
+                        onPressed: () => context.read<LoginBloc>().add(const LoginEvent.loginSubmitted()),
                       ),
                     );
                   },
@@ -120,7 +120,7 @@ class _LoginViewBody extends StatelessWidget {
                       width: double.infinity,
                       child: GoogleButton(
                         label: "Login With Google",
-                        onPressed: () => context.read<LoginBloc>().add(LoginWithGooglePressed()),
+                        onPressed: () => context.read<LoginBloc>().add(const LoginEvent.loginWithGooglePressed()),
                       ),
                     );
                   },
@@ -134,7 +134,7 @@ class _LoginViewBody extends StatelessWidget {
                     const Text("Don't have an account?"),
                     TextButton(
                       child: const Text("Register"),
-                      onPressed: () => context.router.replace(const RegisterRoute()),
+                      onPressed: () => context.router.push(const RegisterRoute()),
                     ),
                   ],
                 ),

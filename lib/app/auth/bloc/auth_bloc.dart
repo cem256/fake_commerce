@@ -4,19 +4,19 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../data/models/user/user_model.dart';
-import '../../../data/repositories/auth/auth_repository.dart';
+import '../../../data/repositories/auth/base_auth_repository.dart';
 
 part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthRepository authRepository;
+  final BaseAuthRepository authRepository;
   late final StreamSubscription<UserModel> _userSubscription;
 
   AuthBloc({required this.authRepository}) : super(const _Unauthenticated()) {
     on<_UserChanged>(_onUserChanged);
-    _userSubscription = authRepository.user.listen(
+    _userSubscription = authRepository.userStream.listen(
       (user) => add(_UserChanged(user: user)),
     );
   }

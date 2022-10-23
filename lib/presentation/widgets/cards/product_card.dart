@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/product/product_model.dart';
-import '../../../data/models/shopping_cart/shopping_cart_model.dart';
 import '../../../logic/shopping_cart/shopping_cart_bloc.dart';
 
 class ProductCard extends StatelessWidget {
@@ -64,12 +63,8 @@ class ProductCard extends StatelessWidget {
                       child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
                         builder: (context, state) {
                           return IconButton(
-                            onPressed: () => context.read<ShoppingCartBloc>()
-                              ..add(
-                                ProductAddedToCart(
-                                  ShoppingCartModel(product, 1),
-                                ),
-                              ),
+                            onPressed: () =>
+                                context.read<ShoppingCartBloc>()..add(ShoppingCartEvent.addProductToCart(product)),
                             icon: Icon(
                               Icons.shopping_cart,
                               color: state.cartItems.map((e) => e.product.name).contains(product.name)

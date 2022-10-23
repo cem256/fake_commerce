@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/exceptions/auth_exceptions.dart';
+import '../../../core/extensions/firebase_user_extensions.dart';
 import '../../models/user/user_model.dart';
 import 'base_auth_repository.dart';
 
@@ -13,12 +14,8 @@ class AuthRepository implements BaseAuthRepository {
   final GoogleSignIn googleSignIn;
 
   @override
-  Stream<UserModel> get user {
-    return firebaseAuth.userChanges().map(
-      (firebaseUser) {
-        return firebaseUser == null ? UserModel.empty : firebaseUser.toUser;
-      },
-    );
+  Stream<UserModel> get userStream {
+    return firebaseAuth.authStateChanges().map((firebaseUser) => firebaseUser.toUserModel);
   }
 
   @override
@@ -103,11 +100,5 @@ class AuthRepository implements BaseAuthRepository {
     } catch (_) {
       throw LogOutFailure();
     }
-  }
-}
-
-extension on firebase_auth.User {
-  UserModel get toUser {
-    return UserModel(id: uid, email: email, name: displayName, photo: photoURL);
   }
 }

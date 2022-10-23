@@ -5,7 +5,7 @@ import '../../../core/enums/page_status.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../data/models/category/category_model.dart';
 import '../../../data/models/product/product_model.dart';
-import '../../../logic/blocs.dart';
+import '../../../logic/product/product_bloc.dart';
 import '../../widgets/grid/product_grid.dart';
 
 class CategoryDetailView extends StatelessWidget {
@@ -37,7 +37,10 @@ class CategoryDetailView extends StatelessWidget {
                     products: products,
                   ));
                 } else {
-                  return const Text("Something went wrong");
+                  return Text(
+                    "Something went wrong",
+                    style: Theme.of(context).textTheme.headline6,
+                  );
                 }
               },
             ),

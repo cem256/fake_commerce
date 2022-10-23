@@ -1,10 +1,6 @@
 part of 'category_bloc.dart';
 
-abstract class CategoryEvent extends Equatable {
-  const CategoryEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class CategoryEvent with _$CategoryEvent {
+  const factory CategoryEvent.categoriesFetched() = _CategoriesFetched;
 }
-
-class CategoriesFetched extends CategoryEvent {}

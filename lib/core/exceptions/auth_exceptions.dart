@@ -168,4 +168,9 @@ class AccountDeletionFailure implements Exception {
   }
 }
 
+class AddUserDetailsFailure implements Exception {
+  AddUserDetailsFailure([this.message = 'An error occured while creating user.']);
+  final String message;
+}
+
 class LogOutFailure implements Exception {}

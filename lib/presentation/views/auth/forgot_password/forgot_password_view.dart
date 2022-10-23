@@ -6,7 +6,7 @@ import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/router/app_router.gr.dart';
 import '../../../../locator.dart';
-import '../../../../logic/blocs.dart';
+import '../../../../logic/auth/forgot_password/forgot_password_bloc.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/input/email_input_field.dart';
 
@@ -72,7 +72,9 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.done,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<ForgotPasswordBloc>().add(ForgotPasswordEmailChanged(email)),
+                      onChanged: (email) => context.read<ForgotPasswordBloc>().add(
+                            ForgotPasswordEvent.emailChanged(email),
+                          ),
                     );
                   },
                 ),
@@ -87,7 +89,8 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                         buttonText: "Reset",
                         isValid: ((state.isValidEmail ?? false)),
                         status: state.status,
-                        onPressed: () => context.read<ForgotPasswordBloc>().add(const ForgotPasswordSubmitted()),
+                        onPressed: () =>
+                            context.read<ForgotPasswordBloc>().add(const ForgotPasswordEvent.passwordSubmitted()),
                       ),
                     );
                   },
@@ -101,7 +104,7 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                     const Text("Already have an account?"),
                     TextButton(
                       child: const Text("Login"),
-                      onPressed: () => context.router.replace(const LoginRoute()),
+                      onPressed: () => context.router.pop(const LoginRoute()),
                     ),
                   ],
                 ),

@@ -7,6 +7,7 @@ import '../../presentation/views/auth/register/register_view.dart';
 import '../../presentation/views/category_detail/category_detail_view.dart';
 import '../../presentation/views/change_password/change_password_view.dart';
 import '../../presentation/views/navbar/navbar_view.dart';
+import '../../presentation/views/search/search_view.dart';
 import '../../presentation/views/settings/settings_view.dart';
 import '../../presentation/views/shopping_cart/shopping_cart_view.dart';
 import '../../presentation/views/store/store_view.dart';
@@ -46,7 +47,10 @@ const authenticatedRouter = AutoRoute(
           page: EmptyRouterPage,
           name: "StoreRouter",
           children: [
-            AutoRoute(initial: true, page: StoreView),
+            AutoRoute(
+              initial: true,
+              page: StoreView,
+            ),
             RedirectRoute(path: '*', redirectTo: ''),
           ],
         ),
@@ -68,6 +72,7 @@ const authenticatedRouter = AutoRoute(
         ),
       ],
     ),
+    AutoRoute(page: SearchView),
     AutoRoute(page: ChangePasswordView),
     AutoRoute(page: CategoryDetailView),
     RedirectRoute(path: '*', redirectTo: ''),

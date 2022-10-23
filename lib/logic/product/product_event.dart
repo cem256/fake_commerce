@@ -1,10 +1,6 @@
 part of 'product_bloc.dart';
 
-abstract class ProductEvent extends Equatable {
-  const ProductEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class ProductEvent with _$ProductEvent {
+  const factory ProductEvent.productsFetched() = _ProductsFetched;
 }
-
-class ProductsFetched extends ProductEvent {}

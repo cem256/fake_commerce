@@ -6,7 +6,7 @@ import '../../../../core/enums/form_status.dart';
 import '../../../../core/extensions/context_extensions.dart';
 import '../../../../core/router/app_router.gr.dart';
 import '../../../../locator.dart';
-import '../../../../logic/blocs.dart';
+import '../../../../logic/auth/register/register_bloc.dart';
 import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/buttons/google_button.dart';
 import '../../../widgets/input/email_input_field.dart';
@@ -74,7 +74,9 @@ class _RegisterViewBody extends StatelessWidget {
                     return EmailInputField(
                       textInputAction: TextInputAction.next,
                       isValidEmail: state.isValidEmail,
-                      onChanged: (email) => context.read<RegisterBloc>().add(RegisterEmailChanged(email)),
+                      onChanged: (email) => context.read<RegisterBloc>().add(
+                            RegisterEvent.emailChanged(email),
+                          ),
                     );
                   },
                 ),
@@ -88,8 +90,12 @@ class _RegisterViewBody extends StatelessWidget {
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
-                      onPressed: () => context.read<RegisterBloc>().add(RegisterPasswordVisibilityChanged()),
-                      onChanged: (password) => context.read<RegisterBloc>().add(RegisterPasswordChanged(password)),
+                      onPressed: () => context.read<RegisterBloc>().add(
+                            const RegisterEvent.passwordVisibilityChanged(),
+                          ),
+                      onChanged: (password) => context.read<RegisterBloc>().add(
+                            RegisterEvent.passwordChanged(password),
+                          ),
                     );
                   },
                 ),
@@ -104,7 +110,9 @@ class _RegisterViewBody extends StatelessWidget {
                         buttonText: "Register",
                         isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
                         status: state.status,
-                        onPressed: () => context.read<RegisterBloc>().add(RegisterSubmitted()),
+                        onPressed: () => context.read<RegisterBloc>().add(
+                              const RegisterEvent.registerSubmitted(),
+                            ),
                       ),
                     );
                   },
@@ -115,7 +123,9 @@ class _RegisterViewBody extends StatelessWidget {
                       width: double.infinity,
                       child: GoogleButton(
                         label: "Register with Google",
-                        onPressed: () => context.read<RegisterBloc>().add(RegisterWithGooglePressed()),
+                        onPressed: () => context.read<RegisterBloc>().add(
+                              const RegisterEvent.registerWithGooglePressed(),
+                            ),
                       ),
                     );
                   },
@@ -129,7 +139,7 @@ class _RegisterViewBody extends StatelessWidget {
                     const Text("Already have an account?"),
                     TextButton(
                       child: const Text("Login"),
-                      onPressed: () => context.router.replace(
+                      onPressed: () => context.router.pop(
                         const LoginRoute(),
                       ),
                     ),

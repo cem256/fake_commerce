@@ -3,13 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'app/auth/bloc/auth_bloc.dart';
-import 'app/theme/theme_bloc.dart';
-import 'data/repositories/auth/auth_repository.dart';
-import 'data/repositories/category/category_repository.dart';
-import 'data/repositories/product/product_repository.dart';
+import 'core/services/search_service.dart';
+import 'core/theme/theme_manager.dart';
+import 'data/repositories/repositories.dart';
+
 import 'logic/blocs.dart';
-import 'logic/change_password/change_password_bloc.dart';
 
 // Global service locator
 final GetIt getIt = GetIt.instance;
@@ -20,23 +18,46 @@ void initServices() {
   getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
 
+  getIt.registerLazySingleton(() => SearchService());
+  getIt.registerLazySingleton(() => ThemeManager());
+
   //Repositories
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseAuthRepository>(
     () => AuthRepository(
       firebaseAuth: getIt(),
       googleSignIn: getIt(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseUserRepository>(
+    () => UserRepository(
+      firebaseAuth: getIt(),
+      firebaseFirestore: getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BaseCategoryRepository>(
     () => CategoryRepository(
       firebaseFirestore: getIt(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  getIt.registerLazySingleton<BaseProductRepository>(
     () => ProductRepository(
       firebaseFirestore: getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BaseShoppingCartRepostiory>(
+    () => ShoppingCartRepository(
+      firebaseAuth: getIt(),
+      firebaseFirestore: getIt(),
+    ),
+  );
+
+  getIt.registerLazySingleton<BaseSearchRepository>(
+    () => SearchRepository(
+      searchService: getIt(),
     ),
   );
 
@@ -52,11 +73,13 @@ void initServices() {
   getIt.registerFactory(
     () => RegisterBloc(
       authRepository: getIt(),
+      userRepository: getIt(),
     ),
   );
   getIt.registerFactory(
     () => LoginBloc(
       authRepository: getIt(),
+      userRepository: getIt(),
     ),
   );
   getIt.registerFactory(
@@ -85,6 +108,11 @@ void initServices() {
     ),
   );
   getIt.registerFactory(
-    () => ShoppingCartBloc(),
+    () => ShoppingCartBloc(shoppingCartRepostiory: getIt()),
+  );
+  getIt.registerFactory(
+    () => SearchBloc(
+      searchRepository: getIt(),
+    ),
   );
 }
