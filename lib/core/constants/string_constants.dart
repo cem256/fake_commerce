@@ -1,3 +1,3 @@
 class StringConstants {
-  static const title = "FakeCommerce";
+  static const title = 'FakeCommerce';
 }

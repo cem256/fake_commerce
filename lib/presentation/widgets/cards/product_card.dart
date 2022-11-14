@@ -45,13 +45,13 @@ class ProductCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            product.name.toString(),
+                            product.name,
                             softWrap: false,
                             overflow: TextOverflow.fade,
                             maxLines: 1,
                           ),
                           Text(
-                            "\$${product.price.toString()}",
+                            '\$${product.price.toString()}',
                             softWrap: false,
                             overflow: TextOverflow.fade,
                             maxLines: 1,

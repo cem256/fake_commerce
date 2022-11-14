@@ -11,7 +11,7 @@ import '../../../widgets/buttons/custom_elevated_button.dart';
 import '../../../widgets/input/email_input_field.dart';
 
 class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({Key? key}) : super(key: key);
+  const ForgotPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ForgotPasswordView extends StatelessWidget {
 }
 
 class _ForgotPasswordViewBody extends StatelessWidget {
-  const _ForgotPasswordViewBody({Key? key}) : super(key: key);
+  const _ForgotPasswordViewBody();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _ForgotPasswordViewBody extends StatelessWidget {
         } else if (state.status == FormStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Password reset link sent to the email provided. (Check your spam.)"),
+              content: Text('Password reset link sent to the email provided. (Check your spam.)'),
             ),
           );
         }
@@ -55,14 +55,14 @@ class _ForgotPasswordViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Forgot Password",
+                  'Forgot Password',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 SizedBox(
                   height: context.mediumValue,
                 ),
                 const Text(
-                  "Please provide your email and we will send you a link to reset your password",
+                  'Please provide your email and we will send you a link to reset your password',
                 ),
                 SizedBox(
                   height: context.mediumValue,
@@ -86,8 +86,8 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                     return SizedBox(
                       width: double.infinity,
                       child: CustomElevatedButton(
-                        buttonText: "Reset",
-                        isValid: ((state.isValidEmail ?? false)),
+                        buttonText: 'Reset',
+                        isValid: state.isValidEmail ?? false,
                         status: state.status,
                         onPressed: () =>
                             context.read<ForgotPasswordBloc>().add(const ForgotPasswordEvent.passwordSubmitted()),
@@ -101,9 +101,9 @@ class _ForgotPasswordViewBody extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account?"),
+                    const Text('Already have an account?'),
                     TextButton(
-                      child: const Text("Login"),
+                      child: const Text('Login'),
                       onPressed: () => context.router.pop(const LoginRoute()),
                     ),
                   ],

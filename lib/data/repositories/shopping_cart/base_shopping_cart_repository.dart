@@ -6,7 +6,10 @@ abstract class BaseShoppingCartRepostiory {
   UserModel get currentUser;
 
   Stream<List<ShoppingCartItemModel>> getUserCart();
-  Future<void> addItemToCart(List<ShoppingCartItemModel> cartItems, ProductModel product);
+  Future<void> addItemToCart(
+    List<ShoppingCartItemModel> cartItems,
+    ProductModel product,
+  );
   Future<void> decreaseQuantity(ShoppingCartItemModel cartItem);
   Future<void> increaseQuantity(ShoppingCartItemModel cartItem);
   double calculateSubtotal(List<ShoppingCartItemModel> userCart);

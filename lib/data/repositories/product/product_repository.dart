@@ -11,6 +11,6 @@ class ProductRepository implements BaseProductRepository {
   @override
   Future<List<ProductModel>> fetchProducts() async {
     final querySnapshot = await firebaseFirestore.collection('products').get();
-    return querySnapshot.docs.map((e) => e.data()).map((e) => ProductModel.fromJson(e)).toList();
+    return querySnapshot.docs.map((e) => e.data()).map(ProductModel.fromJson).toList();
   }
 }

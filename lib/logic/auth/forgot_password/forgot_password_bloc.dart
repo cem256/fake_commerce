@@ -11,11 +11,11 @@ part 'forgot_password_event.dart';
 part 'forgot_password_state.dart';
 
 class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
-  final BaseAuthRepository authRepository;
   ForgotPasswordBloc({required this.authRepository}) : super(const ForgotPasswordState()) {
     on<_EmailChanged>(_onEmailChanged);
     on<_PasswordSubmitted>(_onPasswordSubmitted);
   }
+  final BaseAuthRepository authRepository;
 
   void _onEmailChanged(_EmailChanged event, Emitter<ForgotPasswordState> emit) {
     InputValidator.checkEmailValidity(event.email)
@@ -23,7 +23,10 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
         : emit(state.copyWith(email: event.email, isValidEmail: false));
   }
 
-  Future<void> _onPasswordSubmitted(_PasswordSubmitted event, Emitter<ForgotPasswordState> emit) async {
+  Future<void> _onPasswordSubmitted(
+    _PasswordSubmitted event,
+    Emitter<ForgotPasswordState> emit,
+  ) async {
     emit(state.copyWith(status: FormStatus.submitting));
     try {
       await authRepository.sendPasswordResetEmail(email: state.email);

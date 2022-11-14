@@ -12,9 +12,6 @@ part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final BaseAuthRepository authRepository;
-  final BaseUserRepository userRepository;
-
   RegisterBloc({required this.authRepository, required this.userRepository}) : super(const RegisterState()) {
     on<_EmailChanged>(_onEmailChanged);
     on<_PasswordChanged>(_onPasswordChanged);
@@ -22,6 +19,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<_RegisterSubmitted>(_onRegisterSubmitted);
     on<_RegisterWithGooglePressed>(_onRegisterWithGoogleSubmitted);
   }
+  final BaseAuthRepository authRepository;
+  final BaseUserRepository userRepository;
 
   void _onEmailChanged(_EmailChanged event, Emitter<RegisterState> emit) {
     InputValidator.checkEmailValidity(event.email)

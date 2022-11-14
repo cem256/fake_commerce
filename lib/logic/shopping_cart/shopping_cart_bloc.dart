@@ -13,14 +13,13 @@ part 'shopping_cart_event.dart';
 part 'shopping_cart_state.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
-  final BaseShoppingCartRepostiory shoppingCartRepostiory;
-
   ShoppingCartBloc({required this.shoppingCartRepostiory}) : super(const ShoppingCartState()) {
     on<_LoadShoppingCart>(_onShoppingCartLoaded);
     on<_AddProductToCart>(_onProductAddedToCart);
     on<_IncreaseProductQuantity>(_onProductCountIncreased);
     on<_DecreaseProductQuantity>(_onProductCountDecreased);
   }
+  final BaseShoppingCartRepostiory shoppingCartRepostiory;
 
   Future<void> _onShoppingCartLoaded(_LoadShoppingCart event, Emitter<ShoppingCartState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));
@@ -28,9 +27,10 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     await emit.forEach<List<ShoppingCartItemModel>>(
       shoppingCartRepostiory.getUserCart(),
       onData: (cartItems) => state.copyWith(
-          cartItems: cartItems,
-          subtotal: shoppingCartRepostiory.calculateSubtotal(cartItems),
-          status: PageStatus.success),
+        cartItems: cartItems,
+        subtotal: shoppingCartRepostiory.calculateSubtotal(cartItems),
+        status: PageStatus.success,
+      ),
       onError: (_, __) => state.copyWith(status: PageStatus.failure),
     );
   }

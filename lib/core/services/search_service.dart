@@ -9,7 +9,7 @@ class SearchService {
   );
 
   Future<List<AlgoliaObjectSnapshot>> getProducts(String searchTerm) async {
-    AlgoliaQuerySnapshot snapshot = await _algolia.instance.index('products').query(searchTerm).getObjects();
+    final snapshot = await _algolia.instance.index('products').query(searchTerm).getObjects();
 
     return snapshot.hits;
   }

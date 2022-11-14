@@ -10,11 +10,10 @@ part 'product_event.dart';
 part 'product_state.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final BaseProductRepository productRepository;
-
   ProductBloc({required this.productRepository}) : super(const ProductState()) {
     on<_ProductsFetched>(_onProductsFetched);
   }
+  final BaseProductRepository productRepository;
 
   Future<void> _onProductsFetched(_ProductsFetched event, Emitter<ProductState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));

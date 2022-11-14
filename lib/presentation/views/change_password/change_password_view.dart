@@ -15,7 +15,7 @@ class ChangePasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Password"),
+        title: const Text('Change Password'),
       ),
       body: BlocProvider(
         create: (context) => getIt<ChangePasswordBloc>(),
@@ -41,7 +41,7 @@ class _ChangePasswordBody extends StatelessWidget {
         } else if (state.status == FormStatus.success) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Your password successfully updated. Please login again."),
+              content: Text('Your password successfully updated. Please login again.'),
             ),
           );
         }
@@ -52,14 +52,14 @@ class _ChangePasswordBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Enter your new password. Your password must be at least 6 characters long."),
+            const Text('Enter your new password. Your password must be at least 6 characters long.'),
             SizedBox(
               height: context.mediumValue,
             ),
             BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
               builder: (context, state) {
                 return PasswordInputField(
-                  labelText: "New Password",
+                  labelText: 'New Password',
                   obscureText: state.isPasswordObscured,
                   textInputAction: TextInputAction.done,
                   isValid: state.isValidPassword,
@@ -80,7 +80,7 @@ class _ChangePasswordBody extends StatelessWidget {
                 return SizedBox(
                   width: double.infinity,
                   child: CustomElevatedButton(
-                    buttonText: "Change Password",
+                    buttonText: 'Change Password',
                     onPressed: () => context.read<ChangePasswordBloc>().add(
                           const ChangePasswordEvent.changePasswordSubmitted(),
                         ),

@@ -2,8 +2,6 @@
 class LogInWithGoogleFailure implements Exception {
   const LogInWithGoogleFailure([this.message = 'An unknown exception occurred.']);
 
-  final String message;
-
   factory LogInWithGoogleFailure.fromCode(String code) {
     switch (code) {
       case 'account-exists-with-different-credential':
@@ -42,13 +40,13 @@ class LogInWithGoogleFailure implements Exception {
         return const LogInWithGoogleFailure();
     }
   }
+
+  final String message;
 }
 
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/createUserWithEmailAndPassword.html
 class SignUpWithEmailAndPasswordFailure implements Exception {
   const SignUpWithEmailAndPasswordFailure([this.message = 'An unknown exception occurred.']);
-
-  final String message;
 
   factory SignUpWithEmailAndPasswordFailure.fromCode(String code) {
     switch (code) {
@@ -73,13 +71,13 @@ class SignUpWithEmailAndPasswordFailure implements Exception {
         return const SignUpWithEmailAndPasswordFailure();
     }
   }
+
+  final String message;
 }
 
 //https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/signInWithEmailAndPassword.html
 class LogInWithEmailAndPasswordFailure implements Exception {
   const LogInWithEmailAndPasswordFailure([this.message = 'An unknown exception occurred.']);
-
-  final String message;
 
   factory LogInWithEmailAndPasswordFailure.fromCode(String code) {
     switch (code) {
@@ -103,13 +101,13 @@ class LogInWithEmailAndPasswordFailure implements Exception {
         return const LogInWithEmailAndPasswordFailure();
     }
   }
+
+  final String message;
 }
 
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/User/updatePassword.html
 class UpdatePasswordFailure implements Exception {
   const UpdatePasswordFailure([this.message = 'An unknown exception occurred.']);
-
-  final String message;
 
   factory UpdatePasswordFailure.fromCode(String code) {
     switch (code) {
@@ -126,13 +124,13 @@ class UpdatePasswordFailure implements Exception {
         return const UpdatePasswordFailure();
     }
   }
+
+  final String message;
 }
 
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/sendPasswordResetEmail.html
 class PasswordResetFailure implements Exception {
   const PasswordResetFailure([this.message = 'An unknown exception occurred.']);
-
-  final String message;
 
   factory PasswordResetFailure.fromCode(String code) {
     switch (code) {
@@ -148,13 +146,13 @@ class PasswordResetFailure implements Exception {
         return const PasswordResetFailure();
     }
   }
+
+  final String message;
 }
 
 // https://pub.dev/documentation/firebase_auth/latest/firebase_auth/User/delete.html
 class AccountDeletionFailure implements Exception {
   AccountDeletionFailure([this.message = 'An unknown exception occurred.']);
-
-  final String message;
 
   factory AccountDeletionFailure.fromCode(String code) {
     switch (code) {
@@ -166,6 +164,8 @@ class AccountDeletionFailure implements Exception {
         return AccountDeletionFailure();
     }
   }
+
+  final String message;
 }
 
 class AddUserDetailsFailure implements Exception {

@@ -13,7 +13,7 @@ import '../../../widgets/input/email_input_field.dart';
 import '../../../widgets/input/password_input_field.dart';
 
 class RegisterView extends StatelessWidget {
-  const RegisterView({Key? key}) : super(key: key);
+  const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class RegisterView extends StatelessWidget {
 }
 
 class _RegisterViewBody extends StatelessWidget {
-  const _RegisterViewBody({Key? key}) : super(key: key);
+  const _RegisterViewBody();
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +60,11 @@ class _RegisterViewBody extends StatelessWidget {
                   height: context.highValue,
                 ),
                 Text(
-                  "Register",
+                  'Register',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 const Text(
-                  "Enter your email and password to register",
+                  'Enter your email and password to register',
                 ),
                 SizedBox(
                   height: context.mediumValue,
@@ -86,7 +86,7 @@ class _RegisterViewBody extends StatelessWidget {
                 BlocBuilder<RegisterBloc, RegisterState>(
                   builder: (context, state) {
                     return PasswordInputField(
-                      labelText: "Password",
+                      labelText: 'Password',
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
@@ -107,8 +107,8 @@ class _RegisterViewBody extends StatelessWidget {
                     return SizedBox(
                       width: double.infinity,
                       child: CustomElevatedButton(
-                        buttonText: "Register",
-                        isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
+                        buttonText: 'Register',
+                        isValid: (state.isValidPassword ?? false) && (state.isValidEmail ?? false),
                         status: state.status,
                         onPressed: () => context.read<RegisterBloc>().add(
                               const RegisterEvent.registerSubmitted(),
@@ -122,7 +122,7 @@ class _RegisterViewBody extends StatelessWidget {
                     return SizedBox(
                       width: double.infinity,
                       child: GoogleButton(
-                        label: "Register with Google",
+                        label: 'Register with Google',
                         onPressed: () => context.read<RegisterBloc>().add(
                               const RegisterEvent.registerWithGooglePressed(),
                             ),
@@ -136,9 +136,9 @@ class _RegisterViewBody extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account?"),
+                    const Text('Already have an account?'),
                     TextButton(
-                      child: const Text("Login"),
+                      child: const Text('Login'),
                       onPressed: () => context.router.pop(
                         const LoginRoute(),
                       ),

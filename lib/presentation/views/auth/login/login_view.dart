@@ -13,7 +13,7 @@ import '../../../widgets/input/email_input_field.dart';
 import '../../../widgets/input/password_input_field.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
 }
 
 class _LoginViewBody extends StatelessWidget {
-  const _LoginViewBody({Key? key}) : super(key: key);
+  const _LoginViewBody();
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +61,11 @@ class _LoginViewBody extends StatelessWidget {
                   height: context.highValue,
                 ),
                 Text(
-                  "Login",
+                  'Login',
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 const Text(
-                  "Enter your email and password to login",
+                  'Enter your email and password to login',
                 ),
                 SizedBox(
                   height: context.mediumValue,
@@ -85,7 +85,7 @@ class _LoginViewBody extends StatelessWidget {
                 BlocBuilder<LoginBloc, LoginState>(
                   builder: (context, state) {
                     return PasswordInputField(
-                      labelText: "Password",
+                      labelText: 'Password',
                       obscureText: state.isPasswordObscured,
                       textInputAction: TextInputAction.next,
                       isValid: state.isValidPassword,
@@ -98,7 +98,7 @@ class _LoginViewBody extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () => context.router.push(const ForgotPasswordRoute()),
-                    child: const Text("Forgot Password?"),
+                    child: const Text('Forgot Password?'),
                   ),
                 ),
                 BlocBuilder<LoginBloc, LoginState>(
@@ -106,8 +106,8 @@ class _LoginViewBody extends StatelessWidget {
                     return SizedBox(
                       width: double.infinity,
                       child: CustomElevatedButton(
-                        buttonText: "Login",
-                        isValid: ((state.isValidPassword ?? false) && (state.isValidEmail ?? false)),
+                        buttonText: 'Login',
+                        isValid: (state.isValidPassword ?? false) && (state.isValidEmail ?? false),
                         status: state.status,
                         onPressed: () => context.read<LoginBloc>().add(const LoginEvent.loginSubmitted()),
                       ),
@@ -119,7 +119,7 @@ class _LoginViewBody extends StatelessWidget {
                     return SizedBox(
                       width: double.infinity,
                       child: GoogleButton(
-                        label: "Login With Google",
+                        label: 'Login With Google',
                         onPressed: () => context.read<LoginBloc>().add(const LoginEvent.loginWithGooglePressed()),
                       ),
                     );
@@ -133,7 +133,7 @@ class _LoginViewBody extends StatelessWidget {
                   children: [
                     const Text("Don't have an account?"),
                     TextButton(
-                      child: const Text("Register"),
+                      child: const Text('Register'),
                       onPressed: () => context.router.push(const RegisterRoute()),
                     ),
                   ],

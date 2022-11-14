@@ -11,13 +11,13 @@ part 'change_password_event.dart';
 part 'change_password_state.dart';
 
 class ChangePasswordBloc extends Bloc<ChangePasswordEvent, ChangePasswordState> {
-  final BaseAuthRepository authRepository;
-
   ChangePasswordBloc({required this.authRepository}) : super(const ChangePasswordState()) {
     on<_PasswordModified>(_onPasswordChanged);
     on<_PasswordVisibilityChanged>(_onPasswordVisibilityChanged);
     on<_ChangePasswordSubmitted>(_onChangePasswordSubmitted);
   }
+  final BaseAuthRepository authRepository;
+
   void _onPasswordChanged(_PasswordModified event, Emitter<ChangePasswordState> emit) {
     InputValidator.checkPasswordValidity(event.password)
         ? emit(state.copyWith(password: event.password, isValidPassword: true))

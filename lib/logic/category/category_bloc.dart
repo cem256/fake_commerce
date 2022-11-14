@@ -10,11 +10,10 @@ part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final BaseCategoryRepository categoryRepository;
-
   CategoryBloc({required this.categoryRepository}) : super(const CategoryState()) {
     on<_CategoriesFetched>(_onCategoriesFetched);
   }
+  final BaseCategoryRepository categoryRepository;
 
   Future<void> _onCategoriesFetched(_CategoriesFetched event, Emitter<CategoryState> emit) async {
     emit(state.copyWith(status: PageStatus.loading));
