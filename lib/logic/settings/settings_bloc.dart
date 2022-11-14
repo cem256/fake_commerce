@@ -9,12 +9,12 @@ part 'settings_event.dart';
 part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final BaseAuthRepository authRepository;
-
   SettingsBloc({required this.authRepository}) : super(const _InitialState()) {
     on<AccountDeletionRequested>(_onAccountDeletionRequested);
     on<LogoutRequested>(_onLogoutRequested);
   }
+  final BaseAuthRepository authRepository;
+
   Future<void> _onAccountDeletionRequested(AccountDeletionRequested event, Emitter<SettingsState> emit) async {
     try {
       await authRepository.deleteAccount();

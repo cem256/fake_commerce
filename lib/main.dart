@@ -20,20 +20,17 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = AppBlocObserver();
 
-  await Firebase.initializeApp();
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await dotenv.load(fileName: Environment.fileName);
-  final storage = await HydratedStorage.build(
+  HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
 
+  await Firebase.initializeApp();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await dotenv.load(fileName: Environment.fileName);
+
   initServices();
 
-  HydratedBlocOverrides.runZoned(
-    () => runApp(FakeCommerce()),
-    storage: storage,
-    blocObserver: AppBlocObserver(),
-  );
+  runApp(FakeCommerce());
 }
 
 class FakeCommerce extends StatelessWidget {
@@ -73,7 +70,10 @@ class FakeCommerce extends StatelessWidget {
                 darkTheme: getIt<ThemeManager>().darkTheme,
 
                 // routing
-                routerDelegate: AutoRouterDelegate.declarative(_appRouter, routes: (_) => routes),
+                routerDelegate: AutoRouterDelegate.declarative(
+                  _appRouter,
+                  routes: (_) => routes,
+                ),
                 routeInformationParser: _appRouter.defaultRouteParser(),
               );
             },

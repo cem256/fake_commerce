@@ -1,3 +1,5 @@
+// ignore_for_file: sort_constructors_first
+
 part of 'theme_bloc.dart';
 
 class ThemeState extends Equatable {
@@ -5,6 +7,7 @@ class ThemeState extends Equatable {
     this.theme = ThemeMode.system,
     this.settingsValue,
   });
+
   // enum
   final ThemeMode theme;
   final ThemeMode? settingsValue;

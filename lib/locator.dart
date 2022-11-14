@@ -6,7 +6,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'core/services/search_service.dart';
 import 'core/theme/theme_manager.dart';
 import 'data/repositories/repositories.dart';
-
 import 'logic/blocs.dart';
 
 // Global service locator
@@ -14,105 +13,100 @@ final GetIt getIt = GetIt.instance;
 
 void initServices() {
   //Services
-  getIt.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
-  getIt.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
-  getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn.standard());
+  getIt
+    ..registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance)
+    ..registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance)
+    ..registerLazySingleton<GoogleSignIn>(GoogleSignIn.standard)
+    ..registerLazySingleton(SearchService.new)
+    ..registerLazySingleton(ThemeManager.new)
 
-  getIt.registerLazySingleton(() => SearchService());
-  getIt.registerLazySingleton(() => ThemeManager());
+    //Repositories
+    ..registerLazySingleton<BaseAuthRepository>(
+      () => AuthRepository(
+        firebaseAuth: getIt(),
+        googleSignIn: getIt(),
+      ),
+    )
+    ..registerLazySingleton<BaseUserRepository>(
+      () => UserRepository(
+        firebaseAuth: getIt(),
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<BaseCategoryRepository>(
+      () => CategoryRepository(
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<BaseProductRepository>(
+      () => ProductRepository(
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<BaseShoppingCartRepostiory>(
+      () => ShoppingCartRepository(
+        firebaseAuth: getIt(),
+        firebaseFirestore: getIt(),
+      ),
+    )
+    ..registerLazySingleton<BaseSearchRepository>(
+      () => SearchRepository(
+        searchService: getIt(),
+      ),
+    )
 
-  //Repositories
-  getIt.registerLazySingleton<BaseAuthRepository>(
-    () => AuthRepository(
-      firebaseAuth: getIt(),
-      googleSignIn: getIt(),
-    ),
-  );
-
-  getIt.registerLazySingleton<BaseUserRepository>(
-    () => UserRepository(
-      firebaseAuth: getIt(),
-      firebaseFirestore: getIt(),
-    ),
-  );
-
-  getIt.registerLazySingleton<BaseCategoryRepository>(
-    () => CategoryRepository(
-      firebaseFirestore: getIt(),
-    ),
-  );
-
-  getIt.registerLazySingleton<BaseProductRepository>(
-    () => ProductRepository(
-      firebaseFirestore: getIt(),
-    ),
-  );
-
-  getIt.registerLazySingleton<BaseShoppingCartRepostiory>(
-    () => ShoppingCartRepository(
-      firebaseAuth: getIt(),
-      firebaseFirestore: getIt(),
-    ),
-  );
-
-  getIt.registerLazySingleton<BaseSearchRepository>(
-    () => SearchRepository(
-      searchService: getIt(),
-    ),
-  );
-
-  //Blocs
-  getIt.registerFactory(
-    () => AuthBloc(
-      authRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => ThemeBloc(),
-  );
-  getIt.registerFactory(
-    () => RegisterBloc(
-      authRepository: getIt(),
-      userRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => LoginBloc(
-      authRepository: getIt(),
-      userRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => ForgotPasswordBloc(
-      authRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => CategoryBloc(
-      categoryRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => ProductBloc(
-      productRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => SettingsBloc(
-      authRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => ChangePasswordBloc(
-      authRepository: getIt(),
-    ),
-  );
-  getIt.registerFactory(
-    () => ShoppingCartBloc(shoppingCartRepostiory: getIt()),
-  );
-  getIt.registerFactory(
-    () => SearchBloc(
-      searchRepository: getIt(),
-    ),
-  );
+    //Blocs
+    ..registerFactory(
+      () => AuthBloc(
+        authRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      ThemeBloc.new,
+    )
+    ..registerFactory(
+      () => RegisterBloc(
+        authRepository: getIt(),
+        userRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => LoginBloc(
+        authRepository: getIt(),
+        userRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => ForgotPasswordBloc(
+        authRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => CategoryBloc(
+        categoryRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => ProductBloc(
+        productRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => SettingsBloc(
+        authRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => ChangePasswordBloc(
+        authRepository: getIt(),
+      ),
+    )
+    ..registerFactory(
+      () => ShoppingCartBloc(shoppingCartRepostiory: getIt()),
+    )
+    ..registerFactory(
+      () => SearchBloc(
+        searchRepository: getIt(),
+      ),
+    );
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/router/app_router.gr.dart';
 
 class NavbarView extends StatelessWidget {
-  const NavbarView({Key? key}) : super(key: key);
+  const NavbarView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +22,15 @@ class NavbarView extends StatelessWidget {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.store),
-              label: "Store",
+              label: 'Store',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.shopping_cart),
-              label: "Cart",
+              label: 'Cart',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              label: "Settings",
+              label: 'Settings',
             )
           ],
         );

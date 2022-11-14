@@ -10,11 +10,10 @@ part 'search_event.dart';
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  final BaseSearchRepository searchRepository;
-
   SearchBloc({required this.searchRepository}) : super(const _InitialState()) {
     on<SearchTermChanged>(_onSearchTermChanged, transformer: debounce(const Duration(seconds: 1)));
   }
+  final BaseSearchRepository searchRepository;
 
   Future<void> _onSearchTermChanged(SearchTermChanged event, Emitter<SearchState> emit) async {
     emit(const _LoadingState());
@@ -22,7 +21,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (event.searchTerm.isEmpty) {
         emit(const _InitialState());
       } else {
-        final List<ProductModel> searchResults = await searchRepository.getProducts(event.searchTerm);
+        final searchResults = await searchRepository.getProducts(event.searchTerm);
         if (searchResults.isEmpty) {
           emit(const _NoResultState());
         } else {

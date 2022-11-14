@@ -7,7 +7,7 @@ class SearchTextField extends StatelessWidget {
     required this.hintText,
   });
 
-  final Function(String)? onChanged;
+  final void Function(String)? onChanged;
   final String hintText;
 
   @override

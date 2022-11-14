@@ -4,7 +4,7 @@ part of 'forgot_password_bloc.dart';
 class ForgotPasswordState with _$ForgotPasswordState {
   const factory ForgotPasswordState({
     @Default(FormStatus.initial) FormStatus status,
-    @Default("") String email,
+    @Default('') String email,
     bool? isValidEmail,
     String? errorMessage,
   }) = _ForgotPasswordState;

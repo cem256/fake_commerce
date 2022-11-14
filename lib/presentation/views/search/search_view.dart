@@ -20,14 +20,14 @@ class SearchView extends StatelessWidget {
 }
 
 class _SearchViewBody extends StatelessWidget {
-  const _SearchViewBody({Key? key}) : super(key: key);
+  const _SearchViewBody();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: SearchTextField(
-          hintText: "Search Products",
+          hintText: 'Search Products',
           onChanged: (searchTerm) => context.read<SearchBloc>().add(SearchTermChanged(searchTerm)),
         ),
       ),
@@ -48,7 +48,7 @@ class _SearchViewBody extends StatelessWidget {
                       height: context.mediumValue,
                     ),
                     Text(
-                      "Find your stuff.",
+                      'Find your stuff.',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
@@ -62,13 +62,13 @@ class _SearchViewBody extends StatelessWidget {
               ),
               failure: (_) => Center(
                 child: Text(
-                  "Something went wrong",
+                  'Something went wrong',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
               noResult: (_) => Center(
                 child: Text(
-                  "No results found",
+                  'No results found',
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),

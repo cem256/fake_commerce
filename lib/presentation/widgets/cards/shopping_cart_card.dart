@@ -13,7 +13,6 @@ class ShoppingCartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         ClipRRect(
           borderRadius: context.defaultBorderRadius,
@@ -39,7 +38,7 @@ class ShoppingCartCard extends StatelessWidget {
             children: [
               Text(cartItem.product.name, maxLines: 2),
               Text(
-                "\$${cartItem.product.price} x ${cartItem.quantity}",
+                '\$${cartItem.product.price} x ${cartItem.quantity}',
               ),
             ],
           ),

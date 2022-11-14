@@ -8,10 +8,12 @@ import '../../models/user/user_model.dart';
 import 'base_shopping_cart_repository.dart';
 
 class ShoppingCartRepository implements BaseShoppingCartRepostiory {
+  ShoppingCartRepository({
+    required this.firebaseAuth,
+    required this.firebaseFirestore,
+  });
   final FirebaseAuth firebaseAuth;
   final FirebaseFirestore firebaseFirestore;
-
-  ShoppingCartRepository({required this.firebaseAuth, required this.firebaseFirestore});
 
   @override
   UserModel get currentUser => firebaseAuth.currentUser.toUserModel;
@@ -29,7 +31,10 @@ class ShoppingCartRepository implements BaseShoppingCartRepostiory {
   }
 
   @override
-  Future<void> addItemToCart(List<ShoppingCartItemModel> cartItems, ProductModel product) async {
+  Future<void> addItemToCart(
+    List<ShoppingCartItemModel> cartItems,
+    ProductModel product,
+  ) async {
     if (_isItemAlreadyAdded(cartItems, product)) {
       await firebaseFirestore
           .collection('userCart')
@@ -78,16 +83,20 @@ class ShoppingCartRepository implements BaseShoppingCartRepostiory {
 
   @override
   double calculateSubtotal(List<ShoppingCartItemModel> userCart) {
+    // ignore: omit_local_variable_types
     double subTotal = 0;
 
-    for (var element in userCart) {
+    for (final element in userCart) {
       subTotal += element.product.price * element.quantity;
     }
 
     return subTotal;
   }
 
-  bool _isItemAlreadyAdded(List<ShoppingCartItemModel> cartItems, ProductModel product) {
+  bool _isItemAlreadyAdded(
+    List<ShoppingCartItemModel> cartItems,
+    ProductModel product,
+  ) {
     return cartItems.map((e) => e.product.name).contains(product.name);
   }
 }

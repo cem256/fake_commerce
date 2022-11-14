@@ -11,6 +11,6 @@ class CategoryRepository implements BaseCategoryRepository {
   @override
   Future<List<CategoryModel>> fetchCategories() async {
     final querySnapshot = await firebaseFirestore.collection('categories').get();
-    return querySnapshot.docs.map((e) => e.data()).map((e) => CategoryModel.fromJson(e)).toList();
+    return querySnapshot.docs.map((e) => e.data()).map(CategoryModel.fromJson).toList();
   }
 }

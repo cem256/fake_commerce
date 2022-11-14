@@ -13,7 +13,7 @@ import '../../widgets/carousel/category_carousel.dart';
 import '../../widgets/grid/product_grid.dart';
 
 class StoreView extends StatelessWidget {
-  const StoreView({Key? key}) : super(key: key);
+  const StoreView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class StoreView extends StatelessWidget {
 }
 
 class _StoreViewBody extends StatelessWidget {
-  const _StoreViewBody({Key? key}) : super(key: key);
+  const _StoreViewBody();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class _StoreViewBody extends StatelessWidget {
                     items: state.categories.map((category) => CategoryCarousel(category: category)).toList(),
                   );
                 } else {
-                  return const Center(child: Text("Some Error"));
+                  return const Center(child: Text('Some Error'));
                 }
               },
             ),
@@ -68,7 +68,7 @@ class _StoreViewBody extends StatelessWidget {
             height: context.mediumValue,
           ),
           Text(
-            "All Products",
+            'All Products',
             style: Theme.of(context).textTheme.headline6,
           ),
           SizedBox(
@@ -85,7 +85,7 @@ class _StoreViewBody extends StatelessWidget {
                     products: state.products,
                   );
                 } else {
-                  return const Center(child: Text("Some Error"));
+                  return const Center(child: Text('Some Error'));
                 }
               },
             ),

@@ -5,9 +5,6 @@ part 'user_model.g.dart';
 
 @freezed
 class UserModel with _$UserModel {
-  @JsonSerializable(explicitToJson: true)
-  const UserModel._();
-
   const factory UserModel({
     required String uid,
     String? email,
@@ -15,11 +12,14 @@ class UserModel with _$UserModel {
     String? photoURL,
   }) = _UserModel;
 
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+
+  @JsonSerializable(explicitToJson: true)
+  const UserModel._();
+
   static const empty = UserModel(uid: '');
 
   bool get isEmpty => this == UserModel.empty;
 
   bool get isNotEmpty => this != UserModel.empty;
-
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
 }

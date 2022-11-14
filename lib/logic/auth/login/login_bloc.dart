@@ -12,9 +12,6 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final BaseAuthRepository authRepository;
-  final BaseUserRepository userRepository;
-
   LoginBloc({required this.authRepository, required this.userRepository}) : super(const LoginState()) {
     on<_EmailChanged>(_onEmailChanged);
     on<_PasswordChanged>(_onPasswordChanged);
@@ -22,6 +19,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<_LoginSubmitted>(_onLoginSubmitted);
     on<_LoginWithGooglePressed>(_onLoginWithGooglePressed);
   }
+  final BaseAuthRepository authRepository;
+  final BaseUserRepository userRepository;
 
   void _onEmailChanged(_EmailChanged event, Emitter<LoginState> emit) {
     InputValidator.checkEmailValidity(event.email)

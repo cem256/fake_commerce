@@ -8,13 +8,13 @@ import '../../../core/router/app_router.gr.dart';
 import '../../../logic/settings/settings_bloc.dart';
 
 class SettingsView extends StatelessWidget {
-  const SettingsView({Key? key}) : super(key: key);
+  const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: const Text('Settings'),
       ),
       body: const _SettingsViewBody(),
     );
@@ -22,7 +22,7 @@ class SettingsView extends StatelessWidget {
 }
 
 class _SettingsViewBody extends StatelessWidget {
-  const _SettingsViewBody({Key? key}) : super(key: key);
+  const _SettingsViewBody();
 
   @override
   Widget build(BuildContext context) {
@@ -32,18 +32,18 @@ class _SettingsViewBody extends StatelessWidget {
           deleteAccountFailureState: (state) => ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                state.errorMessage.toString(),
+                state.errorMessage,
               ),
             ),
           ),
           deleteAccountSuccessState: (value) => ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Your account deleted permanently"),
+              content: Text('Your account deleted permanently'),
             ),
           ),
           logoutFailureState: (value) => ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("We cannot process your request right now."),
+              content: Text('We cannot process your request right now.'),
             ),
           ),
         );
@@ -54,7 +54,7 @@ class _SettingsViewBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Display",
+              'Display',
               style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
             ),
             const _ThemeTile(),
@@ -62,7 +62,7 @@ class _SettingsViewBody extends StatelessWidget {
               height: context.mediumValue,
             ),
             Text(
-              "Account",
+              'Account',
               style: Theme.of(context).textTheme.bodyText1?.copyWith(fontWeight: FontWeight.w700),
             ),
             const _ChangePasswordTile(),
@@ -76,14 +76,14 @@ class _SettingsViewBody extends StatelessWidget {
 }
 
 class _ThemeTile extends StatelessWidget {
-  const _ThemeTile({Key? key}) : super(key: key);
+  const _ThemeTile();
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: const Icon(Icons.brightness_medium),
-      title: const Text("Theme"),
+      title: const Text('Theme'),
       onTap: () => _settingsDialog(
         context: context,
         child: const _ThemeTileDialog(),
@@ -93,7 +93,7 @@ class _ThemeTile extends StatelessWidget {
 }
 
 class _ThemeTileDialog extends StatelessWidget {
-  const _ThemeTileDialog({Key? key}) : super(key: key);
+  const _ThemeTileDialog();
 
   @override
   Widget build(BuildContext context) {
@@ -107,26 +107,26 @@ class _ThemeTileDialog extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Choose Theme",
+                  'Choose Theme',
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 RadioListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("System Default"),
+                  title: const Text('System Default'),
                   value: ThemeMode.system,
                   groupValue: state.settingsValue ?? state.theme,
                   onChanged: (ThemeMode? theme) => context.read<ThemeBloc>().add(ThemeTileChanged(theme!)),
                 ),
                 RadioListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("Light"),
+                  title: const Text('Light'),
                   value: ThemeMode.light,
                   groupValue: state.settingsValue ?? state.theme,
                   onChanged: (ThemeMode? theme) => context.read<ThemeBloc>().add(ThemeTileChanged(theme!)),
                 ),
                 RadioListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text("Dark"),
+                  title: const Text('Dark'),
                   value: ThemeMode.dark,
                   groupValue: state.settingsValue ?? state.theme,
                   onChanged: (ThemeMode? theme) => context.read<ThemeBloc>().add(ThemeTileChanged(theme!)),
@@ -136,14 +136,14 @@ class _ThemeTileDialog extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () => context.router.pop(),
-                      child: const Text("CANCEL"),
+                      child: const Text('CANCEL'),
                     ),
                     TextButton(
                       onPressed: () {
                         context.read<ThemeBloc>().add(ThemeChanged());
                         context.router.pop();
                       },
-                      child: const Text("OK"),
+                      child: const Text('OK'),
                     )
                   ],
                 ),
@@ -157,28 +157,28 @@ class _ThemeTileDialog extends StatelessWidget {
 }
 
 class _ChangePasswordTile extends StatelessWidget {
-  const _ChangePasswordTile({Key? key}) : super(key: key);
+  const _ChangePasswordTile();
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: const Icon(Icons.password),
-      title: const Text("Change Password"),
+      title: const Text('Change Password'),
       onTap: () => context.router.push(const ChangePasswordRoute()),
     );
   }
 }
 
 class _DeleleteAccounTile extends StatelessWidget {
-  const _DeleleteAccounTile({Key? key}) : super(key: key);
+  const _DeleleteAccounTile();
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: const Icon(Icons.delete),
-      title: const Text("Delete Account"),
+      title: const Text('Delete Account'),
       onTap: () => _settingsDialog(
         context: context,
         child: const _DeleteAccountDialog(),
@@ -188,7 +188,7 @@ class _DeleleteAccounTile extends StatelessWidget {
 }
 
 class _DeleteAccountDialog extends StatelessWidget {
-  const _DeleteAccountDialog({Key? key}) : super(key: key);
+  const _DeleteAccountDialog();
 
   @override
   Widget build(BuildContext context) {
@@ -200,14 +200,14 @@ class _DeleteAccountDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Delete Account",
+              'Delete Account',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(
               height: context.mediumValue,
             ),
             const Text(
-              "Are you sure you want to delete your account? You cannot undo this operation!",
+              'Are you sure you want to delete your account? You cannot undo this operation!',
             ),
             SizedBox(
               height: context.mediumValue,
@@ -217,11 +217,11 @@ class _DeleteAccountDialog extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () => context.router.pop(),
-                  child: const Text("CANCEL"),
+                  child: const Text('CANCEL'),
                 ),
                 TextButton(
                   onPressed: () => context.read<SettingsBloc>().add(const AccountDeletionRequested()),
-                  child: const Text("OK"),
+                  child: const Text('OK'),
                 )
               ],
             ),
@@ -233,14 +233,14 @@ class _DeleteAccountDialog extends StatelessWidget {
 }
 
 class _LogoutTile extends StatelessWidget {
-  const _LogoutTile({Key? key}) : super(key: key);
+  const _LogoutTile();
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: const Icon(Icons.logout),
-      title: const Text("Logout"),
+      title: const Text('Logout'),
       onTap: () => _settingsDialog(
         context: context,
         child: const _LogoutDialog(),
@@ -250,7 +250,7 @@ class _LogoutTile extends StatelessWidget {
 }
 
 class _LogoutDialog extends StatelessWidget {
-  const _LogoutDialog({Key? key}) : super(key: key);
+  const _LogoutDialog();
 
   @override
   Widget build(BuildContext context) {
@@ -262,14 +262,14 @@ class _LogoutDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              "Logout",
+              'Logout',
               style: Theme.of(context).textTheme.bodyText1,
             ),
             SizedBox(
               height: context.mediumValue,
             ),
             const Text(
-              "Are you sure you want to logout?",
+              'Are you sure you want to logout?',
             ),
             SizedBox(
               height: context.mediumValue,
@@ -279,11 +279,11 @@ class _LogoutDialog extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () => context.router.pop(),
-                  child: const Text("CANCEL"),
+                  child: const Text('CANCEL'),
                 ),
                 TextButton(
                   onPressed: () => context.read<SettingsBloc>().add(const LogoutRequested()),
-                  child: const Text("OK"),
+                  child: const Text('OK'),
                 )
               ],
             ),

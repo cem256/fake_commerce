@@ -24,7 +24,7 @@ import 'wrappers/navbar_wrapper.dart';
 class $AppRouter {}
 
 const unauthenticatedRouter = AutoRoute(
-  name: "UnauthenticatedRouter",
+  name: 'UnauthenticatedRouter',
   page: EmptyRouterPage,
   children: [
     AutoRoute(initial: true, page: LoginView),
@@ -35,7 +35,7 @@ const unauthenticatedRouter = AutoRoute(
 );
 
 const authenticatedRouter = AutoRoute(
-  name: "AuthenticatedRouter",
+  name: 'AuthenticatedRouter',
   page: NavbarWrapper,
   children: [
     AutoRoute(
@@ -45,7 +45,7 @@ const authenticatedRouter = AutoRoute(
         AutoRoute(
           initial: true,
           page: EmptyRouterPage,
-          name: "StoreRouter",
+          name: 'StoreRouter',
           children: [
             AutoRoute(
               initial: true,
@@ -55,7 +55,7 @@ const authenticatedRouter = AutoRoute(
           ],
         ),
         AutoRoute(
-          name: "ShoppingCartRouter",
+          name: 'ShoppingCartRouter',
           page: EmptyRouterPage,
           children: [
             AutoRoute(initial: true, page: ShoppingCartView),
@@ -63,7 +63,7 @@ const authenticatedRouter = AutoRoute(
           ],
         ),
         AutoRoute(
-          name: "SettingsRouter",
+          name: 'SettingsRouter',
           page: EmptyRouterPage,
           children: [
             AutoRoute(initial: true, page: SettingsView),
